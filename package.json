@@ -15,8 +15,12 @@
     "demo"
   ],
   "author": "GitHub",
-  "license": "CC0-1.0",
+  "license": "LGPL",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "ipfs": "^0.20.3",
+    "jQuery": "^1.7.4"
   }
 }

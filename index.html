@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  <body id="body">
+    <div id="holder">
+      <!--todo: also drag things here -->
+      <h1>Store the documents in the supercloudswarm</h1>
+      <button id="the-file-to-upload">Upload a file to the supercloudswarm</button>
+
+    </div>
   </body>
 
   <script>
     // You can also require other files to run in this process
     require('./renderer.js')
   </script>
+
 </html>
