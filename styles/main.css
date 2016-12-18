@@ -1,0 +1,16 @@
+.upload-success-div {
+  line-height: 1.5em;
+}
+
+.upload-success-file-name {
+  padding: 0 3px;
+  background: #DDD;
+  font-weight: bold;
+
+}
+
+.upload-success-file-id {
+  padding: 0 3px;
+  background: #DDD;
+  font-weight: bold;
+}

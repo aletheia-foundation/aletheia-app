@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link href="styles/main.css" rel="stylesheet"></link>
   </head>
   <body id="body">
     <div id="holder">
       <!--todo: also drag things here -->
       <h1>Store the documents in the supercloudswarm</h1>
       <button id="the-file-to-upload">Upload a file to the supercloudswarm</button>
-
+      <div class="upload-success-div" id="upload-success-div">
+        File <span class="upload-success-file-name" id="upload-success-file-name"></span> uploaded successfully.
+        File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
+      </div>
     </div>
   </body>
 
