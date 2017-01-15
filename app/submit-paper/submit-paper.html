@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Aletheia global science</title>
+    <link href="../common/main.css" rel="stylesheet"></link>
+    <link href="submit-paper.css" rel="stylesheet"></link>
+
+  </head>
+  <body id="body">
+    <div id="status-bar" class="status-bar"></div>
+    <div id="holder">
+      <!--todo: also drag things here -->
+      <h1>Store the documents in the supercloudswarm</h1>
+      <button id="the-file-to-upload">Upload a file to the supercloudswarm</button>
+      <div class="upload-success-div" id="upload-success-div">
+        File <span class="upload-success-file-name" id="upload-success-file-name"></span> uploaded successfully.
+        File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
+      </div>
+      <div id="error-div"></div>
+    </div>
+  </body>
+  <script>
+    // You can also require other files to run in this process
+    require('./submit-paper.js')
+  </script>
+</html>

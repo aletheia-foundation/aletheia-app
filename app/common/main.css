@@ -1,0 +1,17 @@
+.subtitle {
+  font-weight: normal;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.status-bar {
+  padding:20px;
+}
+
+.status-bar.has-error {
+  background: #FFCCCC;
+}
+
+.status-bar.has-success {
+  background: #FFFFFF;
+}
