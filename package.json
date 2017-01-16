@@ -19,10 +19,11 @@
   "license": "LGPL",
   "devDependencies": {
     "electron": "^1.4.1",
-    "electron-rebuild": "^1.4.0"
+    "electron-rebuild": "^1.4.0",
+    "mocha": "^3.2.0"
   },
   "dependencies": {
-    "ipfs-api": "^12.1.2",
-    "jQuery": "^1.7.4"
+    "ipfs-api": "^12.1.4",
+    "jQuery": "1.7.4"
   }
 }

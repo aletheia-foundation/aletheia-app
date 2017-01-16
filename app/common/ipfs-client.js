@@ -15,28 +15,26 @@ function checkConnection () {
   })
 }
 
-module.exports = {
-  checkConnection: checkConnection,
-  init: function (args) {
-    _ipfsClient = ipfsAPI(args.address)
-    window.ipfs = _ipfsClient
-    setTimeout(checkConnection, args.statusPollIntervalMs)
-    console.log('init')
-    checkConnection()
-  },
-  addFileFromPath: function (args) {
-    if (typeof args.filePath !== 'string') {
-      throw {err: 'filePath was null'}
-    }
-    console.log(args.filePath)
-    const fileStream = fs.createReadStream(args.filePath)
-    // using the lower level method so that we do not reveal the user's local file path to the network
-    return _ipfsClient.files.add([{path: '', content: fileStream}])
-  },
-  onNumPeersChange: function (cb) {
-    ee.on('peer-update', function (err, numPeers) {
-      cb(err, numPeers)
-    })
-  }
+module.exports = function (args) {
+  _ipfsClient = ipfsAPI(args.address)
+  // window.ipfs = _ipfsClient
+  setTimeout(checkConnection, args.statusPollIntervalMs)
+  checkConnection()
 
+  return {
+    checkConnection: checkConnection,
+    addFileFromPath: function (args) {
+      if (typeof args.filePath !== 'string') {
+        throw {err: 'filePath was null'}
+      }
+      const fileStream = fs.createReadStream(args.filePath)
+    // using the lower level method so that we do not reveal the user's local file path to the network
+      return _ipfsClient.files.add([{path: '', content: fileStream}])
+    },
+    onNumPeersChange: function (cb) {
+      ee.on('peer-update', function (err, numPeers) {
+        cb(err, numPeers)
+      })
+    }
+  }
 }
