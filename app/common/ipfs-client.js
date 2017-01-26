@@ -7,8 +7,6 @@ let _ipfsClient = null
 
 function checkConnection () {
   return _ipfsClient.swarm.peers().then((result) => {
-    console.log('result',result)
-
     ee.emit('peer-update', null, result.length)
   }).catch((e) => {
     ee.emit('peer-update', e, 0)
@@ -19,7 +17,7 @@ function checkConnection () {
 module.exports = function (args) {
   _ipfsClient = ipfsAPI(args.address)
   // window.ipfs = _ipfsClient
-  setTimeout(checkConnection, args.statusPollIntervalMs)
+  setInterval(checkConnection, args.statusPollIntervalMs)
   checkConnection()
 
   return {
@@ -30,7 +28,7 @@ module.exports = function (args) {
       }
       const fileStream = fs.createReadStream(args.filePath)
     // using the lower level method so that we do not reveal the user's local file path to the network
-      return _ipfsClient.files.add([{path: '', content: fileStream}])
+      return _ipfsClient.files.add([{path: args.fileName, content: fileStream}])
     },
     onNumPeersChange: function (cb) {
       ee.on('peer-update', function (err, numPeers) {
