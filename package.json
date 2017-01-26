@@ -23,7 +23,7 @@
     "mocha": "^3.2.0"
   },
   "dependencies": {
-    "ipfs-api": "^12.1.4",
+    "ipfs-api": "",
     "jQuery": "1.7.4"
   }
 }

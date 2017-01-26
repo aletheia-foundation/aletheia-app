@@ -7,11 +7,12 @@ let _ipfsClient = null
 
 function checkConnection () {
   return _ipfsClient.swarm.peers().then((result) => {
+    console.log('result',result)
+
     ee.emit('peer-update', null, result.length)
   }).catch((e) => {
-    ee.emit('peer-update', e)
+    ee.emit('peer-update', e, 0)
     console.error(e, e.stack)
-    throw e
   })
 }
 
