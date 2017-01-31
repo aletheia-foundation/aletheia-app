@@ -3,37 +3,32 @@ const EventEmitter = require('events').EventEmitter
 const ee = new EventEmitter()
 const fs = require('fs')
 
-let _ipfsClient = null
+class IpfsClient extends EventEmitter {
 
-function checkConnection () {
-  return _ipfsClient.swarm.peers().then((result) => {
-    ee.emit('peer-update', null, result.length)
-  }).catch((e) => {
-    ee.emit('peer-update', e, 0)
-    console.error(e, e.stack)
-  })
-}
+  constructor (args) {
+    super()
+    this._ipfsClient = ipfsAPI(args.address)
+    setInterval(this._checkConnection.bind(this), args.statusPollIntervalMs)
+    this._checkConnection()
+  }
 
-module.exports = function (args) {
-  _ipfsClient = ipfsAPI(args.address)
-  // window.ipfs = _ipfsClient
-  setInterval(checkConnection, args.statusPollIntervalMs)
-  checkConnection()
+  _checkConnection () {
+    return this._ipfsClient.swarm.peers().then((result) => {
+      this.emit('peer-update', null, result.length)
+    }).catch((e) => {
+      this.emit('peer-update', e, 0)
+      console.error(e, e.stack)
+    })
+  }
 
-  return {
-    checkConnection: checkConnection,
-    addFileFromPath: function (args) {
-      if (typeof args.filePath !== 'string') {
-        throw {err: 'filePath was null'}
-      }
-      const fileStream = fs.createReadStream(args.filePath)
-    // using the lower level method so that we do not reveal the user's local file path to the network
-      return _ipfsClient.files.add([{path: args.fileName, content: fileStream}])
-    },
-    onNumPeersChange: function (cb) {
-      ee.on('peer-update', function (err, numPeers) {
-        cb(err, numPeers)
-      })
+  addFileFromPath (args) {
+    if (typeof args.filePath !== 'string') {
+     throw {err: 'filePath was null'}
     }
+    const fileStream = fs.createReadStream(args.filePath)
+    // using the lower level method so that we do not reveal the user's local file path to the network
+    return this._ipfsClient.files.add([{path: args.fileName, content: fileStream}])
   }
 }
+
+module.exports = IpfsClient

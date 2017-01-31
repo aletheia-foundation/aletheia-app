@@ -1,6 +1,6 @@
 const $ = require('jQuery')
 const EventEmitter = require('events').EventEmitter
-// util.inherits(Master, EventEmitter);
+
 class SubmitPaperView extends EventEmitter {
 
   constructor () {

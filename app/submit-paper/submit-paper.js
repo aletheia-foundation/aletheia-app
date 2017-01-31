@@ -1,11 +1,13 @@
 const submitPaperView = require('./submit-paper-view')
-const ipfsClient = require('../common/ipfs-client')({
+const IpfsClient = require('../common/ipfs-client')
+
+const ipfsClient = new IpfsClient({
   address: '/ip4/127.0.0.1/tcp/5001',
   statusPollIntervalMs: 1000
 })
 const {dialog} = require('electron').remote;
 
-ipfsClient.onNumPeersChange((err, numPeers)=>{
+ipfsClient.on('peer-update', (err, numPeers) => {
   if(err) {
     submitPaperView.showError('Error conecting to Aletheia gateway server')
   }
@@ -17,11 +19,10 @@ ipfsClient.onNumPeersChange((err, numPeers)=>{
   }
 })
 
-submitPaperView.on('clickSelectFile', (a) => {
+submitPaperView.on('clickSelectFile', () => {
   const filePath = dialog.showOpenDialog({properties: ['openFile']})
 
   if (typeof filePath !== 'object' || !filePath[0]) {
-    console.log('Cannot read file: ', filePath)
     submitPaperView.showError(`Cannot read file: ${filePath}`)
     return
   }
@@ -30,15 +31,11 @@ submitPaperView.on('clickSelectFile', (a) => {
   ipfsClient.addFileFromPath({
     fileName,
     filePath: filePath[0]
-  }).then((r)=>{
-    console.log('r',r)
-    if(typeof r === 'object' && r[0] && r[0].hash){
-      submitPaperView.showUploadSuccess(r[0]);
+  }).then((result)=>{
+    if(typeof result === 'object' && result[0] && result[0].hash){
+      submitPaperView.showUploadSuccess(result[0]);
     }
-
-  }).catch((a,b)=>{
-    console.log(a,b)
+  }).catch( () => {
     submitPaperView.showUploadError({path: fileName})
   })
-
 })

@@ -1,9 +1,10 @@
 const expect = require('expect.js')
+const IpfsClient = require('./ipfs-client')
 
 describe('ipfs-client', () => {
   describe('addFileFromPath', ()=>{
     it('should add a file and return the correct hash', (done) => {
-      const client = require('./ipfs-client')({
+      const client = new IpfsClient({
         address: '/ip4/127.0.0.1/tcp/5001',
         statusPollIntervalMs: 1000
       })
