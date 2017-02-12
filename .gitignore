@@ -2,3 +2,4 @@ node_modules
 ipfs-repo
 .DS_Store
 out
+.ethereum_private

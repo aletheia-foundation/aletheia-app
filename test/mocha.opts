@@ -1,2 +1,2 @@
 --globals window
-test/runner.js
+app/**/*.spec.js
