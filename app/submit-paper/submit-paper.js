@@ -5,7 +5,7 @@ const ipfsClient = new IpfsClient({
   address: '/ip4/127.0.0.1/tcp/5001',
   statusPollIntervalMs: 1000
 })
-const {dialog} = require('electron').remote;
+const dialog = require('electron').remote.dialog;
 
 ipfsClient.on('peer-update', (err, numPeers) => {
   if(err) {
