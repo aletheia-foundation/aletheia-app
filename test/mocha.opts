@@ -1,2 +1,3 @@
 --globals window
+--timeout 100000
 app/**/*.spec.js

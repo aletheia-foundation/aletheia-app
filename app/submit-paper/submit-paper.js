@@ -5,16 +5,14 @@ const ipfsClient = new IpfsClient({
   address: '/ip4/127.0.0.1/tcp/5001',
   statusPollIntervalMs: 1000
 })
-const dialog = require('electron').remote.dialog;
+const dialog = require('electron').remote.dialog
 
 ipfsClient.on('peer-update', (err, numPeers) => {
-  if(err) {
+  if (err) {
     submitPaperView.showError('Error conecting to Aletheia gateway server')
-  }
-  else if(0 === numPeers) {
+  } else if (numPeers === 0) {
     submitPaperView.showError('No Alethia peers found')
-  }
-  else if(numPeers > 0){
+  } else if (numPeers > 0) {
     submitPaperView.setPeers(numPeers)
   }
 })
@@ -31,11 +29,11 @@ submitPaperView.on('clickSelectFile', () => {
   ipfsClient.addFileFromPath({
     fileName,
     filePath: filePath[0]
-  }).then((result)=>{
-    if(typeof result === 'object' && result[0] && result[0].hash){
-      submitPaperView.showUploadSuccess(result[0]);
+  }).then((result) => {
+    if (typeof result === 'object' && result[0] && result[0].hash) {
+      submitPaperView.showUploadSuccess(result[0])
     }
-  }).catch( () => {
+  }).catch(() => {
     submitPaperView.showUploadError({path: fileName})
   })
 })

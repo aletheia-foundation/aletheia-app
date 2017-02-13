@@ -3,3 +3,5 @@ ipfs-repo
 .DS_Store
 out
 .ethereum_private
+.ethereum-test
+.node-xmlhttprequest-sync-*

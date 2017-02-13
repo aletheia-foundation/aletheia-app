@@ -11,7 +11,7 @@ class IpfsClient extends EventEmitter {
     setInterval(this._checkConnection.bind(this), args.statusPollIntervalMs)
     this._checkConnection()
   }
-
+  
   _checkConnection () {
     return this._ipfsClient.swarm.peers().then((result) => {
       this.emit('peer-update', null, result.length)

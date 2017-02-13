@@ -19,9 +19,11 @@
   "devDependencies": {
     "electron": "^1.4.1",
     "expect.js": "^0.3.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "rimraf": "^2.5.4"
   },
   "dependencies": {
+    "geth": "^0.3.0",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jQuery": "1.7.4",
     "web3": "^0.18.2"

@@ -7,6 +7,18 @@ class Web3Client {
   isConnected () {
     return this._web3.isConnected()
   }
+  createAccountIfNotExist () {
+    return new Promise((res, rej) => {
+      const existingAcc = this._web3.personal.listAccounts
+      if(existingAcc[0]) {
+        return res(existingAcc[0])
+      }
+      else {
+        const resp = this._web3.personal.newAccount()
+        res(resp)
+      }
+    })
+  }
 }
 
 module.exports = Web3Client

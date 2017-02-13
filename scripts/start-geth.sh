@@ -1,3 +1,3 @@
 geth --datadir .ethereum_private init contracts/genesis.json
 
-geth --fast --rpc --cache 512 --ipcpath ~/Library/Ethereum/geth.ipc --networkid 1234 --datadir .ethereum_private  console
+geth --fast --rpc --rpcapi eth,net,web3,personal --cache 512 --datadir .ethereum_private  console
