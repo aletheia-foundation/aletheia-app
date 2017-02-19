@@ -20,9 +20,11 @@
     "electron": "^1.4.1",
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "solc": "^0.4.9"
   },
   "dependencies": {
+    "config": "^1.25.1",
     "geth": "^0.3.0",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jQuery": "1.7.4",
