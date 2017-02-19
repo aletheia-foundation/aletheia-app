@@ -10,25 +10,33 @@ class SubmitPaperView extends EventEmitter {
     })
   }
 
-  showError(msg) {
+  showError (msg) {
     $('#status-bar').text(msg)
   }
 
-  showUploadSuccess(args) {
+  showEthereumError (msg) {
+    $('#status-bar-ethereum').text(msg)
+  }
+
+  showUploadSuccess ({path, hash}) {
     $('#error-div').hide()
     $('#upload-success-div').show()
-    $('#upload-success-file-name').text(args.path)
-    $('#upload-success-file-id').text(args.hash)
+    $('#upload-success-file-name').text(path)
+    $('#upload-success-file-id').text(hash)
   }
 
-  showUploadError(args) {
+  showUploadError ({path}) {
     $('#upload-success-div').hide()
     $('#error-div').show()
-    $('#error-div').text(`Unable to share file ${args.path}`)
+    $('#error-div').text(`Unable to share file ${path}`)
   }
 
-  setPeers(numPeers) {
-    $('#status-bar').text(`${numPeers} peers connected`)
+  setPeers (numPeers) {
+    $('#status-bar').text(`${numPeers} alethia filesystem peers connected`)
+  }
+
+  setEthereumPeers (numPeers) {
+    $('#status-bar-ethereum').text(`${numPeers} aletheia blockchain peers connected`)
   }
 }
 module.exports = new SubmitPaperView()

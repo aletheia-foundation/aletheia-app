@@ -1,0 +1,11 @@
+{
+  "ipfsRepoPath": "./ipfs-repo",
+  "ipfs": {
+    "gatewayUrl": "/ip4/127.0.0.1/tcp/5001",
+    "pollIntervalMs": 1000
+  },
+  "web3": {
+    "url": "http://localhost:8545",
+    "pollIntervalMs": 1000
+  }
+}

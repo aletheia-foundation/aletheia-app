@@ -2,14 +2,14 @@ const expect = require('expect.js')
 const IpfsClient = require('./ipfs-client')
 
 describe('ipfs-client', () => {
-  describe('addFileFromPath', ()=>{
+  describe('addFileFromPath', () => {
     it('should add a file and return the correct hash', (done) => {
       const client = new IpfsClient({
         address: '/ip4/127.0.0.1/tcp/5001',
-        statusPollIntervalMs: 1000
+        pollIntervalMs: 1000
       })
       client.addFileFromPath({
-        fileName:'spacer.gif',
+        fileName: 'spacer.gif',
         filePath: './test/data/spacer.gif'
       })
       .then((res) => {
@@ -20,7 +20,6 @@ describe('ipfs-client', () => {
       .catch((err) => {
         done(err)
       })
-    });
-
+    })
   })
 })

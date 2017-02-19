@@ -18,17 +18,20 @@ describe('web3-client', () => {
       rpcapi: 'admin,db,eth,net,web3,personal,web3',
       fast: 'init contracts/genesis.json' // workaround to get this command in here.
     }
-    // geth.debug = true
     geth.start(options, function (err, proc) {
-      // get your geth on!
       if (err) console.log('error starting geth', err)
-      web3Client = new Web3Client(WEB3_URL)
+      web3Client = new Web3Client({
+        web3Url: WEB3_URL,
+        pollIntervalMs: 1000
+      })
       done(err)
     })
   })
   after((done) => {
+    web3Client.stop()
     geth.stop(() => {
       rimraf(ETH_TEST_CHAIN_DIR, (err) => {
+        console.log('stopped eth client')
         done(err)
       })
     })
@@ -39,9 +42,20 @@ describe('web3-client', () => {
     })
   })
 
-  describe('createAccountIfNotExist', (done) => {
+  describe('_checkConnection', () => {
+    it('should trigger peer-update listeners with 0 peers when no peers are connected', (done) => {
+      web3Client.once('peer-update', (err, numPeers) => {
+        expect(err).to.equal(null)
+        expect(numPeers).to.equal(0)
+
+        done()
+      })
+      web3Client._checkConnection()
+    })
+  })
+
+  describe('createAccountIfNotExist', () => {
     it('should create an account if none exists', (done) => {
-      // reset the chain somehow.
       web3Client.createAccountIfNotExist()
       .then((acc) => {
         expect(acc).not.to.equal(null)
