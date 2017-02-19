@@ -18,6 +18,10 @@ class SubmitPaperView extends EventEmitter {
     $('#status-bar-ethereum').text(msg)
   }
 
+  showEthereumAccount ({accountHash}) {
+    $('#account-div').text(`your aletheia blockchain account is "${accountHash}"`)
+  }
+
   showUploadSuccess ({path, hash}) {
     $('#error-div').hide()
     $('#upload-success-div').show()

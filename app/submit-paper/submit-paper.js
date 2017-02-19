@@ -34,6 +34,13 @@ ipfsClient.on('peer-update', (err, numPeers) => {
   }
 })
 
+web3Client.createAccountIfNotExist().then((accountHash) => {
+  submitPaperView.showEthereumAccount({accountHash})
+}).catch((e) => {
+  console.error(e, e.stack)
+  submitPaperView.showEthereumAccount('')
+})
+
 submitPaperView.on('clickSelectFile', () => {
   const filePath = dialog.showOpenDialog({properties: ['openFile']})
 

@@ -1,6 +1,7 @@
 const Web3 = require('web3')
 const EventEmitter = require('events').EventEmitter
 
+// TODO: implement all methods in a nonblocking way, or use another means to prevent blocking the UI thread.
 class Web3Client extends EventEmitter {
   constructor ({web3Url, pollIntervalMs}) {
     super()
