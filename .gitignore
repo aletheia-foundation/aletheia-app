@@ -5,3 +5,6 @@ out
 .ethereum_private
 .ethereum-test
 .node-xmlhttprequest-sync-*
+*.sol*.bin
+.embark/
+dist/

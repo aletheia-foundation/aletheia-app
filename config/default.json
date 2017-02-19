@@ -6,6 +6,7 @@
   },
   "web3": {
     "url": "http://localhost:8545",
-    "pollIntervalMs": 1000
+    "pollIntervalMs": 1000,
+    "aletheiaContractAddress": ""
   }
 }
