@@ -8,3 +8,4 @@ out
 *.sol*.bin
 .embark/
 dist/
+chains.json
