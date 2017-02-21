@@ -17,6 +17,7 @@
   "author": "aletheia-foundation",
   "license": " LGPL-3.0",
   "devDependencies": {
+    "bs58": "^4.0.0",
     "electron": "^1.4.1",
     "embark": "git+https://github.com/aletheia-foundation/embark-framework.git",
     "expect.js": "^0.3.1",
