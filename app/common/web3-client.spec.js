@@ -2,6 +2,8 @@ const expect = require('expect.js')
 const Web3Client = require('./web3-client')
 const geth = require('geth')
 const rimraf = require('rimraf')
+const Embark = require('embark')
+const EmbarkSpec = Embark.initTests()
 
 const ETH_TEST_CHAIN_DIR = '.ethereum-test'
 const WEB3_URL = 'http://localhost:8546'
@@ -26,6 +28,9 @@ describe('web3-client', () => {
       })
       done(err)
     })
+  })
+  afterEach((done) => {
+    rimraf(ETH_TEST_CHAIN_DIR + '/keystore', (e) => { done(e) })
   })
   after((done) => {
     web3Client.stop()
@@ -63,7 +68,7 @@ describe('web3-client', () => {
         done()
       })
       .catch((err) => {
-        done(err || 'error')
+        done({err})
       })
     })
 
@@ -77,11 +82,32 @@ describe('web3-client', () => {
         })
       })
       .catch((err) => {
-        done(err || 'error')
+        done({err})
       })
     })
-    afterEach((done) => {
-      rimraf(ETH_TEST_CHAIN_DIR + '/keystore', (e) => { done(e) })
+  })
+
+  describe('indexNewFile', () => {
+    before(function (done) {
+      var contractsConfig = {
+        'SubmittedPapersIndex': {
+          args: []
+        }
+      }
+      //this line evals something which puts SubmittedPapersIndex onto the global scope
+      EmbarkSpec.deployAll(contractsConfig, done)
+    })
+    it('should index a new file and return its filehash', (done) => {
+      web3Client.createAccountIfNotExist().then((acc1) => {
+        return web3Client.indexNewFile('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')
+      }).then(() => {
+        return web3Client.getAllFileHashes();
+      }).then((allHashes) => {
+        expect(allHashes[0]).to.be('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')
+        done()
+      }).catch((err) => {
+        done({err})
+      })
     })
   })
 })

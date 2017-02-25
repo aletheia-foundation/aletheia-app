@@ -1,5 +1,7 @@
 const Web3 = require('web3')
 const EventEmitter = require('events').EventEmitter
+const config = require('config')
+const EncodingHelper = require('./encoding-helper')
 
 // TODO: implement all methods in a nonblocking way, or use another means to prevent blocking the UI thread.
 class Web3Client extends EventEmitter {
@@ -24,6 +26,38 @@ class Web3Client extends EventEmitter {
         const resp = this._web3.personal.newAccount()
         res(resp)
       }
+    }).then((resp) => {
+      this._address = resp
+      return resp
+    })
+  }
+
+  indexNewFile (fileHash) {
+    return new Promise((res, rej) => {
+      const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
+      SubmittedPapersIndex.push(bytesOfAddress, (err) => {
+        console.log('push done')
+        if(err) {
+          rej(err)
+        } else {
+          res()
+        }
+      })
+    })
+  }
+  getAllFileHashes () {
+    return new Promise ((res, rej) => {
+      SubmittedPapersIndex.getAll((err, result) => {
+        if(err) {
+          rej(err)
+        } else if (!result || !result.map){
+          rej({err: 'SubmittedPapersIndex.getAll result is not an array'})
+        } else{
+          const ipfsMultiHashes = result.map((address)=>{return EncodingHelper.hexSha256ToIpfsMultiHash(address)})
+
+          res(ipfsMultiHashes);
+        }
+      })
     })
   }
   _checkConnection () {

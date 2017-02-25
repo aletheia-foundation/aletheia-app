@@ -2,9 +2,8 @@
   "default": {
     "gas": "auto",
     "contracts": {
-      "SimpleStorage": {
+      "SubmittedPapersIndex": {
         "args": [
-          100
         ]
       }
     }

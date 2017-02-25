@@ -50,14 +50,27 @@ submitPaperView.on('clickSelectFile', () => {
   }
   const fileName = filePath[0].match(/[^/]+$/)
 
+  // todo, prevent denial of service here: https://github.com/aletheia-foundation/aletheia-app/issues/43
   ipfsClient.addFileFromPath({
     fileName,
     filePath: filePath[0]
   }).then((result) => {
-    if (typeof result === 'object' && result[0] && result[0].hash) {
-      submitPaperView.showUploadSuccess(result[0])
+
+    if (typeof result !== 'object' || !result[0] || !result[0].hash) {
+      throw {err: 'result[0].hash was null', result }
     }
-  }).catch(() => {
+    console.log('ipfs add file done')
+
+    return web3Client.indexNewFile(result[0].hash)
+  }).then((web3Result) => {
+    console.log('indexNewFile done')
+    // will probably have to poll for inclusion in the blockchain =(
+    if (typeof web3Result !== 'object' || !web3Result.fileHash) {
+      throw {err: 'web3Result.fileHash was null', web3Result}
+    }
+    submitPaperView.showUploadSuccess(web3Result.fileHash)
+  }).catch((err) => {
+    console.error(err, err.stack)
     submitPaperView.showUploadError({path: fileName})
   })
 })
