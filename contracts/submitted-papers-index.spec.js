@@ -5,29 +5,19 @@ var web3 = EmbarkSpec.web3
 var bs58 = require('bs58')
 describe('SubmittedPapersIndex', function () {
   before(function (done) {
-    const bytesOfAddress = bs58ToWeb3Bytes('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTV')
     var contractsConfig = {
       'SubmittedPapersIndex': {
-        args: ['0x' + bytesOfAddress.slice(0, 4),'0x' + bytesOfAddress.slice(4)]
+        args: []
       }
     }
     EmbarkSpec.deployAll(contractsConfig, done)
   })
 
-  it('should set constructor value', function (done) {
-    SubmittedPapersIndex.get(function (err, result) {
-      assert.equal(solidityAddressToIpfsAddress(result[0], result[1]), 'QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTV')
-      done()
-    })
-  })
-
-
   it('set storage value', function (done) {
     const bytesOfAddress = bs58ToWeb3Bytes('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
-
-    SubmittedPapersIndex.set('0x' + bytesOfAddress.slice(0, 4), '0x' + bytesOfAddress.slice(4), function () {
-      SubmittedPapersIndex.get(function (err, result) {
-        assert.equal(solidityAddressToIpfsAddress(result[0], result[1]), 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
+    SubmittedPapersIndex.push('0x' + bytesOfAddress.slice(4), function () {
+      SubmittedPapersIndex.getAll(function (err, result) {
+        assert.equal(solidityAddressToIpfsAddress('0x1220', result[0]), 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
         done()
       })
     })
