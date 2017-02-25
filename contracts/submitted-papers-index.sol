@@ -1,17 +1,27 @@
 pragma solidity ^0.4.7;
 contract SubmittedPapersIndex {
-  bytes public storedData;
-
-  function SubmittedPapersIndex(bytes initialValue) {
-    storedData = initialValue;
+  IpfsAddress public store;
+  
+  struct IpfsAddress {
+    bytes2 version;
+    bytes32 hash;
   }
 
-  function set(bytes x) {
-    storedData = x;
+  function SubmittedPapersIndex(bytes2 _version, bytes32 _hash) {
+    store = IpfsAddress({
+      version: _version,
+      hash: _hash
+    });
   }
 
-  function get() constant returns (bytes retVal) {
-    return storedData;
+  function set(bytes2 _version, bytes32 _hash) {
+    store = IpfsAddress({
+      version: _version,
+      hash: _hash
+    });
   }
 
+  function get() constant returns (bytes2 _version, bytes32 _hash) {
+    return (store.version, store.hash);
+  }
 }
