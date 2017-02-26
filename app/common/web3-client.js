@@ -33,33 +33,10 @@ class Web3Client extends EventEmitter {
   }
 
   indexNewFile (fileHash) {
-    return new Promise((res, rej) => {
-      const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
-      SubmittedPapersIndex.push(bytesOfAddress, (err) => {
-        console.log('push done')
-        if(err) {
-          rej(err)
-        } else {
-          res()
-        }
-      })
-    })
+    const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
+    return SubmittedPapersIndex.push(bytesOfAddress)
   }
-  getAllFileHashes () {
-    return new Promise ((res, rej) => {
-      SubmittedPapersIndex.getAll((err, result) => {
-        if(err) {
-          rej(err)
-        } else if (!result || !result.map){
-          rej({err: 'SubmittedPapersIndex.getAll result is not an array'})
-        } else{
-          const ipfsMultiHashes = result.map((address)=>{return EncodingHelper.hexSha256ToIpfsMultiHash(address)})
 
-          res(ipfsMultiHashes);
-        }
-      })
-    })
-  }
   _checkConnection () {
     this._web3.net.getPeerCount((err, numPeers) => {
       if (err) {

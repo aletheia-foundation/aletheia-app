@@ -3,7 +3,7 @@
   "buildDir": "dist/",
   "config": "config/",
   "app": {
-    "js/embark-contracts.js": ["embark.js"]
+    "js": ["embark.js"]
   },
   "plugins": { }
 }

@@ -23,6 +23,7 @@
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
+    "sinon": "^1.17.7",
     "solc": "^0.4.9"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "geth": "^0.3.0",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jQuery": "1.7.4",
+    "q": "^1.4.1",
     "web3": "^0.18.2"
   }
 }

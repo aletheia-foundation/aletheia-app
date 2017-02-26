@@ -7,6 +7,8 @@ const EmbarkSpec = Embark.initTests()
 
 const ETH_TEST_CHAIN_DIR = '.ethereum-test'
 const WEB3_URL = 'http://localhost:8546'
+const q = require('q')
+const sinon = require('sinon')
 
 describe('web3-client', () => {
   let web3Client = null
@@ -88,25 +90,39 @@ describe('web3-client', () => {
   })
 
   describe('indexNewFile', () => {
-    before(function (done) {
-      var contractsConfig = {
-        'SubmittedPapersIndex': {
-          args: []
-        }
+    let pushSpy
+    let pushResult
+    beforeEach(function () {
+      pushSpy = sinon.stub()
+      pushResult = q.defer()
+      pushSpy.returns(pushResult.promise)
+      global.SubmittedPapersIndex = {
+        push: pushSpy
       }
-      //this line evals something which puts SubmittedPapersIndex onto the global scope
-      EmbarkSpec.deployAll(contractsConfig, done)
     })
-    it('should index a new file and return its filehash', (done) => {
+    it.only('should index a new file and return its filehash', (done) => {
+      pushResult.resolve('TRANSACTION_HASH')
+
       web3Client.createAccountIfNotExist().then((acc1) => {
         return web3Client.indexNewFile('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')
-      }).then(() => {
-        return web3Client.getAllFileHashes();
-      }).then((allHashes) => {
-        expect(allHashes[0]).to.be('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')
+      }).then((result) => {
+        expect(result).to.equal('TRANSACTION_HASH')
+        expect(pushSpy.calledOnce).to.equal(true)
         done()
       }).catch((err) => {
         done({err})
+      })
+    })
+    it.only('should return error on failure', (done) => {
+      pushResult.reject('invalid')
+
+      web3Client.createAccountIfNotExist().then((acc1) => {
+        return web3Client.indexNewFile('')
+      }).then((result) => {
+        done('should have rejected.')
+      }).catch((err) => {
+        expect(err).to.equal('invalid')
+        done()
       })
     })
   })
