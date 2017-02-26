@@ -22,11 +22,16 @@ class SubmitPaperView extends EventEmitter {
     $('#account-div').text(`your aletheia blockchain account is "${accountHash}"`)
   }
 
+  showUploadInProgress ({transactionHash}) {
+    $('#error-div').hide()
+    $('#upload-success-div').show()
+    $('#upload-success-div').text(`upload in progress, transactionId "${transactionHash}"`)
+  }
+
   showUploadSuccess ({path, hash}) {
     $('#error-div').hide()
     $('#upload-success-div').show()
-    $('#upload-success-file-name').text(path)
-    $('#upload-success-file-id').text(hash)
+    $('#upload-success-div').text(`success! file: ${path} uploaded successfully, identifier: ${hash}`)
   }
 
   showUploadError ({path}) {

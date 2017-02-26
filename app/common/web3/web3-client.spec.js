@@ -90,30 +90,34 @@ describe('web3-client', () => {
   })
 
   describe('indexNewFile', () => {
-    let pushSpy
+    let pushStub
     let pushResult
+
     beforeEach(function () {
-      pushSpy = sinon.stub()
+      pushStub = sinon.stub()
       pushResult = q.defer()
-      pushSpy.returns(pushResult.promise)
+      pushStub.returns(pushResult.promise)
+
       global.SubmittedPapersIndex = {
-        push: pushSpy
+        push: pushStub
       }
     })
-    it.only('should index a new file and return its filehash', (done) => {
-      pushResult.resolve('TRANSACTION_HASH')
+    it('should index a new file and return its filehash', (done) => {
+      pushResult.resolve('TRANSACTION')
 
       web3Client.createAccountIfNotExist().then((acc1) => {
         return web3Client.indexNewFile('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')
       }).then((result) => {
-        expect(result).to.equal('TRANSACTION_HASH')
-        expect(pushSpy.calledOnce).to.equal(true)
+        expect(pushStub.calledOnce).to.equal(true)
+        sinon.assert.calledWith(pushStub, '0xd5f651ab92222ed740c06818c61a3da8343a9915760726c66f703b4c64def8f5')
+        expect(result).to.equal('TRANSACTION')
         done()
       }).catch((err) => {
         done({err})
       })
     })
-    it.only('should return error on failure', (done) => {
+
+    it('should return error on failure', (done) => {
       pushResult.reject('invalid')
 
       web3Client.createAccountIfNotExist().then((acc1) => {
@@ -123,6 +127,28 @@ describe('web3-client', () => {
       }).catch((err) => {
         expect(err).to.equal('invalid')
         done()
+      })
+    })
+  })
+  describe('awaitIndexNewFile', () => {
+    let pushResult
+
+    beforeEach(function () {
+      const Web3Helper = require('./web3-helper')
+
+      pushResult = q.defer()
+
+      sinon.stub(Web3Helper, 'getTransactionReceiptMined', (txhash) => {
+        return  pushResult.promise
+      })
+    })
+    it('should wait for file to be mined', (done) => {
+      pushResult.resolve({blockHash:'abc123'})
+      web3Client.awaitIndexNewFile('TX_HASH').then((result)=>{
+        expect(result).to.equal('abc123')
+        done()
+      }).catch((err) => {
+        done({err})
       })
     })
   })

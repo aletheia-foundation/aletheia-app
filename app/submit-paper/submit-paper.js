@@ -3,7 +3,7 @@ const config = require('config')
 
 const submitPaperView = require('./submit-paper-view')
 const IpfsClient = require('../common/ipfs-client')
-const Web3Client = require('../common/web3-client')
+const Web3Client = require('../common/web3/web3-client')
 
 const web3Client = new Web3Client({
   web3Url: config.get('web3.url'),
@@ -55,20 +55,23 @@ submitPaperView.on('clickSelectFile', () => {
     fileName,
     filePath: filePath[0]
   }).then((result) => {
-
     if (typeof result !== 'object' || !result[0] || !result[0].hash) {
       throw {err: 'result[0].hash was null', result }
     }
-    console.log('ipfs add file done')
 
-    return web3Client.indexNewFile(result[0].hash)
-  }).then((web3Result) => {
-    console.log('indexNewFile done')
-    // will probably have to poll for inclusion in the blockchain =(
-    if (typeof web3Result !== 'object' || !web3Result.fileHash) {
-      throw {err: 'web3Result.fileHash was null', web3Result}
-    }
-    submitPaperView.showUploadSuccess(web3Result.fileHash)
+    return web3Client.indexNewFile(result[0].hash).then((transactionHash) => {
+      submitPaperView.showUploadInProgress({transactionHash})
+      return web3Client.awaitIndexNewFile(transactionHash)
+    }).then((blockHash) => {
+      // will probably have to poll for inclusion in the blockchain =(
+      if (typeof blockHash !== 'string') {
+        throw {err: 'hash of ethereum block was invalid', blockHash}
+      }
+      submitPaperView.showUploadSuccess({
+        hash: result[0].hash,
+        path: result[0].path
+      })
+    })
   }).catch((err) => {
     console.error(err, err.stack)
     submitPaperView.showUploadError({path: fileName})

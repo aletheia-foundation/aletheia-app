@@ -1,7 +1,8 @@
 const Web3 = require('web3')
 const EventEmitter = require('events').EventEmitter
 const config = require('config')
-const EncodingHelper = require('./encoding-helper')
+const EncodingHelper = require('../encoding-helper')
+const Web3Helper = require('./web3-helper')
 
 // TODO: implement all methods in a nonblocking way, or use another means to prevent blocking the UI thread.
 class Web3Client extends EventEmitter {
@@ -34,7 +35,16 @@ class Web3Client extends EventEmitter {
 
   indexNewFile (fileHash) {
     const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
+    console.log(bytesOfAddress)
     return SubmittedPapersIndex.push(bytesOfAddress)
+  }
+
+  awaitIndexNewFile(txnHash) {
+    return Web3Helper.getTransactionReceiptMined(txnHash)
+    .then((result)=>{
+      console.log('transaction mined!', result)
+      return result.blockHash;
+    })
   }
 
   _checkConnection () {
