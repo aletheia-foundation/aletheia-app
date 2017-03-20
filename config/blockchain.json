@@ -32,8 +32,13 @@
     "networkType": "custom",
     "rpcHost": "localhost",
     "rpcPort": 8545,
-    "datadir": "yourdatadir",
-    "networkId": "123",
-    "nodes": []
+    "rpcApi": ["eth", "net", "web3", "personal"],
+    "datadir": ".ethereum-test",
+    "networkId": "8675",
+    "genesisBlock": "config/test/genesis.json",
+    "bootnodes": [ "enode://a8ef210e697743ecac3a140cf3cd86f386ddf9096cd914ec42b6056a68e9b1f9956d2b95aff8e9143a45c863103f2d4d003704c572e3adbc250443aa7f7affa7@128.199.97.121:30303 " ],
+    "account": {
+      "password": "config/test/password"
+    }
   }
 }

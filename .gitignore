@@ -4,6 +4,7 @@ ipfs-repo
 out
 .ethereum_private
 .ethereum-test
+.password
 .node-xmlhttprequest-sync-*
 *.sol*.bin
 .embark/
