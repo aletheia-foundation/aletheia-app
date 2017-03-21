@@ -14,11 +14,6 @@
       "password": "config/development/password"
     }
   },
-  "testnet": {
-    "networkType": "testnet",
-    "rpcHost": "localhost",
-    "rpcPort": 8545
-  },
   "livenet": {
     "networkType": "livenet",
     "rpcHost": "localhost",
@@ -28,7 +23,7 @@
       "password": "config/livenet/password"
     }
   },
-  "privatenet": {
+  "testnet": {
     "networkType": "custom",
     "rpcHost": "localhost",
     "rpcPort": 8545,
