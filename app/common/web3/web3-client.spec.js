@@ -102,8 +102,8 @@ describe('web3-client', () => {
         push: pushStub
       }
     })
-    it('should index a new file and return its filehash', (done) => {
-      pushResult.resolve('TRANSACTION')
+    it.only('should index a new file and return its filehash', (done) => {
+      pushResult.resolve({transactionHash:'TRANSACTION'})
 
       web3Client.createAccountIfNotExist().then((acc1) => {
         return web3Client.indexNewFile('QmcjsPrt3VhTcBPg5F7eTSfxsnQTnKHtqEt7ZpAQBKumTa')

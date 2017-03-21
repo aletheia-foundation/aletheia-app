@@ -35,8 +35,9 @@ class Web3Client extends EventEmitter {
 
   indexNewFile (fileHash) {
     const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
-    console.log(bytesOfAddress)
-    return SubmittedPapersIndex.push(bytesOfAddress)
+    return SubmittedPapersIndex.push(bytesOfAddress).then((transactionInfo) => {
+      return transactionInfo.transactionHash
+    })
   }
 
   awaitIndexNewFile(txnHash) {
