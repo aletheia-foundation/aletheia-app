@@ -24,14 +24,14 @@ Likewise any spamming, trolling, flaming, baiting or other attention-stealing be
 
 These are the policies for upholding our community’s standards of conduct. If you feel that a something needs moderation, please contact contact@aletheia-foundation.io 
 
-1. Remarks that violate the Aletheia standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but never targeting another user, and never in a hateful manner.) 
-2. Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed. 
-3. Moderators will first respond to such remarks with a warning. 
-4. If the warning is unheeded, the user will be “kicked,” i.e., asked to leave the communication channel to cool off. 
-5. If the user comes back and continues to make trouble, they will be banned, i.e., indefinitely excluded. 
-6. Moderators may choose at their discretion to un-ban the user if it was a first offense and they offer the offended party a genuine apology. 
-7. If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, in private. Complaints about bans in-channel are not allowed. 
-8. Moderators are held to a higher standard than other community members. If a moderator creates an inappropriate situation, they should expect less leeway than others. 
+* Remarks that violate the Aletheia standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but never targeting another user, and never in a hateful manner.) 
+* Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed. 
+* Moderators will first respond to such remarks with a warning. 
+* If the warning is unheeded, the user will be “kicked,” i.e., asked to leave the communication channel to cool off. 
+* If the user comes back and continues to make trouble, they will be banned, i.e., indefinitely excluded. 
+* Moderators may choose at their discretion to un-ban the user if it was a first offense and they offer the offended party a genuine apology. 
+* If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, in private. Complaints about bans in-channel are not allowed. 
+* Moderators are held to a higher standard than other community members. If a moderator creates an inappropriate situation, they should expect less leeway than others. 
 
 In the Aletheia community we strive to go the extra step to look out for each other. Don’t just aim to be technically unimpeachable, try to be your best self. In particular, avoid flirting with offensive or sensitive issues, particularly if they’re off-topic; this all too often leads to unnecessary fights, hurt feelings, and damaged trust; worse, it can drive people away from the community entirely.
 
@@ -39,5 +39,5 @@ And if someone takes issue with something you said or did, resist the urge to be
 
 The enforcement policies listed above apply to all official Aletheia venues, GitHub repositories and forums. For other projects adopting the Aletheia Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
-Adapted from [The Rust Code of Conduct] (https://www.rust-lang.org/en-US/conduct.html)
+Adapted from [The Rust Code of Conduct](https://www.rust-lang.org/en-US/conduct.html)
 
