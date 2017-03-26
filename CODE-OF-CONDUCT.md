@@ -1,6 +1,6 @@
-#The Aletheia Code of Conduct
+# The Aletheia Code of Conduct
 
-##Contact: contact@aletheia-foundation.io 
+## Contact: contact@aletheia-foundation.io 
 If you want to contact one of the maintainers individually: kademorton@protonmail.com / roo2@protonmail.com 
 
 We are committed to providing a friendly, safe and welcoming environment for all, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic. 
@@ -20,7 +20,7 @@ Private harassment is also unacceptable. No matter who you are, if you feel you 
 Likewise any spamming, trolling, flaming, baiting or other attention-stealing behaviour is not welcome. 
 
 
-##Moderation
+## Moderation
 
 These are the policies for upholding our community’s standards of conduct. If you feel that a something needs moderation, please contact contact@aletheia-foundation.io 
 
@@ -39,5 +39,5 @@ And if someone takes issue with something you said or did, resist the urge to be
 
 The enforcement policies listed above apply to all official Aletheia venues, GitHub repositories and forums. For other projects adopting the Aletheia Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
-Adapted from The Rust Code of Conduct. https://www.rust-lang.org/en-US/conduct.html
+Adapted from [The Rust Code of Conduct] (https://www.rust-lang.org/en-US/conduct.html)
 
