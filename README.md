@@ -19,9 +19,11 @@ Clone this repo and cd into its directory
   npm start
 ```
 
+---
+
 # Aletheia
 
-_**Publish science for free, access science for free.
+_**Publish science for free, access science for free.**_
 
 ## Welcome
 
