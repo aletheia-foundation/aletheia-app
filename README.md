@@ -51,7 +51,7 @@ Anyone and everyone. Aletheia is currently under construction and we are seeking
 
 ## Get involved
 
-Check out of Contributor Guidelines, our Code of Conduct and our Roadmap. If this is looking like a project you want to participate in, contact us on the below details.
+Skim our whitepaper (It's a few pages long so skiming is OK), check out of Contributor Guidelines, our Code of Conduct and our Roadmap. If this is looking like a project you want to participate in, contact us on the below details.
 
 ## Contact us
 
@@ -59,6 +59,7 @@ You can email us at contact@aletheia-foundation.io If you want to contact one of
 
 ## Find out more
 
+* Aletheia whitepaper
 * Our Lean Canvas build plan
 * Code of Conduct
 * Roadmap
