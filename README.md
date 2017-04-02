@@ -15,7 +15,7 @@ The `geth` ethereum client installed on your path
   ipfs daemon
 ```
 
-# install
+# Install
 
 Clone this repo and cd into its directory
 ```
