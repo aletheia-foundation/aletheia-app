@@ -10,3 +10,4 @@ out
 .embark/
 dist/
 chains.json
+.ipfs-develop/
