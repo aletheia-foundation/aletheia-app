@@ -1,9 +1,0 @@
-{
-  "contracts": ["contracts/**"],
-  "buildDir": "dist/",
-  "config": "config/",
-  "app": {
-    "js/embark.js": ["embark.js"]
-  },
-  "plugins": { }
-}

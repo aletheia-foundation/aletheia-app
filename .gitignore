@@ -8,6 +8,6 @@ out
 .node-xmlhttprequest-sync-*
 *.sol*.bin
 .embark/
-dist/
 chains.json
 .ipfs-develop/
+build/
