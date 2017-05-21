@@ -8,12 +8,12 @@ const SubmittedPapersIndexJson = require('../../../build/contracts/SubmittedPape
 
 // TODO: implement all methods in a nonblocking way, or use another means to prevent blocking the UI thread.
 class Web3Client extends EventEmitter {
-  static instance (web3Url, pollIntervalMs, submittedPapersIndexAddress) {
+  static getInstance ({web3Url, pollIntervalMs, submittedPapersIndexAddress}) {
     const provider = new Web3.providers.HttpProvider(web3Url)
     const indexContract = contract(SubmittedPapersIndexJson)
     indexContract.setProvider(provider)
     return indexContract.at(submittedPapersIndexAddress).then((indexInstance) => {
-      return this({
+      return new Web3Client({
         web3Provider: provider,
         pollIntervalMs,
         submittedPapersIndexInstance: indexInstance
@@ -38,7 +38,7 @@ class Web3Client extends EventEmitter {
   }
   createAccountIfNotExist () {
     return new Promise((res, rej) => {
-      const existingAcc = this._web3.personal.listAccounts
+      const existingAcc = this._web3.eth.accounts
       if (existingAcc[0]) {
         return res(existingAcc[0])
       } else {
@@ -61,7 +61,7 @@ class Web3Client extends EventEmitter {
   }
 
   awaitIndexNewFile (txnHash) {
-    return Web3Helper.getTransactionReceiptMined(txnHash)
+    return Web3Helper.getTransactionReceiptMined(this._web3, txnHash)
     .then((result) => {
       console.log('transaction mined!', result)
       return result.blockHash

@@ -53,3 +53,5 @@ Start geth(via embark CLI) and ipfs in background processes
 ```bash
   mocha
 ```
+
+# code style

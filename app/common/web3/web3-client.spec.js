@@ -94,7 +94,7 @@ describe('web3-client', () => {
 
       pushResult = q.defer()
 
-      sinon.stub(Web3Helper, 'getTransactionReceiptMined', (txhash) => {
+      sinon.stub(Web3Helper, 'getTransactionReceiptMined', (web3, txhash) => {
         return pushResult.promise
       })
     })

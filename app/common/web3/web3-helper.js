@@ -1,7 +1,7 @@
 // thanks xavierlepretre https://gist.github.com/xavierlepretre/88682e871f4ad07be4534ae560692ee6
 
 class Web3Helper {
-  static getTransactionReceiptMined(txnHash, interval) {
+  static getTransactionReceiptMined(web3, txnHash, interval) {
       var transactionReceiptAsync;
       interval = interval ? interval : 500;
       transactionReceiptAsync = function(txnHash, resolve, reject) {

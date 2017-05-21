@@ -7,7 +7,6 @@ out
 .password
 .node-xmlhttprequest-sync-*
 *.sol*.bin
-.embark/
 chains.json
 .ipfs-develop/
 build/

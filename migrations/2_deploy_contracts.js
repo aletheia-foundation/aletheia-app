@@ -1,5 +1,21 @@
-var SubmittedPapersIndex = artifacts.require("./SubmittedPapersIndex.sol");
+var SubmittedPapersIndex = artifacts.require('./SubmittedPapersIndex.sol')
+var fs = require('fs')
 
-module.exports = function(deployer) {
-  deployer.deploy(SubmittedPapersIndex);
-};
+function writeFile (outputPath, content) {
+  fs.writeFile(outputPath, JSON.stringify(content), function (err) {
+    if (err) {
+      return console.log(err)
+    }
+    console.log('Contract addresses saved to ' + outputPath)
+  })
+}
+
+module.exports = function (deployer) {
+  deployer.deploy(SubmittedPapersIndex).then((a, b, c) => {
+    const outputPath = `./build/contracts/SubmittedPapersIndex.development.json`
+    var config = {
+      'address': SubmittedPapersIndex.address
+    }
+    writeFile(outputPath, config)
+  })
+}
