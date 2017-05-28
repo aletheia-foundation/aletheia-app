@@ -5,7 +5,6 @@ const submitPaperView = require('./submit-paper-view')
 const IpfsClient = require('../common/ipfs-client')
 const Web3Client = require('../common/web3/web3-client')
 
-//todo: think of another way to determine which smartcontract to use?
 const SubmittedPapersIndexAddress = require('../../build/contracts/SubmittedPapersIndex.development.json').address
 
 //todo: throw error if app is clearly misconfigured.

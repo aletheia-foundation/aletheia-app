@@ -11,8 +11,8 @@ function writeFile (outputPath, content) {
 }
 
 module.exports = function (deployer) {
-  deployer.deploy(SubmittedPapersIndex).then((a, b, c) => {
-    const outputPath = `./build/contracts/SubmittedPapersIndex.development.json`
+  deployer.deploy(SubmittedPapersIndex).then(() => {
+    const outputPath = `./build/contracts/SubmittedPapersIndex.${deployer.network}.json`
     var config = {
       'address': SubmittedPapersIndex.address
     }
