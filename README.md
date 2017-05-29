@@ -6,40 +6,31 @@ Aletheia client using IPFS and Electron
 
 # Requirements
 
+* Nodejs 6+
 * A running local IPFS node
 * A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
 ## OSX instructions
 ```bash
+  # note, this is not strictly required for local development as the fake ethereum client `testrpc` can be used.
   brew install ethereum # installs geth
   brew install ipfs
   brew install nodejs
   npm install -g electron
 ```
 
-
 ## Ubuntu instructions
+
+These instructions were tested on ubuntu 16.10
+
 ```bash
-  sudo apt install nodejs
-  # and create an alias in your .bash_profile: alias node=nodejs
-  sudo apt-get install software-properties-common # required by geth
-
-  # add ethereum repo and install geth (ethereum).
-  sudo add-apt-repository -y ppa:ethereum/ethereum
-  sudo apt-get update
-  sudo apt-get install ethereum -Y
-
-  # easiest is with the snap package manager https://github.com/ipfs/go-ipfs#build-from-source
-  sudo snap install ipfs
-
-  npm install -g electron
+  #this installs nodejs 6.x, geth, ipfs and electron
+  sudo ./scripts/ubuntu-install.sh
 ```
 
 # Run project
 
 Clone this repo and cd into its directory
-
-## Run locally
 
 This project requires IPFS and Ethereum clients to be running in the background
 
