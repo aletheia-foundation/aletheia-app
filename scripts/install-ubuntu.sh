@@ -1,3 +1,6 @@
+#!/bin/bash
+set -x
+
 # install nodejs 6.x from nodesource
 curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
 sudo sh -c "echo 'deb https://deb.nodesource.com/node_6.x xenial main' > \
