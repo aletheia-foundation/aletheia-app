@@ -6,19 +6,22 @@ Aletheia client using IPFS and Electron
 
 # Requirements
 
-A running local IPFS node
-The `geth` ethereum client installed on your path
+* A running local IPFS node
+* A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
 ## OSX instructions
 ```bash
-  brew install ethereum # requires geth
-  brew install ipfs #or install ipfs for your platform
-  ipfs daemon
+  brew install ethereum # installs geth
+  brew install ipfs
+  brew install nodejs
+  npm install -g electron
 ```
+
 
 ## Ubuntu instructions
 ```bash
-  sudo apt install nodejs # and create an alias node=nodejs
+  sudo apt install nodejs
+  # and create an alias in your .bash_profile: alias node=nodejs
   sudo apt-get install software-properties-common # required by geth
 
   # add ethereum repo and install geth (ethereum).
@@ -35,23 +38,32 @@ The `geth` ethereum client installed on your path
 # Run project
 
 Clone this repo and cd into its directory
+
+## Run locally
+
+This project requires IPFS and Ethereum clients to be running in the background
+
 ```bash
+  # open three terminal tabs in the project folder:
+  # in tab 1
   npm install
-  npm start
-  # this project relies on ipfs and an ethereum client running in the background.
+  npm start # (app will start but be unable to connect to filesharing or blockchain)
+
+  # in tab 2 (must be in project directory)
+  npm run ipfs-local
+
+  # in tab 3 (must be in project directory)
+  npm run ethereum-local
 ```
 
-Start geth(via embark CLI) and ipfs in background processes
-```bash
-  # in bash 1, in the project directory
-  ./node_modules/.bin/embark blockchain
-  # in bash 2
-  ipfs daemon
-```
+# Tests
 
-# tests
+Tests require IPFS and Ethereum clients to be running in the background
 ```bash
-  mocha
+  # while `npm run ethereum-local` and `npm run ethereum-local` are running in two other tabs:
+  npm test
 ```
 
 # code style
+
+Project uses the Javascript standard style

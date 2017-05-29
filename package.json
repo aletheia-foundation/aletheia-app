@@ -6,7 +6,7 @@
   "scripts": {
     "start": "truffle migrate && electron .",
     "test": "truffle test && truffle migrate && mocha",
-    "testchain": "testrpc",
+    "ethereum-local": "testrpc",
     "ipfs-local": "./scripts/ipfs-local.sh"
   },
   "repository": "https://github.com/electron/electron-quick-start",
