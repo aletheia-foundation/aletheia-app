@@ -1,5 +1,5 @@
 # !/bin/bash
-TEST_DATA_DIR=.ethereum-test
+source ./scripts/env-testnet.sh
 
 if [ -d "$TEST_DATA_DIR" ]; then
   rm -r $TEST_DATA_DIR
@@ -9,7 +9,7 @@ fi
 geth --datadir $TEST_DATA_DIR --password ./config/test/password account new
 
 # get the account that was just generated
-TESTNET_ACCOUNTS=`geth --datadir $TEST_DATA_DIR account list | awk -F[\{\}] '{print $2}' | xargs`
+TESTNET_ACCOUNTS=`./scripts/get-testnet-addresses.sh`
 
 # update the testnet config to make the account(s) start with ether
 node ./scripts/add-balance-to-test-account.js $TESTNET_ACCOUNTS
