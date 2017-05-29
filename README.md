@@ -24,7 +24,7 @@ Aletheia client using IPFS and Electron
 These instructions were tested on ubuntu 16.10
 
 ```bash
-  #this installs nodejs 6.x, geth, ipfs and electron
+  # this installs nodejs 6.x, geth, ipfs and electron
   sudo ./scripts/ubuntu-install.sh
 ```
 
@@ -38,13 +38,13 @@ This project requires IPFS and Ethereum clients to be running in the background
   # open three terminal tabs in the project folder:
   # in tab 1
   npm install
-  npm start # (app will start but be unable to connect to filesharing or blockchain)
+  npm run ethereum-local
 
   # in tab 2 (must be in project directory)
   npm run ipfs-local
 
   # in tab 3 (must be in project directory)
-  npm run ethereum-local
+  npm start # (app will start but be unable to connect to filesharing or blockchain)
 ```
 
 # Tests
