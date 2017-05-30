@@ -12,11 +12,15 @@ Aletheia client using IPFS and Electron
 
 ## OSX instructions
 ```bash
+  git clone https://github.com/aletheia-foundation/aletheia-app.git
+  cd aletheia-app
+
   # note, this is not strictly required for local development as the fake ethereum client `testrpc` can be used.
   brew install ethereum # installs geth
   brew install ipfs
   brew install nodejs
   npm install -g electron
+
 ```
 
 ## Ubuntu instructions
@@ -24,8 +28,10 @@ Aletheia client using IPFS and Electron
 These instructions were tested on ubuntu 16.10
 
 ```bash
+  git clone https://github.com/aletheia-foundation/aletheia-app.git
+  cd aletheia-app
   # this installs nodejs 6.x, geth, ipfs and electron
-  sudo ./scripts/ubuntu-install.sh
+  sudo ./scripts/install-ubuntu.sh
 ```
 
 # Run project
