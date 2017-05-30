@@ -25,7 +25,7 @@ These instructions were tested on ubuntu 16.10
 
 ```bash
   # this installs nodejs 6.x, geth, ipfs and electron
-  sudo ./scripts/ubuntu-install.sh
+  sudo ./scripts/install-ubuntu.sh
 ```
 
 # Run project
