@@ -2,22 +2,13 @@ const dialog = require('electron').remote.dialog
 const config = require('config')
 
 const submitPaperView = require('./submit-paper-view')
-const IpfsClient = require('../common/ipfs-client')
-const Web3Client = require('../common/web3/web3-client')
-
-const SubmittedPapersIndexAddress = require('../../build/contracts/SubmittedPapersIndex.development.json').address
+const IpfsClientFactory = require('../common/ipfs-client/ipfs-client-factory')
+const Web3ClientFactory = require('../common/web3/web3-client-factory')
 
 //todo: throw error if app is clearly misconfigured.
-const web3ClientPromise = Web3Client.getInstance({
-  web3Url: config.get('web3.url'),
-  pollIntervalMs: config.get('web3.pollIntervalMs'),
-  submittedPapersIndexAddress: SubmittedPapersIndexAddress
-})
+const web3ClientPromise = Web3ClientFactory.getDefaultInstance();
 
-const ipfsClient = new IpfsClient({
-  address: config.get('ipfs.gatewayUrl'),
-  pollIntervalMs: config.get('ipfs.pollIntervalMs')
-})
+const ipfsClient = IpfsClientFactory.getDefaultInstance();
 
 web3ClientPromise.then((web3Client)=>{
     web3Client.on('peer-update', (err, numPeers) => {

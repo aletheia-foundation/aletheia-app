@@ -1,25 +1,10 @@
-const Web3 = require('web3')
 const EventEmitter = require('events').EventEmitter
-const config = require('config')
 const EncodingHelper = require('../encoding-helper')
 const Web3Helper = require('./web3-helper')
-const contract = require('truffle-contract')
-const SubmittedPapersIndexJson = require('../../../build/contracts/SubmittedPapersIndex.json')
+const Web3 = require('web3')
 
 // TODO: implement all methods in a nonblocking way, or use another means to prevent blocking the UI thread.
 class Web3Client extends EventEmitter {
-  static getInstance ({web3Url, pollIntervalMs, submittedPapersIndexAddress}) {
-    const provider = new Web3.providers.HttpProvider(web3Url)
-    const indexContract = contract(SubmittedPapersIndexJson)
-    indexContract.setProvider(provider)
-    return indexContract.at(submittedPapersIndexAddress).then((indexInstance) => {
-      return new Web3Client({
-        web3Provider: provider,
-        pollIntervalMs,
-        submittedPapersIndexInstance: indexInstance
-      })
-    })
-  }
   constructor ({web3Provider, pollIntervalMs, submittedPapersIndexInstance}) {
     super()
     this._web3Provider = web3Provider
