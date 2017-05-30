@@ -7,7 +7,6 @@ const Web3ClientFactory = require('../common/web3/web3-client-factory')
 
 //todo: throw error if app is clearly misconfigured.
 const web3ClientPromise = Web3ClientFactory.getDefaultInstance();
-
 const ipfsClient = IpfsClientFactory.getDefaultInstance();
 
 web3ClientPromise.then((web3Client)=>{

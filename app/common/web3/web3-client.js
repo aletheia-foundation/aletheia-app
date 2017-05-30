@@ -53,6 +53,13 @@ class Web3Client extends EventEmitter {
     })
   }
 
+  getAllPapers () {
+    return this._SubmittedPapersIndex.getAll().then((fileHashesInHex) => {
+      return fileHashesInHex.map( fileHash =>
+          EncodingHelper.hexSha256ToIpfsMultiHash(fileHash)
+        )
+    })
+  }
   _checkConnection () {
     this._web3.net.getPeerCount((err, numPeers) => {
       if (err) {
