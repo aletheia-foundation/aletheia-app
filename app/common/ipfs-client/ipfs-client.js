@@ -21,6 +21,9 @@ class IpfsClient extends EventEmitter {
     })
   }
 
+  downloadFile ({hash}) {
+  }
+
   addFileFromPath ({filePath, fileName}) {
     if (typeof filePath !== 'string') {
       throw {err: 'filePath was null'}
