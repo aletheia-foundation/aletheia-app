@@ -5,6 +5,10 @@ if [ -d "$TEST_DATA_DIR" ]; then
   rm -r $TEST_DATA_DIR
 fi
 
+if [ -f "$TEST_NET_PASSWORD" ]; then
+  rm -f $TEST_NET_PASSWORD
+fi
+
 randomUtf8=$(head -c 64 /dev/urandom | base64)
 (umask 377 ; echo $randomUtf8 > "$TEST_NET_PASSWORD")
 
