@@ -2,9 +2,8 @@ node_modules
 ipfs-repo
 .DS_Store
 out
-.ethereum_private
 .ethereum-test
-.password
+.testnet-password
 .node-xmlhttprequest-sync-*
 *.sol*.bin
 chains.json
