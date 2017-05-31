@@ -2,7 +2,7 @@
 
 _**Publish science for free, access science for free.**_
 
-Aletheia client using IPFS and Electron
+Downloadable Aletheia App
 
 # About
 
@@ -10,14 +10,20 @@ todo:
 * Link to project docs
 * decentralisation
 * why a downloadable app
-* ethereum
-* filesharing
-* testnet vs development
-* electron
-** folder structure
-* truffle
 
+* Ethereum
+[Ethereum](https://www.ethereum.org/) is a blockchain technology for agreeing on data and logic in a completely decentralised way. Ethereum will be used to manage rules about which documents are approved by the network. Ethereum uses [solidity](https://solidity.readthedocs.io/en/develop/) smart contracts which are stored in the `/contracts` directory.
+* Truffle
+[Truffle](http://truffleframework.com/) is a framework for developing, testing and deploying Ethereum contracts.
+* Filesharing
+[IPFS](https://ipfs.io/) is a peer to peer filesharing technology similar to bittorrent. A core aspect of aletheia will be a private ipfs network which shares only the files which have been approved by the community. Currently we simply use the public IPFS network to share files.
 
+* Livenet vs Testnet vs Development
+Despite using the Ethereum code, we do not have to use the main ethereum blockchain. To keep costs down we plan on going live with a sperate blockchain.
+For local development, a blockchain can be faked using [testrpc](https://github.com/ethereumjs/testrpc). For public testing a testnet is being deployed for testing interactions between multiple aletheia clients.
+
+* Electron
+[Electron](https://electron.atom.io/) is a framework for developing cross platform applications with HTML and JavaScript. `main.js` bootstraps the app, each page is then self contained within the `./app` directory. In future we may add a javascript UI framework such as react or angular.
 
 # Requirements
 
