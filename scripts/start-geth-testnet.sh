@@ -4,7 +4,7 @@ source ./scripts/env-testnet.sh
 # Even if we are not the admin(rich) node,
 # still init the network with the same genesis.json to make networks compatible
 if [ ! -d  $TEST_DATA_DIR ]; then
-  geth --datadir $TEST_DATA_DIR init build/genesis.json
+  geth --datadir $TEST_DATA_DIR init ./build/genesis.json
 fi
 
 if [ ! -f "$TEST_NET_PASSWORD" ]; then
