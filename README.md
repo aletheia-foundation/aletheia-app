@@ -4,6 +4,21 @@ _**Publish science for free, access science for free.**_
 
 Aletheia client using IPFS and Electron
 
+# About
+
+todo:
+* Link to project docs
+* decentralisation
+* why a downloadable app
+* ethereum
+* filesharing
+* testnet vs development
+* electron
+** folder structure
+* truffle
+
+
+
 # Requirements
 
 * Nodejs 6+
