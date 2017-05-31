@@ -18,4 +18,4 @@ geth --datadir $TEST_DATA_DIR --rpc --rpcapi eth,net,web3,personal \
   --networkid 123039281 --password $TEST_NET_PASSWORD \
   --unlock $TESTNET_ACCOUNTS \
   --bootnodes enode://66285a935996d546dda3895b75dc6d25d053aa0d69570f991c8f69c2372c6c9686e3c06d6cc9f0b03905c702d48dc402f50986044611dc8f808eef5cd038b419@139.59.126.46:30303 \
-  --mine console
+  js ./scripts/mine.js
