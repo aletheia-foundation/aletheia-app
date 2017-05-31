@@ -8,9 +8,11 @@ Downloadable Aletheia App
 
 todo:
 * Link to project docs
-* decentralisation
-* why a downloadable app
-
+* Decentralisation
+[Decentralisation](https://en.wikipedia.org/wiki/Decentralization), as stated on Wikipedia, *is the process of redistributing or dispersing functions, powers, people or things away from a central location or authority. While centralization, especially in the governmental sphere, is widely studied and practiced, there is no common definition or understanding of decentralization. The meaning of decentralization may vary in part because of the different ways it is applied. Concepts of decentralization have been applied to group dynamics and management science in private businesses and organizations, political science, law and public administration, economics and technology.*
+Aletheia is technology, but using a broad definition of decentalisation rather than in a specifically technological one is a deliberate choice because Aletheia isn't *just* technology, it's also community. Decentralisation is as desirable state because it is strong. No single point of failure means it’s very hard for a system to collapse through neglect or to be taken down by a malicious actor. No single point of control means the system cannot be controlled by vested interests. Utilising decentralisation is an attempt to build a truly free and incorruptible system, a system that can be applied to, but also be applied past technology.
+* Why a downloadable app?
+This is one of the ways Aletheia manifests its decentralised nature, by residing on a number of inividual computers across potentially a hundred or more legal jurisdictions. If Aletheia was a web platform it would be vulnerable because a website can be blocked, a website can be taken down, the server hosting the website could be physically damaged, it can have its contents deleted or can be turned off. A website is a single point of failure. Mirroring websites can only do so much. Try turning off, deleting the contents of, or destroying hundreds of computers in hundreds of different countries, it's much harder. By the same token, control of a website could be obtained through financially acquiring the domain name, acquiring the website host, acquiring the server or the data centre it resides in. Obtaining control of hundreds of personal computers spread across the globe is much more difficult, meaning in both cases, the degree to which Aletheia can be assailed and controled by malicious actors is lowered. Decentralisation is strength.
 * Ethereum
 [Ethereum](https://www.ethereum.org/) is a blockchain technology for agreeing on data and logic in a completely decentralised way. Ethereum will be used to manage rules about which documents are approved by the network. Ethereum uses [solidity](https://solidity.readthedocs.io/en/develop/) smart contracts which are stored in the `/contracts` directory.
 * Truffle
