@@ -7,7 +7,9 @@
     "start": "truffle migrate && electron .",
     "test": "truffle test && truffle migrate && mocha",
     "ethereum-local": "testrpc",
-    "ipfs-local": "./scripts/ipfs-local.sh"
+    "ipfs-local": "./scripts/ipfs-local.sh",
+    "ethereum-testnet": "./scripts/start-geth-testnet.sh",
+    "ethereum-testnet:attach": "./scripts/attach-geth-testnet.sh",
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
