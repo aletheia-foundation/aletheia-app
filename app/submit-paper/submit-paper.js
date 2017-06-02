@@ -1,5 +1,5 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+const React = require('react')
+const ReactDOM = require('react-dom')
 const dialog = require('electron').remote.dialog
 const config = require('config')
 
@@ -7,18 +7,10 @@ const submitPaperView = require('./submit-paper-view')
 const IpfsClientFactory = require('../common/ipfs-client/ipfs-client-factory')
 const Web3ClientFactory = require('../common/web3/web3-client-factory')
 
-class App extends React.Component {
-  render(){
-    return (
-      <div>
-        Hello World!
-      </div>
-    )
-  }
-}
-
 ReactDOM.render(
-  <App />,
+  <div>
+    <p>Hello World</p>
+  </div>,
   document.getElementById('root')
 )
 //todo: throw error if app is clearly misconfigured.

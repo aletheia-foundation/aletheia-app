@@ -29,6 +29,7 @@
   <!-- this puts SubmittedPapersIndex web3 wrapper on the global scope. -->
   <script>
     // You can also require other files to run in this process
-    require('./submit-paper.js')
+    require('babel-register');
+    require('./submit-paper.js');
   </script>
 </html>
