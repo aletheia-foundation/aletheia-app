@@ -4,10 +4,14 @@
   "description": "Decentralised science",
   "main": "main.js",
   "scripts": {
-    "start": "truffle migrate && electron .",
+    "create": "webpack",
+    "start": "truffle migrate && electron . && webpack-dev-server --open",
     "test": "truffle test && truffle migrate && mocha",
     "ethereum-local": "testrpc",
     "ipfs-local": "./scripts/ipfs-local.sh"
+  },
+  "babel": {
+    "presets": ["env", "react"]
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -20,22 +24,33 @@
   "author": "aletheia-foundation",
   "license": "LGPL-3.0",
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
     "bs58": "^4.0.0",
+    "css-loader": "^0.28.4",
     "electron": "^1.4.1",
     "ethereumjs-testrpc": "^3.0.5",
     "expect.js": "^0.3.1",
+    "html-webpack-plugin": "^2.28.0",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.7",
     "solc": "^0.4.9",
-    "truffle": "^3.2.1"
+    "style-loader": "^0.18.1",
+    "truffle": "^3.2.1",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
     "config": "^1.25.1",
     "geth": "^0.3.0",
-    "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
+    "ipfs-api": "https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jQuery": "1.7.4",
     "q": "^1.4.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "truffle-contract": "^2.0.0",
     "web3": "^0.18.2"
   }
