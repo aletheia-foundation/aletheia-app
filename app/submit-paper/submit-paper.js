@@ -22,7 +22,7 @@ web3ClientPromise.then((web3Client)=>{
       if (err) {
         submitPaperView.showEthereumError(`Error conecting to alethia blockchian node at: ${config.get('web3.url')}`)
       } else if (numPeers === 0) {
-        submitPaperView.showEthereumError('No alethia blockchain peers found')
+        submitPaperView.setEthereumPeers(numPeers)
       } else if (numPeers > 0) {
         submitPaperView.setEthereumPeers(numPeers)
       }

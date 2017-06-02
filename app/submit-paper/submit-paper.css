@@ -1,6 +1,38 @@
 .upload-success-div {
   line-height: 1.5em;
 }
+#body {
+  background-color: #82D99C;
+}
+
+#holder {
+  margin-top: 20%;
+}
+
+body h1 {
+  color: white;
+}
+body .navbar-default {
+    border: none;
+}
+body .navbar-default .navbar-brand {
+    color: white;
+  }
+
+body .navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.btn.btn-primary {
+  background-color: #54C175;
+  border-color: white;
+  border: none;
+}
+
+.btn.btn-primary:hover {
+  background-color: #159E3E;
+  border: none;
+}
 
 .upload-success-file-name {
   padding: 0 3px;
