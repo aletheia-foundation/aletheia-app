@@ -31,6 +31,7 @@
     "truffle": "^3.2.1"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "config": "^1.25.1",
     "geth": "^0.3.0",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",

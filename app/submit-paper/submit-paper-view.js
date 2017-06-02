@@ -19,7 +19,7 @@ class SubmitPaperView extends EventEmitter {
   }
 
   showEthereumAccount ({accountHash}) {
-    $('#account-div').text(`your aletheia blockchain account is "${accountHash}"`)
+    $('#account-div').text(`${accountHash}`)
   }
 
   showUploadInProgress ({transactionHash}) {
@@ -41,11 +41,11 @@ class SubmitPaperView extends EventEmitter {
   }
 
   setPeers (numPeers) {
-    $('#status-bar').text(`${numPeers} alethia filesystem peers connected`)
+    $('#status-bar').text(`${numPeers}`)
   }
 
   setEthereumPeers (numPeers) {
-    $('#status-bar-ethereum').text(`${numPeers} aletheia blockchain peers connected`)
+    $('#status-bar-ethereum').text(`${numPeers}`)
   }
 }
 module.exports = new SubmitPaperView()

@@ -5,21 +5,51 @@
     <title>Aletheia global science</title>
     <link href="../common/main.css" rel="stylesheet"></link>
     <link href="submit-paper.css" rel="stylesheet"></link>
-
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body id="body">
-    <div id="status-bar" class="status-bar"></div>
-    <div id="status-bar-ethereum" class="status-bar"></div>
+
+<nav class="navbar navbar-default" style="background-color: #34ad58;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Aletheia</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><span id="account-div" class="label label-default"></span></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Ethereum Peers <span id="status-bar-ethereum" class="label label-default status-bar"></span></a></li>
+        <li><a href="#">Peers <span id="status-bar" class="label label-default status-bar"></span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
     <div id="account-div"></div>
     <div id="holder">
       <!--todo: also drag things here -->
-      <h1>Store the documents in aletheia</h1>
-      <button id="the-file-to-upload">Permanently share a file</button>
+      <h1 style="text-align: center;">Submit documents to Aletheia</h1>
+      <br />
+      <br />
+      <div style="text-align: center;">
+      <button class="btn btn-primary" id="the-file-to-upload">Permanently share a file</button>
+      </div>
       <div class="upload-success-div" id="upload-success-div" style="display:none;">
         File <span class="upload-success-file-name" id="upload-success-file-name"></span> shared successfully.
         File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
       </div>
-      <div>
+      <br />
+      <div style="text-align: center;">
         <a href="../list/list.html">View all submitted papers</a>
       </div>
       <div id="error-div"></div>
