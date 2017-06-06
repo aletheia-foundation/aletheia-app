@@ -16,10 +16,13 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Aletheia</a>
+      <a href="#" class="navbar-brand">
+          <img style="max-height: 100%;"src="./../../assets/aletheia_logo.png">
+      </a>
+      <a class="navbar-brand" href="../home/home.html">Aletheia</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,24 +39,7 @@
 </nav>
 
     <div id="account-div"></div>
-    <div id="holder">
-      <!--todo: also drag things here -->
-      <h1 style="text-align: center;">Submit documents to Aletheia</h1>
-      <br />
-      <br />
-      <div style="text-align: center;">
-      <button class="btn btn-primary" id="the-file-to-upload">Permanently share a file</button>
-      </div>
-      <div class="upload-success-div" id="upload-success-div" style="display:none;">
-        File <span class="upload-success-file-name" id="upload-success-file-name"></span> shared successfully.
-        File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
-      </div>
-      <br />
-      <div style="text-align: center;">
-        <a href="../list/list.html">View all submitted papers</a>
-      </div>
-      <div id="error-div"></div>
-    </div>
+    <div id="root"></div>
   </body>
   <!-- this puts SubmittedPapersIndex web3 wrapper on the global scope. -->
   <script>

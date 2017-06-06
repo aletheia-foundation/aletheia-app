@@ -7,10 +7,28 @@ const submitPaperView = require('./submit-paper-view')
 const IpfsClientFactory = require('../common/ipfs-client/ipfs-client-factory')
 const Web3ClientFactory = require('../common/web3/web3-client-factory')
 
+class SubmitPaper extends React.Component {
+  render (){
+    return <div id="holder">
+        <h1 style={{textAlign: 'center'}}>Submit documents to Aletheia</h1>
+        <br />
+        <br />
+        <div style={{textAlign: 'center'}}>
+          <button className="btn btn-primary" id="the-file-to-upload">Permanently share a file</button>
+        </div>
+        <div className="upload-success-div alert alert-success" id="upload-success-div" style={{display: 'none'}}>
+        </div>
+        <br />
+        <div style={{textAlign: 'center'}}>
+          <a href="../list/list.html">View all submitted papers</a>
+        </div>
+        <div id="error-div" />
+      </div>
+  };
+}
+
 ReactDOM.render(
-  <div>
-    <p>Hello World</p>
-  </div>,
+  <SubmitPaper />,
   document.getElementById('root')
 )
 //todo: throw error if app is clearly misconfigured.

@@ -9,3 +9,4 @@ out
 chains.json
 .ipfs-develop/
 build/
+dist
