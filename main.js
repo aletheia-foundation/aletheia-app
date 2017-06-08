@@ -19,7 +19,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '/app/submit-paper/submit-paper.html'),
+    pathname: path.join(__dirname, '/app/home/home.html'),
     protocol: 'file:',
     slashes: true
   }))

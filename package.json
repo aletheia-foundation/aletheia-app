@@ -11,7 +11,10 @@
     "ipfs-local": "./scripts/ipfs-local.sh"
   },
   "babel": {
-    "presets": ["env", "react"]
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -52,6 +55,7 @@
     "q": "^1.4.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1",
     "truffle-contract": "^2.0.0",
     "web3": "^0.18.2"
   }
