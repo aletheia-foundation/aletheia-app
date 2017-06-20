@@ -77,13 +77,14 @@ This project requires IPFS and Ethereum clients to be running in the background
 ```
 
 # Tests
-
 Tests require IPFS and Ethereum clients to be running in the background
 ```bash
   # while `npm run ethereum-local` and `npm run ethereum-local` are running in two other tabs:
   npm test
 ```
 
-# code style
+# Testnet
+Todo: add instructions for testnet
 
+# code style
 Project uses the Javascript standard style
