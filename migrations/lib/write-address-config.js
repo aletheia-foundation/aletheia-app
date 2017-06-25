@@ -1,4 +1,3 @@
-var SubmittedPapersIndex = artifacts.require('./SubmittedPapersIndex.sol')
 var fs = require('fs')
 
 function writeFile (outputPath, content) {
@@ -10,12 +9,16 @@ function writeFile (outputPath, content) {
   })
 }
 
-module.exports = function (deployer) {
-  deployer.deploy(SubmittedPapersIndex).then(() => {
-    const outputPath = `./build/contracts/SubmittedPapersIndex.${deployer.network}.json`
+class WriteAddressConfig {
+
+  static writeConfigFile (networkName, deployedContract) {
+
+    const outputPath = `./build/contracts/${deployedContract.contract_name}.${networkName}.json`
     var config = {
-      'address': SubmittedPapersIndex.address
+      'address': deployedContract.address
     }
     writeFile(outputPath, config)
-  })
+  }
 }
+
+module.exports = WriteAddressConfig
