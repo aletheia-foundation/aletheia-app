@@ -23,5 +23,5 @@ TESTNET_ACCOUNTS=`./scripts/get-testnet-addresses.sh`
 geth --datadir $TEST_DATA_DIR --rpc --rpcapi eth,net,web3,personal \
   --networkid 123039281 --password $TEST_NET_PASSWORD \
   --unlock $TESTNET_ACCOUNTS \
-  --bootnodes enode://41dbef7eac7931f4249e8bdd2fbf31255b15bbc6b9836afe156593b401ac4a2c139028e422efe1e63008aba954e434fc1f93c92abd7fd69c28daec9976aa093b@127.0.0.1:30303 \
+  --bootnodes enode://62ab83384fe32644223de24565a7e6712304eadabd8a378ba00015499dd0bf189b374d13c9fdcd9cf1c8e750ffda631e16be5a6462ebefbe5b09c40baa505d80@127.0.0.1:30303 \
   js ./scripts/mine.js
