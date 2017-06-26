@@ -1,0 +1,17 @@
+#body {
+  background-color: #82D99C;
+}
+
+body h1 {
+  color: white;
+}
+body .navbar-default {
+    border: none;
+}
+body .navbar-default .navbar-brand {
+    color: white;
+  }
+
+body .navbar-default .navbar-nav>li>a {
+  color: white;
+}

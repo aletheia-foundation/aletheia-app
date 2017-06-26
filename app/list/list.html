@@ -5,15 +5,42 @@
     <title>Aletheia global science</title>
     <link href="../common/main.css" rel="stylesheet"></link>
     <link href="list.css" rel="stylesheet"></link>
-
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://use.fontawesome.com/fc795545c4.js"></script>
   </head>
   <body id="body">
+    <nav class="navbar navbar-default" style="background-color: #34ad58;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Aletheia</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><span id="account-div" class="label label-default"></span></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Ethereum Peers <span id="status-bar-ethereum" class="label label-default status-bar"></span></a></li>
+        <li><a href="#">Peers <span id="status-bar" class="label label-default status-bar"></span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
     <div id="status-bar" class="status-bar"></div>
     <div id="status-bar-ethereum" class="status-bar"></div>
     <div id="account-div"></div>
     <div id="holder">
-      <a href="../submit-paper/submit-paper.html">Submit Paper</a><br/>
-
+      <div style="text-align: center;">
+        <a href="../submit-paper/submit-paper.html">Submit Paper</a><br/>
+      </div>
       <ul id="papers-list"></ul>
 
       <div id="error-div"></div>

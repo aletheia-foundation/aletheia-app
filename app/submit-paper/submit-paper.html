@@ -6,6 +6,7 @@
     <link href="../common/main.css" rel="stylesheet"></link>
     <link href="submit-paper.css" rel="stylesheet"></link>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://use.fontawesome.com/fc795545c4.js"></script>
   </head>
   <body id="body">
 
@@ -42,15 +43,20 @@
       <br />
       <br />
       <div style="text-align: center;">
-      <button class="btn btn-primary" id="the-file-to-upload">Permanently share a file</button>
+      <button class="btn btn-primary" id="the-file-to-upload">
+        <i class="fa fa-share-square-o fa-5x" aria-hidden="true"></i>
+        <br />
+        Permanently share a file
+      </button>
+      <a href="../list/list.html" class="btn btn-primary" role="button">
+        <i class="fa fa-university fa-5x" aria-hidden="true"></i>
+        <br />
+        View all submitted papers
+      </a>
       </div>
       <div class="upload-success-div" id="upload-success-div" style="display:none;">
         File <span class="upload-success-file-name" id="upload-success-file-name"></span> shared successfully.
         File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
-      </div>
-      <br />
-      <div style="text-align: center;">
-        <a href="../list/list.html">View all submitted papers</a>
       </div>
       <div id="error-div"></div>
     </div>
