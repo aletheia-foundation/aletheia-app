@@ -63,6 +63,9 @@ web3ClientPromise.then((web3Client)=>{
         submitPaperView.showUploadError({path: fileName})
       })
     })
+}).catch((err)=>{
+  console.error(err,err.stack);
+  submitPaperView.showEthereumError('Error initialising blockchain')
 })
 
 ipfsClient.on('peer-update', (err, numPeers) => {
