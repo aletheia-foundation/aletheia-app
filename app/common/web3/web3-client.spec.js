@@ -1,8 +1,5 @@
 const expect = require('expect.js')
 const Web3Client = require('./web3-client')
-const geth = require('geth')
-const rimraf = require('rimraf')
-
 const WEB3_URL = 'http://localhost:8545'
 const q = require('q')
 const sinon = require('sinon')

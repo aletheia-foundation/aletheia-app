@@ -6,7 +6,7 @@ const SubmittedPapersIndexJson = require(
   '../../../build/contracts/SubmittedPapersIndex.json'
 )
 const SubmittedPapersIndexAddress = require(
-  '../../../build/contracts/SubmittedPapersIndex.development.json'
+  '../../../build/addresses/SubmittedPapersIndex.development.json'
 ).address
 
 class Web3ClientFactory {
