@@ -22,4 +22,4 @@ TESTNET_ACCOUNTS=`./scripts/get-testnet-addresses.sh`
 node ./scripts/add-balance-to-test-account.js $TESTNET_ACCOUNTS
 
 # initialise the testnet chain
-geth --datadir $TEST_DATA_DIR init build/genesis.json
+geth --datadir $TEST_DATA_DIR init build/genesis.testnet.json

@@ -4,8 +4,8 @@
   "description": "Decentralised science",
   "main": "main.js",
   "scripts": {
-    "start": "truffle migrate && electron .",
-    "test": "truffle test && truffle migrate && mocha",
+    "start": "./node_modules/.bin/truffle migrate && electron .",
+    "test": "./node_modules/.bin/truffle test && ./node_modules/.bin/truffle migrate && mocha",
     "ethereum-local": "testrpc",
     "ipfs-local": "./scripts/ipfs-local.sh",
     "ethereum-testnet": "./scripts/start-geth-testnet.sh",
@@ -22,23 +22,26 @@
   "author": "aletheia-foundation",
   "license": "LGPL-3.0",
   "devDependencies": {
-    "bs58": "^4.0.0",
-    "electron": "^1.4.1",
-    "ethereumjs-testrpc": "^3.0.5",
-    "expect.js": "^0.3.1",
-    "mocha": "^3.2.0",
-    "rimraf": "^2.5.4",
-    "sinon": "^1.17.7",
-    "solc": "^0.4.9",
-    "truffle": "^3.2.1"
+    "bs58": "4.0.1",
+    "electron": "1.6.11",
+    "ethereumjs-testrpc": "3.9.2",
+    "expect.js": "0.3.1",
+    "mkdirp": "0.5.1",
+    "mocha": "3.4.2",
+    "sinon": "1.17.7",
+    "solc": "0.4.11",
+    "truffle": "3.3.2",
+    "truffle-config": "1.0.0",
+    "truffle-contract": "2.0.1",
+    "truffle-expect": "0.0.3"
   },
   "dependencies": {
-    "config": "^1.25.1",
-    "geth": "^0.3.0",
+    "config": "1.26.1",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jQuery": "1.7.4",
-    "q": "^1.4.1",
-    "truffle-contract": "^2.0.0",
-    "web3": "^0.18.2"
+    "q": "1.5.0",
+    "truffle-contract": "2.0.1",
+    "truffle-expect": "0.0.3",
+    "web3": "0.18.4"
   }
 }
