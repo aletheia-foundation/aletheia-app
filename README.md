@@ -6,8 +6,6 @@ Downloadable Aletheia App
 
 # About
 
-todo:
-* Link to project docs
 * Decentralisation
 [Decentralisation](https://en.wikipedia.org/wiki/Decentralization), as stated on Wikipedia, *is the process of redistributing or dispersing functions, powers, people or things away from a central location or authority. While centralization, especially in the governmental sphere, is widely studied and practiced, there is no common definition or understanding of decentralization. The meaning of decentralization may vary in part because of the different ways it is applied. Concepts of decentralization have been applied to group dynamics and management science in private businesses and organizations, political science, law and public administration, economics and technology.*
 Aletheia is technology, but using a broad definition of decentalisation rather than in a specifically technological one is a deliberate choice because Aletheia isn't *just* technology, it's also community. Decentralisation is as desirable state because it is strong. No single point of failure means it’s very hard for a system to collapse through neglect or to be taken down by a malicious actor. No single point of control means the system cannot be controlled by vested interests. Utilising decentralisation is an attempt to build a truly free and incorruptible system, a system that can be applied to, but also be applied past technology.
