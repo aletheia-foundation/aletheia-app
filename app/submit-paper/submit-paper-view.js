@@ -22,6 +22,10 @@ class SubmitPaperView extends EventEmitter {
     $('#account-div').text(`your aletheia blockchain account is "${accountHash}"`)
   }
 
+  showEthereumBalance ({balance}) {
+    $('#balance-div').text(`your aletheia goodwill balance is "${balance}"`)
+  }
+
   showUploadInProgress ({transactionHash}) {
     $('#error-div').hide()
     $('#upload-success-div').show()
