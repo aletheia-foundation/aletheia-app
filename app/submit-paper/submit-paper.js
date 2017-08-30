@@ -25,12 +25,13 @@ class SubmitPaperController {
     this._web3Client = web3Client
     this._ipfsClient = ipfsClient
     this._view = view
+    this.balance = 0
 
-    this._web3Client.on('peer-update', this._onWeb3PeerUpdate.bind(this))
-    this._web3Client.on('balance-update', this._onBalanceUpdate.bind(this))
-    this._ipfsClient.on('peer-update', this._onIpfsPeerUpdate.bind(this))
+    this._web3Client.on('peer-update', this.onWeb3PeerUpdate.bind(this))
+    this._web3Client.on('balance-update', this.onBalanceUpdate.bind(this))
+    this._ipfsClient.on('peer-update', this.onIpfsPeerUpdate.bind(this))
 
-    this._view.on('clickSelectFile', this._onSelectFileClick.bind(this))
+    this._view.on('clickSelectFile', this.onSelectFileClick.bind(this))
 
     this._web3Client.createAccountIfNotExist().then((accountHash) => {
       this._view.showEthereumAccount({accountHash})
@@ -40,7 +41,7 @@ class SubmitPaperController {
     })
   }
 
-  _onWeb3PeerUpdate (err, numPeers) {
+  onWeb3PeerUpdate (err, numPeers) {
     if (err) {
       this._view.showEthereumError(`Error conecting to alethia blockchian node at: ${config.get('web3.url')}`)
     } else if (numPeers === 0) {
@@ -50,7 +51,7 @@ class SubmitPaperController {
     }
   }
 
-  _onBalanceUpdate (err, balance) {
+  onBalanceUpdate (err, balance) {
     if (err || !balance) {
       this._view.showEthereumBalance(`Error getting balance`)
     } else {
@@ -58,7 +59,7 @@ class SubmitPaperController {
     }
   }
 
-  _onIpfsPeerUpdate (err, numPeers) {
+  onIpfsPeerUpdate (err, numPeers) {
     if (err) {
       view.showError(`Error conecting to Aletheia filesystem gateway at  ${config.get('ipfs.gatewayUrl')}`)
     } else if (numPeers === 0) {
@@ -68,9 +69,9 @@ class SubmitPaperController {
     }
   }
 
-  _onSelectFileClick () {
-    if (!hasEnoughBalance()) {
-      this.promptTopUpBalance()
+  onSelectFileClick () {
+    if (!this._hasEnoughBalance()) {
+      return this._promptTopUpBalance()
     }
 
     const filePath = dialog.showOpenDialog({properties: ['openFile']})
@@ -107,5 +108,14 @@ class SubmitPaperController {
       console.error(err, err.stack)
       this._view.showUploadError({path: fileName})
     })
+  }
+
+  _hasEnoughBalance () {
+    // todo: realistic balance requirement
+    return this.balance > 0
+  }
+
+  _promptTopUpBalance () {
+    this._view.showTopUpMessage()
   }
 }

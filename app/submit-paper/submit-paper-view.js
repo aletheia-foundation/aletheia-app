@@ -44,6 +44,10 @@ class SubmitPaperView extends EventEmitter {
     $('#error-div').text(`Unable to share file ${path}`)
   }
 
+  showTopUpMessage () {
+    $('#topup-message').show()
+  }
+
   setPeers (numPeers) {
     $('#status-bar').text(`${numPeers} alethia filesystem peers connected`)
   }
