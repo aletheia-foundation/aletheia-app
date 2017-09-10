@@ -22,8 +22,16 @@ class CreditAccountView extends EventEmitter {
   getCaptchaAnswer () {
     return $('#captcha-input').val()
   }
+
   setCaptcha (value) {
     return $('#captcha-img').attr('src', 'data:image/svg+xml;utf8,' + value)
+  }
+  showError (errorMsg) {
+    return $('#error-div').text(errorMsg)
+  }
+
+  showSuccess () {
+    $('#error-div').text('')
   }
 }
 

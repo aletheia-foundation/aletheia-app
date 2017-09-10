@@ -6,6 +6,7 @@ const Web3ClientFactory = require('../common/web3/web3-client-factory')
 
 // todo: throw error if app is clearly misconfigured.
 const web3ClientPromise = Web3ClientFactory.getDefaultInstance()
+const $ = require('jquery') // only for networking, cannot use nodejs networking because this would bypass proxy settings (and the debugger!)
 
 web3ClientPromise.then((web3Client) => {
   new CreditAccountController({
@@ -57,10 +58,10 @@ class CreditAccountController {
   }
 
   loadCaptcha () {
-    request({
+    $.ajax({
       method: 'GET',
       url: `${config.get('faucet.url')}/captcha.svg`,
-      jar: true // save session id cookie
+      dataType: 'text'
     }).then((result) => {
       this._view.setCaptcha(result)
     })
@@ -72,14 +73,22 @@ class CreditAccountController {
       receiver: this.account,
       captcha: captcha
     }
-    console.log(requestArgs)
-    request({
+    $.ajax({
       method: 'POST',
       url: config.get('faucet.url'),
-      jar: true, // use session id cookie
-      json: requestArgs
+      data: requestArgs
     })
-      .then((result) => { console.log(result) })
-      .catch((err) => { console.error(err) })
+      .then((result) => {
+        if (result.error) {
+          throw new Error(result.error.message)
+        }
+        console.log(result)
+        this._view.showSuccess(result)
+        window.location.href = '../submit-paper/submit-paper.html'
+      })
+      .catch((err) => {
+        console.error(err)
+        this._view.showError(err)
+      })
   }
 }
