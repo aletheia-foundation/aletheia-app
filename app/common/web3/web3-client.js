@@ -12,15 +12,23 @@ class Web3Client extends EventEmitter {
     this._SubmittedPapersIndex = submittedPapersIndexInstance
 
     this._web3 = new Web3(this._web3Provider)
-    this._poll = setInterval(this._checkConnection.bind(this), pollIntervalMs)
+    this._poll = setInterval(this._onPoll.bind(this), pollIntervalMs)
     this._checkConnection()
   }
+
+  _onPoll () {
+    this._checkConnection()
+    this._checkBalance()
+  }
+
   stop () {
     clearInterval(this._poll)
   }
+
   isConnected () {
     return this._web3.isConnected()
   }
+
   createAccountIfNotExist () {
     return new Promise((res, rej) => {
       const existingAcc = this._web3.eth.accounts
@@ -39,7 +47,7 @@ class Web3Client extends EventEmitter {
   indexNewFile (fileHash) {
     const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256(fileHash)
     const from = this._web3.eth.accounts[0]
-// todo: ensure that we have created an account.
+    // todo: ensure that we have created an account.
     return this._SubmittedPapersIndex.push(bytesOfAddress, {from}).then((transactionInfo) => {
       return transactionInfo.receipt.transactionHash
     })
@@ -55,11 +63,12 @@ class Web3Client extends EventEmitter {
 
   getAllPapers () {
     return this._SubmittedPapersIndex.getAll().then((fileHashesInHex) => {
-      return fileHashesInHex.map( fileHash =>
+      return fileHashesInHex.map(fileHash =>
           EncodingHelper.hexSha256ToIpfsMultiHash(fileHash)
         )
     })
   }
+
   _checkConnection () {
     this._web3.net.getPeerCount((err, numPeers) => {
       if (err) {
@@ -68,6 +77,19 @@ class Web3Client extends EventEmitter {
         return
       } else {
         this.emit('peer-update', null, numPeers)
+      }
+    })
+  }
+
+  _checkBalance () {
+    this._web3.eth.getBalance(this._web3.eth.accounts[0], (err, weiBalance) => {
+      const ethBalance = this._web3.fromWei(weiBalance, 'ether')
+      if (err) {
+        this.emit('balance-update', err, ethBalance)
+        console.error(err, err.stack)
+        return
+      } else {
+        this.emit('balance-update', null, ethBalance)
       }
     })
   }

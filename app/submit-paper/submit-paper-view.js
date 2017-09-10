@@ -22,6 +22,10 @@ class SubmitPaperView extends EventEmitter {
     $('#account-div').text(`your aletheia blockchain account is "${accountHash}"`)
   }
 
+  showEthereumBalance ({balance}) {
+    $('#balance-div').text(`your aletheia goodwill balance is "${balance}"`)
+  }
+
   showUploadInProgress ({transactionHash}) {
     $('#error-div').hide()
     $('#upload-success-div').show()
@@ -38,6 +42,10 @@ class SubmitPaperView extends EventEmitter {
     $('#upload-success-div').hide()
     $('#error-div').show()
     $('#error-div').text(`Unable to share file ${path}`)
+  }
+
+  showTopUpMessage () {
+    $('#topup-message').show()
   }
 
   setPeers (numPeers) {
