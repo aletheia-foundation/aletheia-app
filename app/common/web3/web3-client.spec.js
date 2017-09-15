@@ -83,7 +83,7 @@ describe('web3-client', () => {
     //   })
     // })
   })
-  describe('awaitIndexNewFile', () => {
+  describe('awaitTransaction', () => {
     let pushResult
 
     beforeEach(function () {
@@ -97,7 +97,7 @@ describe('web3-client', () => {
     })
     it('should wait for file to be mined', (done) => {
       pushResult.resolve({blockHash: 'abc123'})
-      web3Client.awaitIndexNewFile('TX_HASH').then((result) => {
+      web3Client.awaitTransaction('TX_HASH').then((result) => {
         expect(result).to.equal('abc123')
         done()
       }).catch((err) => {

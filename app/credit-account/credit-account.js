@@ -79,15 +79,19 @@ class CreditAccountController {
       data: requestArgs
     })
       .then((result) => {
-        if (result.error) {
+        if (result.error || !result.success) {
           throw new Error(result.error.message)
         }
-        console.log(result)
-        this._view.showSuccess(result)
+        this._view.showWaiting(result.success.txHash)
+        return this._web3Client.awaitTransaction(result.success.txHash)
+      })
+      .then(() => {
+        // todo: add notification
         window.location.href = '../submit-paper/submit-paper.html'
       })
       .catch((err) => {
         console.error(err)
+        this._view.hideNotification()
         this._view.showError(err)
       })
   }

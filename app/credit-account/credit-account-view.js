@@ -26,6 +26,16 @@ class CreditAccountView extends EventEmitter {
   setCaptcha (value) {
     return $('#captcha-img').attr('src', 'data:image/svg+xml;utf8,' + value)
   }
+
+  showWaiting (hash) {
+    $('#loading-spinner').text(`Your account \'${hash}\' is being credited. Please wait...`)
+    $('#loading-spinner-outer').show()
+  }
+
+  hideWaiting () {
+    $('#loading-spinner-outer').show()
+  }
+
   showError (errorMsg) {
     return $('#error-div').text(errorMsg)
   }

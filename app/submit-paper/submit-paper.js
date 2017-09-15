@@ -93,7 +93,7 @@ class SubmitPaperController {
 
       return this._web3Client.indexNewFile(result[0].hash).then((transactionHash) => {
         this._view.showUploadInProgress({transactionHash})
-        return this._web3Client.awaitIndexNewFile(transactionHash)
+        return this._web3Client.awaitTransaction(transactionHash)
       }).then((blockHash) => {
           // will probably have to poll for inclusion in the blockchain =(
         if (typeof blockHash !== 'string') {
@@ -112,7 +112,7 @@ class SubmitPaperController {
 
   _hasEnoughBalance () {
     // todo: realistic balance requirement
-    return this.balance > 0
+    // return this.balance <= 0
   }
 
   _promptTopUpBalance () {

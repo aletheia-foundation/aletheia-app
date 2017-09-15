@@ -53,7 +53,7 @@ class Web3Client extends EventEmitter {
     })
   }
 
-  awaitIndexNewFile (txnHash) {
+  awaitTransaction (txnHash) {
     return Web3Helper.getTransactionReceiptMined(this._web3, txnHash)
     .then((result) => {
       console.log('transaction mined!', result)
