@@ -1,4 +1,5 @@
 const EncodingHelper = require('../app/common/encoding-helper')
+const expectThrow = require('../test/helpers/expectThrow')
 // const assert = require('assert')
 console.log('*********', Object.keys(contract))
 
@@ -10,26 +11,25 @@ contract('SubmittedPapersIndex', function (accounts) {
 
   // the contrarct state is not reset between indivdual tests
   // therfore the empty state must be tested before the stored value test
-  it('refuses empty value', function () {
+  it('refuses empty value', async function () {
     const bytesOfAddress = ''
-    return SubmittedPapersIndex.deployed().then((instance)=>{
-      return instance.push(bytesOfAddress).then(() => {
-        return instance.getAll()
-      })
-    }).then((result) => {
-      assert.equal(result[0], null)
-    })
-  })
+    var instance = await SubmittedPapersIndex.deployed();
+    // test for throw with empty value is used in push
+    await expectThrow(
+      instance.push(bytesOfAddress),
+    );
+    const result = await instance.getAll();
 
-  it('set storage value', function () {
+    assert.equal(result[0], null)
+  });
+
+  it('set storage value', async function () {
     const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
-    return SubmittedPapersIndex.deployed().then((instance) => {
-      return instance.push(bytesOfAddress).then(()=>{
-        return instance.getAll()
-      })
-    }).then((result) => {
-      assert.equal(EncodingHelper.hexSha256ToIpfsMultiHash(result[0]), 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
-    })
-  })
+    var instance = await SubmittedPapersIndex.deployed();
+    await instance.push(bytesOfAddress);
+    const result = await instance.getAll();
+
+    assert.equal(EncodingHelper.hexSha256ToIpfsMultiHash(result[0]), 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
+  });
 
 })
