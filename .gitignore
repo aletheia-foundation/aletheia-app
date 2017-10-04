@@ -8,3 +8,4 @@ out
 *.sol*.bin
 chains.json
 .ipfs-develop/
+package-lock.json
