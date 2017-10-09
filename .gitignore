@@ -9,3 +9,5 @@ out
 *.sol*.bin
 chains.json
 .ipfs-develop/
+app-builds
+dist
