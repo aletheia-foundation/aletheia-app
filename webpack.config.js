@@ -180,7 +180,6 @@ module.exports = {
     "electron": "require('electron')",
     "child_process": "require('child_process')",
     "crypto": "require('crypto')",
-    "events": "require('events')",
     "fs": "require('fs')",
     "http": "require('http')",
     "https": "require('https')",
@@ -196,7 +195,7 @@ module.exports = {
     "string_decoder": "require('string_decoder')",
     "url": "require('url')",
     "util": "require('util')",
-    "zlib": "require('zlib')"
+    "zlib": "require('zlib')",
   },
   "resolve": {
     "extensions": [
@@ -378,6 +377,7 @@ module.exports = {
     net: "empty",
     process: true,
     module: false,
+    events: true,
     clearImmediate: false,
     setImmediate: false,
     __dirname: false,

@@ -1,24 +1,24 @@
 import { Injectable, Inject } from '@angular/core'
 
-// import {EventEmitter} from 'events'
 import {EncodingHelperService} from '../../encoding-helper/encoding-helper.service'
 import {Web3HelperService} from '../web3-helper/web3-helper.service'
 import {SubmittedPapersIndex} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
 import {Web3Provider} from '../web3-provider/web3-provider.token'
 import Web3 from 'web3'
 import {POLL_INTERVAL_MS} from '../../../Injection-tokens'
+import {EventEmitter} from 'events'
 
 @Injectable()
-export class Web3ClientService  {
+export class Web3ClientService extends EventEmitter {
   _web3Provider: any
   _SubmittedPapersIndex: any
   _web3: any
   _poll: any
   encodingHelper: EncodingHelperService
   web3Helper: Web3HelperService
-  emit (str,obj,abj2) {}
+  // emit (str,obj,abj2) {}
   constructor (@Inject(Web3Provider) provider, @Inject(POLL_INTERVAL_MS) pollInterval: string, @Inject(SubmittedPapersIndex) submittedPapersIndex, encodingHelper: EncodingHelperService, web3Helper: Web3HelperService) {
-    // super()
+    super()
     this._web3Provider = provider
     this.encodingHelper = encodingHelper
     this.web3Helper = web3Helper
