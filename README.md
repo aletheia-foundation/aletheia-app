@@ -75,7 +75,10 @@ This project requires IPFS and Ethereum clients to be running in the background
   npm run ipfs-local
 
   # in tab 3 (must be in project directory)
-  npm start # (app will start but be unable to connect to filesharing or blockchain)
+  # to run the website
+  npm run start:web # (app will start but be unable to connect to filesharing or blockchain)
+  # to run the electron app
+  npm run electron:serve
 ```
 
 # Tests
