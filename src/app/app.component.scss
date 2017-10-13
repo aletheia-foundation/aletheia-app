@@ -1,9 +1,11 @@
 nav {
-    padding: 20px;
+    display: flex;
+    padding: 20px 20px;
     background-color: #32B67A;
     a {
         text-decoration: none;
         color: white;
-        font-size: 18px;        
+        font-size: 18px;   
+        padding: 0px 10px; 
     }
 }

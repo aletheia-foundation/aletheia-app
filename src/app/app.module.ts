@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { BecomeAReviewerComponent } from './components/become-a-reviewer/become-a-reviewer.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -28,7 +29,8 @@ import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
   declarations: [
     AppComponent,
     HomeComponent,
-    SubmitPaperComponent
+    SubmitPaperComponent,
+    BecomeAReviewerComponent
   ],
   imports: [
     BrowserModule,

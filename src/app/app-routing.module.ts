@@ -2,6 +2,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {SubmitPaperComponent} from './components/submit-paper/submit-paper.component';
+import {BecomeAReviewerComponent} from './components/become-a-reviewer/become-a-reviewer.component';
 
 const routes: Routes = [
     {
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'submit-paper',
         component: SubmitPaperComponent
+    },
+    {
+        path: 'become-a-reviewer',
+        component: BecomeAReviewerComponent
     }
 ];
 
