@@ -1,7 +1,7 @@
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SubmitPaperComponent} from "./components/submit-paper/submit-paper.component";
+import {SubmitPaperComponent} from './components/submit-paper/submit-paper.component';
 
 const routes: Routes = [
     {

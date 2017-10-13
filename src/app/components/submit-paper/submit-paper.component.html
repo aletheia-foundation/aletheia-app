@@ -1,7 +1,21 @@
-<h1>Store the documents in aletheia</h1>
-<div></div>
+<h1>Store the documents in Aletheia</h1>
+<div id="status-bar" class="status-bar"></div>
+<div id="status-bar-ethereum" class="status-bar"></div>
+<div id="account-div"></div>
+<div id="balance-div"></div>
+<div id="holder">
 
+<div id="topup-message" style="display:none">To submit a paper to aletheia, you need goodwill. You can get goodwill by solving a captcha
+  <a href="../credit-account/credit-account.html">get goodwill</a>
+</div>
+<button id="the-file-to-upload">Permanently share a file</button>
 
-<p>
-  submit-paper works!
-</p>
+<div class="upload-success-div" id="upload-success-div" style="display:none;">
+  File <span class="upload-success-file-name" id="upload-success-file-name"></span> shared successfully.
+  File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
+</div>
+<div>
+  <a routerLink='/'>View all submitted papers</a>
+  <div id="error-div"></div>
+</div>
+</div>

@@ -1,17 +1,34 @@
+@font-face {
+  font-family: "Domine";
+  src: url('../../../assets/fonts/Domine-Regular.ttf')
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url('../../../assets/fonts/Montserrat-Regular.ttf')
+}
 .container {
-  height: 100%;
+  height: 100vh;
   display: flex;
+  background-color: #32B67A;
+  color: #EEEEEE;
+  font-family: "Montserrat";
+  text-align: center;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background: url(../../../assets/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
-
   .title {
-    color: white;
-    margin:0;
-    padding:50px 20px;
+    font-family: "Domine";
+    font-size: 48px;
   }
 
+  .subtitle {
+    margin-bottom: 40px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;      
+  }
 }

@@ -1,5 +1,17 @@
 <div class="container">
-  <h1 class="title">
-    {{title}}
-  </h1>
+  <div id="status-bar" class="status-bar"></div>
+  <h1 class="title">Aletheia</h1>
+  <span class="subtitle">Search the worlds peer reviewed scientific knowledge.</span>
+  <form>
+    <label for="search-papers">Search papers </label>
+    <input id="search-papers" type="text"/>
+    <button type="submit">Search</button>
+  </form>
+  <p>
+    <a href="#!/not-implemented">How it works</a>
+  </p>
+  <ul>
+    <li><a routerLink="/submit-paper">Submit a paper for peer review</a></li>
+    <li><a routerLink="/become-a-reviewer">Become a reviewer</a></li>
+  </ul>
 </div>
