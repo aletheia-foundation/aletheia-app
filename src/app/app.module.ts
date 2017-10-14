@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {InjectionToken, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { BecomeAReviewerComponent } from './components/become-a-reviewer/become-a-reviewer.component';
@@ -24,6 +25,8 @@ import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.
 import {SubmittedPapersIndex} from './providers/contracts/submitted-papers-index/submitted-papers-index.token'
 import {submittedPapersIndexFactory} from './providers/contracts/submitted-papers-index/submitted-papers-index.factory'
 import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
+import {Web3Token} from './providers/web3/web3/web3.token'
+import {web3Factory} from './providers/web3/web3/web3.factory'
 
 @NgModule({
   declarations: [
@@ -51,6 +54,11 @@ import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
       provide: SubmittedPapersIndex,
       deps: [Web3Provider],
       useFactory: submittedPapersIndexFactory
+    },
+    {
+      provide: Web3Token,
+      deps: [Web3Provider],
+      useFactory: web3Factory
     },
     { provide: Web3HelperService, useClass: Web3HelperService},
     {

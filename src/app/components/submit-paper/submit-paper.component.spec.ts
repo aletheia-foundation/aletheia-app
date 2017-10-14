@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmitPaperComponent } from './submit-paper.component';
+import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
+
+class MockWeb3ClientService {}
 
 describe('SubmitPaperComponent', () => {
   let component: SubmitPaperComponent;
@@ -8,7 +11,8 @@ describe('SubmitPaperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmitPaperComponent ]
+      declarations: [ SubmitPaperComponent ],
+      providers: [{provide: Web3ClientService, useClass: MockWeb3ClientService}]
     })
     .compileComponents();
   }));

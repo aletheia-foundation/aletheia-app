@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import bs58 from 'bs58'
+import * as bs58 from 'bs58'
 const ipfsSha256PrefixHex = '1220'
 
 @Injectable()
