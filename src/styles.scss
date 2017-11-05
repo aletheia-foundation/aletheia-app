@@ -1,8 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
-import 'app/app.component.scss'
+@import 'app/app.component.scss';
+
+@font-face {
+  font-family: "Domine-Bold";
+  src: url('/assets/fonts/Domine-Bold.ttf')
+}
+
+@font-face {
+  font-family: "Domine-Regular";
+  src: url('/assets/fonts/Domine-Regular.ttf')
+}
+
+@font-face {
+  font-family: "Domine-Light";
+  src: url('/assets/fonts/Domine-Light.ttf')
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: url('/assets/fonts/Montserrat-Bold.ttf')
+}
+
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url('/assets/fonts/Montserrat-Regular.ttf')
+}
+
+@font-face {
+  font-family: "Montserrat-Light";
+  src: url('/assets/fonts/Montserrat-Light.ttf')
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
+  color: #EEEEEE;  
+  background-color: #32B67A;
+  font-family: 'Montserrat-Regular';
 }
 

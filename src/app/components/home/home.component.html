@@ -3,15 +3,12 @@
   <h1 class="title">Aletheia</h1>
   <span class="subtitle">Search the worlds peer reviewed scientific knowledge.</span>
   <form>
-    <label for="search-papers">Search papers </label>
-    <input id="search-papers" type="text"/>
-    <button type="submit">Search</button>
+    <input id="search-papers" type="text" placeholder="Search papers..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search papers...'"/>
+    <button type="submit" placeholder="submit">
+      <i class="fa fa-search" aria-hidden="true"></i>      
+    </button>
   </form>
-  <p>
-    <a href="#!/not-implemented">How it works</a>
-  </p>
-  <ul>
-    <li><a routerLink="/submit-paper">Submit a paper for peer review</a></li>
-    <li><a routerLink="/become-a-reviewer">Become a reviewer</a></li>
-  </ul>
+  <div style="margin-top: 40px;">
+    <a routerLink="/how-it-works">How it works</a><span> | </span><a routerLink="/submit-paper">Submit a paper</a><span> | </span><a routerLink="/become-a-reviewer">Become a reviewer</a>
+  </div>
 </div>

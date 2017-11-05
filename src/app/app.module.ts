@@ -9,12 +9,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { BecomeAReviewerComponent } from './components/become-a-reviewer/become-a-reviewer.component';
-
-import { AppRoutingModule } from './app-routing.module';
-
-import { ElectronService } from './providers/electron.service';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { SubmitPaperComponent } from './components/submit-paper/submit-paper.component';
 
+import { AppRoutingModule } from './app-routing.module';
+import { ElectronService } from './providers/electron.service';
 
 import { Web3ClientService } from './providers/web3/web3-client/web3-client.service';
 import { EncodingHelperService } from './providers/encoding-helper/encoding-helper.service';
@@ -32,6 +31,7 @@ import {web3Factory} from './providers/web3/web3/web3.factory'
   declarations: [
     AppComponent,
     HomeComponent,
+    HowItWorksComponent,
     SubmitPaperComponent,
     BecomeAReviewerComponent
   ],

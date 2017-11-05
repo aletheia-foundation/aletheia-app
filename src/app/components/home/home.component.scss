@@ -1,25 +1,64 @@
-@font-face {
-  font-family: "Domine";
-  src: url('../../../assets/fonts/Domine-Regular.ttf')
+body {
+  height: 100vh;
 }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url('../../../assets/fonts/Montserrat-Regular.ttf')
+span {
+  padding: 0px 10px 0px 10px;
+}
+
+#search-papers {
+  color: #EEEEEE;
+  background-color: #32B67A;
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid #EEEEEE;
+  font-size: 16px;
+}
+
+input[type="text"] {
+  width: 200px;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 50px;
+  outline: none;
+}
+
+button[type="submit"] {
+  margin-left: -50px;
+  height: 20px;
+  width: 50px;
+  background: none;
+  border: none;
+  outline: none;
+  color: #EEEEEE;
+  border-left: 1px solid #eeeeee;
+  font-size: 16px;
+}
+
+#search-papers::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #EEEEEE;
+}
+#search-papers::-moz-placeholder { /* Firefox 19+ */
+  color: #EEEEEE;
+}
+#search-papers:-ms-input-placeholder { /* IE 10+ */
+  color: #EEEEEE;
+}
+#search-papers:-moz-placeholder { /* Firefox 18- */
+  color: #EEEEEE;
 }
 .container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   background-color: #32B67A;
   color: #EEEEEE;
-  font-family: "Montserrat";
+  font-family: "Montserrat-Regular";
   text-align: center;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   .title {
-    font-family: "Domine";
+    font-family: "Domine-Regular";
     font-size: 48px;
   }
 
@@ -30,5 +69,12 @@
   ul {
     list-style: none;
     padding-left: 0;      
+  }
+
+  a {
+    color: inherit;
+    font-family: "Montserrat-Light";
+    font-size: 14px;
+    text-decoration: none;
   }
 }
