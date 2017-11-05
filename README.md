@@ -37,7 +37,7 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 
 ## OSX instructions
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vUyjEmcVSFA" frameborder="0" allowfullscreen></iframe>
+[![Video Tutorial](http://img.youtube.com/vi/vUyjEmcVSFA/0.jpg)](https://www.youtube.com/watch?v=vUyjEmcVSFA)
 
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
