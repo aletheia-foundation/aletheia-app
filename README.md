@@ -36,6 +36,9 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 * A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
 ## OSX instructions
+
+![isyoutube](https://www.youtube.com/watch?v=vUyjEmcVSFA)
+
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
   cd aletheia-app
