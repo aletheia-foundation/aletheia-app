@@ -20,23 +20,26 @@ _Note: Reputation given to a paper flows back to the author_
 
 _Note: false attributions need to be handled_
 1. Community vote to find false attributions
-- Reverse reputation gained for false attribution
+2. Reverse reputation gained for false attribution
 
-Peer review / no peer review - Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice
+- Peer review / no peer review
 
-    Whether the submitter marks themselves as the author or not does not impact the flow of the paper. the peer review option does.
+_Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice_
 
-If no peer review is chosen paper moves to vote of acceptance by community
-Communities/Overlay Journals 
-Consensus mechanisms:
+_Note: Whether the submitter marks themselves as the author or not does not impact the flow of the paper. the peer review option does._
+
+- If no peer review is chosen paper moves to vote of acceptance by community
+
+_Note: Communities/Overlay Journals_ 
+
+_Note: Consensus mechanisms:_
     
-If peer review is chosen they have the below options
+- If peer review is chosen they have the below options
+- Remain anonymous / show identity of authorship
 
-    Remain anonymous / show identity of authorship
+_Note: I think they should also be able to select if they want the reviewers identity to be public (at least when theirs is public too)_
 
-     I think they should also be able to select if they want the reviewers identity to be public (at least when theirs is public too)
-
-    Only people from specific fields can peer review article / anyone can peer review the article
+_Note: Only people from specific fields can peer review article / anyone can peer review the article_
 
     Number of required peer reviews Should we set the minimum to three though?
 
