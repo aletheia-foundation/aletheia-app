@@ -14,12 +14,13 @@ Initial options from the submission screen
 
 _Note: authorship is to assist with reputation flowing back to authors. People can lie, but the authorship is tied to the user account that's tied to the ORCID so will be possible to track false attributions. If a number of users flag a false attribution that use will have reputation taken away from them_
 
-_Question: Will we recognise through token or score or some other mechanism_
+_Question: Will we recognise through token or score or some other mechanism?_
 
-  - Reputation given to a paper flows back to the author
-  - Note: false attributions need to be handled
-    - Community vote to find false attributions
-    - Reverse reputation gained for false attribution
+_Note: Reputation given to a paper flows back to the author_
+
+_Note: false attributions need to be handled_
+1. Community vote to find false attributions
+- Reverse reputation gained for false attribution
 
 Peer review / no peer review - Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice
 
