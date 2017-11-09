@@ -1,3 +1,9 @@
+![alt tag](https://cloud.githubusercontent.com/assets/24201238/24583976/ced4c43e-179f-11e7-9c40-c0988c346f55.png)
+
+_**Publish research for free, access research for free.**_
+
+# Submission Smart Contract Definition
+
 Welcome to Etherpad!
 
 This pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!
