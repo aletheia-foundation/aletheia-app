@@ -10,18 +10,18 @@ This is the results of an Etherpad session of the Aletheia community to define t
 ### User submit a paper
 Initial options from the submission screen
 
-* I am one of the authors / I am not one of the authors authors 
+- I am one of the authors / I am not one of the authors authors 
 
 _Note: authorship is to assist with reputation flowing back to authors. People can lie, but the authorship is tied to the user account that's tied to the ORCID so will be possible to track false attributions. If a number of users flag a false attribution that use will have reputation taken away from them_
 
 _Question: Will we recognise through token or score or some other mechanism_
 
-    * Reputation given to a paper flows back to the author
-    * Note: false attributions need to be handled
-        * Community vote to find false attributions
-        * Reverse reputation gained for false attribution
+   - Reputation given to a paper flows back to the author
+   - Note: false attributions need to be handled
+      - Community vote to find false attributions
+      - Reverse reputation gained for false attribution
 
-    Peer review / no peer review - Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice
+Peer review / no peer review - Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice
 
     Whether the submitter marks themselves as the author or not does not impact the flow of the paper. the peer review option does.
 
