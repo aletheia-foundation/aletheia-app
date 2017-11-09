@@ -4,13 +4,8 @@ _**Publish research for free, access research for free.**_
 
 # Submission Smart Contract Definition
 
-Welcome to Etherpad!
-
-This pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!
-
-Get involved with Etherpad at http://etherpad.org
-
-Aletheia submission contract
+## Introduction
+This is the results of an Etherpad session of the Aletheia community to define the requirements of the submission smart contract for submitting a paper to Altheia. the purpose of the exercise was to create the skeleton of what could then be created into a design document that volunteers can reference and work from to create the submission smart contract
 
 User submit a paper
 Initial options from the submission screen
