@@ -18,8 +18,8 @@ _Question: Will we recognise through token or score or some other mechanism_
 
   - Reputation given to a paper flows back to the author
   - Note: false attributions need to be handled
-  - Community vote to find false attributions
-  - Reverse reputation gained for false attribution
+    - Community vote to find false attributions
+    - Reverse reputation gained for false attribution
 
 Peer review / no peer review - Note: paper may already be peer reviewed or might not want peer review, it is the submitter's choice
 
