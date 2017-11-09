@@ -11,6 +11,7 @@ This is the results of an Etherpad session of the Aletheia community to define t
 Initial options from the submission screen
 
 * I am one of the authors / I am not one of the authors authors 
+
 *Note: authorship is to assist with reputation flowing back to authors. People can lie, but the authorship is tied to the user account that's tied to the ORCID so will be possible to track false attributions. If a number of users flag a false attribution that use will have reputation taken away from them
 
 *Question: Will we recognise through token or score or some other mechanism
