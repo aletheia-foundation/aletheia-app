@@ -7,10 +7,10 @@ _**Publish research for free, access research for free.**_
 ## Introduction
 This is the results of an Etherpad session of the Aletheia community to define the requirements of the submission smart contract for submitting a paper to Altheia. the purpose of the exercise was to create the skeleton of what could then be created into a design document that volunteers can reference and work from to create the submission smart contract
 
-User submit a paper
+### User submit a paper
 Initial options from the submission screen
 
-     I am one of the authors / I am not one of the authors authors - Note: authorship is to assist with reputation flowing back to authors. People can lie, but the authorship is tied to the user account that's tied to the ORCID so will be possible to track false attributions. If a number of users flag a false attribution that use will have reputation taken away from them - Question: Will we recognise through token or score or some other mechanism
+* I am one of the authors / I am not one of the authors authors - Note: authorship is to assist with reputation flowing back to authors. People can lie, but the authorship is tied to the user account that's tied to the ORCID so will be possible to track false attributions. If a number of users flag a false attribution that use will have reputation taken away from them - Question: Will we recognise through token or score or some other mechanism
 
     Reputation given to a paper flows back to the author
 
