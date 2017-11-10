@@ -41,60 +41,41 @@ _Note: I think they should also be able to select if they want the reviewers ide
 
 _Note: Only people from specific fields can peer review article / anyone can peer review the article_
 
-    Number of required peer reviews Should we set the minimum to three though?
+_Note: Number of required peer reviews Should we set the minimum to three though?_
 
-    We should also have an option to decide if the reports are made open or not (both author and reviewer)
+_Note: We should also have an option to decide if the reports are made open or not (both author and reviewer)_
 
-If remain anonymous is chosen, peer reviewers cannot see the authorship of the document
-If show identity is chosen, peer reviewers can see authorship
-If peer review from specific fields is chosen, the user can choose from the below list: Not convinced such a dropdown list is helpful, it seems too generalist for me (I'm in computer science, but there is only a fraction of papers in CS that I can review). Use keywords instead (that the submitter can choose freely)?
-I agree. Currently, the whole idea of peer review described here is completly crowd based. Is this our intention? No matter if you select that anyone can review the paper or only someone of a specific field there will always be a very big group of people who could be the reviewer of your manuscript and the chance that a real expert of your specific sub-research field will find the paper and wants to review it is low. I really like the community approach mentioned in the the outlook of the article we cite in the white paper: https://github.com/aletheia-foundation/aletheia-whitepaper/blob/master/Submitted-Ver-1.pdf There, groups of moderators are described which handle the peer review process. Rather then predefining the research fields one could allow the community to form these moderator groups for specific research fields on its own. The groups could get also reputation and authors could choose if they apply for the general public review or directly for a specific moderator group. A moderator group could also invite reviewers which are not part of Aletheia so far and therefore increase the community further.
+- If remain anonymous is chosen, peer reviewers cannot see the authorship of the document
+- If show identity is chosen, peer reviewers can see authorship
+- If peer review from specific fields is chosen, the user can choose from the below list:
 
-    Performing arts
+_Note: Not convinced such a dropdown list is helpful, it seems too generalist for me (I'm in computer science, but there is only a fraction of papers in CS that I can review). Use keywords instead (that the submitter can choose freely)?
 
-    Visual arts
+_Note: I agree. Currently, the whole idea of peer review described here is completly crowd based. Is this our intention? No matter if you select that anyone can review the paper or only someone of a specific field there will always be a very big group of people who could be the reviewer of your manuscript and the chance that a real expert of your specific sub-research field will find the paper and wants to review it is low. I really like the community approach mentioned in the the outlook of the article we cite in the white paper: https://github.com/aletheia-foundation/aletheia-whitepaper/blob/master/Submitted-Ver-1.pdf There, groups of moderators are described which handle the peer review process. Rather then predefining the research fields one could allow the community to form these moderator groups for specific research fields on its own. The groups could get also reputation and authors could choose if they apply for the general public review or directly for a specific moderator group. A moderator group could also invite reviewers which are not part of Aletheia so far and therefore increase the community further._
 
-    Geography
-
-    History
-
-    Languages and literature
-
-    Philosophy
-
-    Theology
-
-    Anthropology
-
-    Economics
-
-    Law
-
-    Political science
-
-    Psychology
-
-    Sociology
-
-    Biology
-
-    Chemistry
-
-    Earth sciences
-
-    Space sciences
-
-    Physics
-
-    Computer Science
-
-    Mathematics
-
-    Statistics
-
-    Engineering
-
-    Medicine and health sciences
+- Performing arts
+- Visual arts
+- Geography
+- History
+- Languages and literature
+- Philosophy
+- Theology
+- Anthropology
+- Economics
+- Law
+- Political science
+- Psychology
+- Sociology
+- Biology
+- Chemistry
+- Earth sciences
+- Space sciences
+- Physics
+- Computer Science
+- Mathematics
+- Statistics
+- Engineering
+- Medicine and health sciences
 
 Rather than use these fields, users can specify tags that gain reputation
 There is incentive to peer review in peer review notes will gain more rep the sooner I get it in and the more citations a paper gets
