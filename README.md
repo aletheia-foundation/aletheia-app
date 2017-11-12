@@ -37,8 +37,6 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 
 ## OSX instructions
 
-[![Video Tutorial](http://img.youtube.com/vi/vUyjEmcVSFA/0.jpg)](https://www.youtube.com/watch?v=vUyjEmcVSFA)
-
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
   cd aletheia-app
@@ -80,6 +78,11 @@ This project requires IPFS and Ethereum clients to be running in the background
   # in tab 3 (must be in project directory)
   npm start # (app will start but be unable to connect to filesharing or blockchain)
 ```
+
+[![Video Tutorial](http://img.youtube.com/vi/vUyjEmcVSFA/0.jpg)](https://www.youtube.com/watch?v=vUyjEmcVSFA)
+
+Note: The video mentions installing/running the project on Mac OS. The steps followed in the video are also applicable to any Linux distribution (Ubuntu, CentOS, ...). 
+
 
 # Tests
 Tests require IPFS and Ethereum clients to be running in the background
