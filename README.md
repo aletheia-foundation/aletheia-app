@@ -32,6 +32,7 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 # Requirements
 
 * Nodejs 6+
+* Python 2 (not python 3) test this with `python --version`
 * A running local IPFS node
 * A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
@@ -44,6 +45,7 @@ For local development, a blockchain can be faked using [testrpc](https://github.
   brew install ethereum # installs geth
   brew install ipfs
   brew install nodejs
+  # OSX should have python 2.X pre installed
   npm install -g electron
 
 ```
@@ -68,6 +70,7 @@ This project requires IPFS and Ethereum clients to be running in the background
 ```bash
   # open three terminal tabs in the project folder:
   # in tab 1
+  npm config set python $(which python) # Python 2 is needed, not python 3
   npm install
   npm run ethereum-local
 
