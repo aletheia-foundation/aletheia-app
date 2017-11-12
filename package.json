@@ -7,7 +7,7 @@
     "startOld": "./node_modules/.bin/truffle migrate && electron .",
     "testOld": "./node_modules/.bin/truffle test && ./node_modules/.bin/truffle migrate && mocha",
     "ethereum-local": "testrpc",
-    "ipfs-local": "./scripts/ipfs-local.sh",
+    "ipfs-local": "node ./scripts/ipfs-local.js",
     "ethereum-testnet": "./scripts/start-geth-testnet.sh",
     "ethereum-testnet:attach": "./scripts/attach-geth-testnet.sh",
     "ng": "ng",
