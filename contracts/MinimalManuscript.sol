@@ -1,32 +1,32 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import './Ownable.sol';
 import './Manuscript.sol';
 
 /** @title Minimal manuscript. */
-contract MinimalManuscript is Manuscript, Ownable {
-    string _dataAddress;
+contract MinimalManuscript is Ownable, Manuscript {
+    bytes32 _dataAddress;
     address[] public authors;
     address[] public citations;
 
-    function MinimalManuscript(string _da) public {
+    function MinimalManuscript(bytes32 _da) public {
+        require(_da != 0x00);
         owner = msg.sender;
         _dataAddress = _da;
     }
 
-    function dataAddress() public returns(string) {
+    function dataAddress() public constant returns(bytes32 _da) {
         return _dataAddress;
     }
 
-    function addAuthor(address newAuthor) public {
+    function addAuthor(address newAuthor) onlyOwner public {
         for (uint i = 0; i<authors.length; i++) {
             if (authors[i] == newAuthor) { return; }
         }
-
         authors.push(newAuthor);
     }
 
-    function citePaper(address citee) public {
+    function citePaper(address citee) onlyOwner public {
         for (uint i = 0; i<citations.length; i++) {
             if(citations[i] == citee) { return; }
         }
@@ -48,7 +48,7 @@ contract MinimalManuscript is Manuscript, Ownable {
         citations.length--;
     }
 
-    function findCitation(address citee) internal returns(uint) {
+    function findCitation(address citee) internal returns(uint citatioIndex) {
         uint i = 0;
         while (citations[i] != citee) {
             i++;
@@ -61,7 +61,22 @@ contract MinimalManuscript is Manuscript, Ownable {
         removeCitationByIndex(i);
     }
 
-    function citationCount() public returns (uint) { return citations.length; }
+    function citationCount()  public constant returns (uint _citationCount) {
+        return citations.length;
+    }
 
-    function authorCount() public returns (uint) { return authors.length; }
+    function authorCount() public constant returns (uint _authorCount) {
+        return authors.length;
+    }
+
+    function author(uint authorIdx) public constant returns (address authorList) {
+        return authors[authorIdx];
+    }
+
+    function citation(uint paperIdx) public constant returns (address citationList) {
+        return citations[paperIdx];
+    }
+
+
+
 }

@@ -1,15 +1,17 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.18;
 
 import './Ownable.sol';
 import './Manuscript.sol';
 
 contract Aletheia is Ownable {
+
   mapping(address => uint256) public balanceOf;
   mapping(address => bool) public published;
 
   function remove() public payable {
-	selfdestruct(msg.sender);
+	    selfdestruct(msg.sender);
   }
+
 
   function registerPaper(address addy) public {
       Manuscript paper = Manuscript(addy);
@@ -24,7 +26,7 @@ contract Aletheia is Ownable {
       }
 
       for (uint paperIdx = 0; paperIdx < paper.citationCount(); paperIdx++) {
-          balanceOf[paper.citations(paperIdx)] += 10;
+          balanceOf[paper.citation(paperIdx)] += 10;
       }
   }
 }
