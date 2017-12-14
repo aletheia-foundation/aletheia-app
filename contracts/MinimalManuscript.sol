@@ -21,13 +21,16 @@ contract MinimalManuscript is Ownable, Manuscript {
 
     function addAuthor(address newAuthor) onlyOwner public {
         for (uint i = 0; i<authors.length; i++) {
+            // ToDo: should function throw if auhtor is already registered?
             if (authors[i] == newAuthor) { return; }
         }
         authors.push(newAuthor);
     }
 
     function citePaper(address citee) onlyOwner public {
+        // ToDo: make self citation of this paper impossible.
         for (uint i = 0; i<citations.length; i++) {
+            //ToDo: should function throw if paper is already registered?
             if(citations[i] == citee) { return; }
         }
 
@@ -40,25 +43,32 @@ contract MinimalManuscript is Ownable, Manuscript {
         // we waste a bunch of gas. Fewer transactions = better.
     }
 
-    function removeCitationByIndex(uint i) internal {
-        while (i<citations.length-1) {
-            citations[i] = citations[i+1];
+    function removeItemByIndex(address[] storage someList, uint i) internal {
+        while (i<someList.length-1) {
+            someList[i] = someList[i+1];
             i++;
         }
-        citations.length--;
+        someList.length--;
     }
 
-    function findCitation(address citee) internal returns(uint citatioIndex) {
+    function findItem(address[] someList, address citee) internal constant
+        returns(uint itemIndex)
+        {
         uint i = 0;
-        while (citations[i] != citee) {
+        while (someList[i] != citee) {
             i++;
         }
         return i;
     }
 
     function removeCitation(address citee) onlyOwner public {
-        uint i = findCitation(citee);
-        removeCitationByIndex(i);
+        uint i = findItem(citations, citee);
+        removeItemByIndex(citations, i);
+    }
+
+    function removeAuthor(address author) onlyOwner public {
+        uint i = findItem(authors, author);
+        removeItemByIndex(authors, i);
     }
 
     function citationCount()  public constant returns (uint _citationCount) {

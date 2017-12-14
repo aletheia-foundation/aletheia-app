@@ -33,7 +33,10 @@ contract('MinimalManuscript', function (accounts) {
       let tempBytesOfAdress = await ma[cnt].dataAddress();
       assert.equal(tempBytesOfAdress, bytesOfAddress[cnt], "data address is not correct")
     }
+  })
 
+  it('checks for throw when data address is empty', async function(){
+    await expectThrow(MinimalManuscript.new(0x00));
   })
 
   it('adds authors to manuscripts', async function() {
@@ -56,6 +59,22 @@ contract('MinimalManuscript', function (accounts) {
       let authorMa2 = await ma[1].author(cnt);
       assert.equal(authorMa2, accounts[cnt+3], "author address is not in author list")
     }
+  })
+
+  it('removes author', async function() {
+
+    // remove author accounts[4] from manuscript ma[1]
+    await ma[1].removeAuthor(accounts[4], {from: accounts[1]});
+
+    // check if author count was reduced by one
+    let authorCnt3 = await ma[1].authorCount();
+    assert.equal(authorCnt3, 2, "author accounts[4] was not removed")
+
+    // check if accounts[3] and accounts[5] are the only remaining authors
+    let tempAuthor1 = await ma[1].author(0);
+    assert.equal(tempAuthor1, accounts[3], "first author of manuscript ma[1] is not accounts[3]");
+    let tempAuthor2 = await ma[1].author(1);
+    assert.equal(tempAuthor2, accounts[5], "second author of manuscript ma[0] is not accounts[5]");
   })
 
   it('cites papers', async function() {
@@ -109,7 +128,10 @@ contract('MinimalManuscript', function (accounts) {
     // check for throw of citePaper() when msg.sender in not owner
     await expectThrow(ma[0].citePaper(adm[3], {from: accounts[1]}));
 
-    // check for thro of removeCitation() when msg.sender in not owner
+    // check for throw of removeCitation() when msg.sender in not owner
     await expectThrow(ma[0].removeCitation(adm[1], {from: accounts[1]}));
+
+    // check for throw of removeAuthor() when msg.sender in not owner
+    await expectThrow(ma[0].removeAuthor(accounts[2], {from: accounts[1]}));
   })
 })

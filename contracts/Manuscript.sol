@@ -7,6 +7,7 @@ interface Manuscript {
     function addAuthor(address newAuthor) public;
     function citePaper(address citee) public;
     function removeCitation(address citee) public;
+    function removeAuthor(address author) public;
     function citationCount() public constant returns (uint);
     function authorCount() public constant returns (uint);
     function citation(uint authorIdx) public constant returns (address);
