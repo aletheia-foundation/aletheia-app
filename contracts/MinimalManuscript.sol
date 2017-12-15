@@ -15,13 +15,17 @@ contract MinimalManuscript is Ownable, Manuscript {
         _dataAddress = _da;
     }
 
+    function getOwner() public constant returns(address) {
+        return owner;
+    }
+
     function dataAddress() public constant returns(bytes32 _da) {
         return _dataAddress;
     }
 
     function addAuthor(address newAuthor) onlyOwner public {
         for (uint i = 0; i<authors.length; i++) {
-            // ToDo: should function throw if auhtor is already registered?
+            // ToDo: should function throw if author is already registered?
             if (authors[i] == newAuthor) { return; }
         }
         authors.push(newAuthor);

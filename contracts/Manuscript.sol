@@ -12,4 +12,5 @@ interface Manuscript {
     function authorCount() public constant returns (uint);
     function citation(uint authorIdx) public constant returns (address);
     function author(uint paperIdx) public constant returns (address);
+    function getOwner() public constant returns(address);
 }

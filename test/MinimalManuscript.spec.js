@@ -1,5 +1,5 @@
 const EncodingHelper = require('../app/common/encoding-helper')
-const expectThrow = require('../test/helpers/expectThrow')
+const expectRevert = require('../test/helpers/expectRevert')
 
 console.log('*********', Object.keys(contract))
 
@@ -35,8 +35,8 @@ contract('MinimalManuscript', function (accounts) {
     }
   })
 
-  it('checks for throw when data address is empty', async function(){
-    await expectThrow(MinimalManuscript.new(0x00));
+  it('checks for revert transaction when data address is empty', async function(){
+    await expectRevert(MinimalManuscript.new(0x00));
   })
 
   it('adds authors to manuscripts', async function() {
@@ -122,16 +122,16 @@ contract('MinimalManuscript', function (accounts) {
 
   it('checks ownership restrictions', async function() {
 
-    // check for throw of addAuthor() when msg.sender is not owner
-    await expectThrow(ma[0].addAuthor(accounts[3], {from: accounts[1]}));
+    // check for revert transaction of addAuthor() when msg.sender is not owner
+    await expectRevert(ma[0].addAuthor(accounts[3], {from: accounts[1]}));
 
-    // check for throw of citePaper() when msg.sender in not owner
-    await expectThrow(ma[0].citePaper(adm[3], {from: accounts[1]}));
+    // check for revert transaction of citePaper() when msg.sender in not owner
+    await expectRevert(ma[0].citePaper(adm[3], {from: accounts[1]}));
 
-    // check for throw of removeCitation() when msg.sender in not owner
-    await expectThrow(ma[0].removeCitation(adm[1], {from: accounts[1]}));
+    // check for revert transaction of removeCitation() when msg.sender in not owner
+    await expectRevert(ma[0].removeCitation(adm[1], {from: accounts[1]}));
 
-    // check for throw of removeAuthor() when msg.sender in not owner
-    await expectThrow(ma[0].removeAuthor(accounts[2], {from: accounts[1]}));
+    // check for revert transaction of removeAuthor() when msg.sender in not owner
+    await expectRevert(ma[0].removeAuthor(accounts[2], {from: accounts[1]}));
   })
 })
