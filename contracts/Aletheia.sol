@@ -24,20 +24,20 @@ contract Aletheia is Ownable {
       return m;
   }
 
-  function registerPaper(address addy) public {
+  function registerPaper(address manuscriptAdress) public {
       // ToDo: should check, if upon reregistration the data address was
       // changed => new community vote / peer review necessary
-      Manuscript paper = Manuscript(addy);
+      Manuscript paper = Manuscript(manuscriptAdress);
       // only owner of manuscript should be able to register paper
       require(paper.getOwner() == msg.sender);
 
       // Check to see if that address has already been registered.
-      if (registered[addy] == true) {
+      if (registered[manuscriptAdress] == true) {
           // Update the citation count
 
       } else {
           // Register the manuscript (and update the citations, after review?)
-          registered[addy] = true;
+          registered[manuscriptAdress] = true;
       }
 
       // ToDo: Update of citation count should be performed

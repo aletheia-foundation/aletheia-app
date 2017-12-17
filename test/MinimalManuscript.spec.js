@@ -75,11 +75,14 @@ contract('MinimalManuscript', function (accounts) {
     assert.equal(tempAuthor1, accounts[3], "first author of manuscript ma[1] is not accounts[3]");
     let tempAuthor2 = await ma[1].author(1);
     assert.equal(tempAuthor2, accounts[5], "second author of manuscript ma[0] is not accounts[5]");
+
+    // try to remove author which is not in author list of manuscript
+    await expectRevert(ma[1].removeAuthor(accounts[6], {from: accounts[1]}));
   })
 
   it('cites papers', async function() {
 
-    // check empt citation count of ma[0]
+    // check empty citation count of ma[0]
     let citationCnt1 = await ma[0].citationCount();
     assert.equal(citationCnt1, 0, "number of citations of manuscript ma[0] is not 0")
 
@@ -118,7 +121,24 @@ contract('MinimalManuscript', function (accounts) {
     assert.equal(tempCitation1, adm[1], "first citation of manuscript ma[0] is not ma[1]");
     let tempCitation2 = await ma[0].citation(1);
     assert.equal(tempCitation2, adm[3], "second citation of manuscript ma[0] is not ma[3]");
+
+    // try to remove citation which is not in citation list of manuscript
+    await expectRevert(ma[0].removeCitation(adm[2], {from: accounts[0]}));
   })
+
+  it('signs authorship', async function(){
+
+    // sign authorhip of manuscript
+    await ma[0].signAuthorship({from: accounts[1]});
+
+    // check if authorship was signed corretly
+    let authorSigned = await ma[0].signedByAuthor(accounts[1]);
+    assert.equal(authorSigned, true, "accounts[1] did not sign manuscript ma[0]")
+
+    // try to sign manuscript without having authorship
+    await expectRevert(ma[0].signAuthorship({from: accounts[3]}));
+  })
+
 
   it('checks ownership restrictions', async function() {
 

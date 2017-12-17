@@ -8,6 +8,7 @@ contract MinimalManuscript is Ownable, Manuscript {
     bytes32 _dataAddress;
     address[] public authors;
     address[] public citations;
+    mapping(address => bool) public signedByAuthor;
 
     function MinimalManuscript(bytes32 _da) public {
         require(_da != 0x00);
@@ -48,6 +49,7 @@ contract MinimalManuscript is Ownable, Manuscript {
     }
 
     function removeItemByIndex(address[] storage someList, uint i) internal {
+        require(i < someList.length);
         while (i<someList.length-1) {
             someList[i] = someList[i+1];
             i++;
@@ -55,14 +57,15 @@ contract MinimalManuscript is Ownable, Manuscript {
         someList.length--;
     }
 
-    function findItem(address[] someList, address citee) internal constant
+    function findItem(address[] someList, address item) internal constant
         returns(uint itemIndex)
         {
-        uint i = 0;
-        while (someList[i] != citee) {
-            i++;
+        // returns index of item in someList, if item is not in someList the
+        // transaction is reverted
+        for (uint i = 0; i<someList.length; i++) {
+            if (someList[i] == item) { return i;}
         }
-        return i;
+        revert();
     }
 
     function removeCitation(address citee) onlyOwner public {
@@ -73,6 +76,11 @@ contract MinimalManuscript is Ownable, Manuscript {
     function removeAuthor(address author) onlyOwner public {
         uint i = findItem(authors, author);
         removeItemByIndex(authors, i);
+    }
+
+    function signAuthorship() public {
+        findItem(authors, msg.sender);
+        signedByAuthor[msg.sender] = true;
     }
 
     function citationCount()  public constant returns (uint _citationCount) {
