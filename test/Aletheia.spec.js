@@ -8,8 +8,8 @@ var MinimalManuscript = artifacts.require('../contracts/MinimalManuscript.sol')
 
 contract('Aletheia', function(accounts) {
   var instance;
-  var adm1;
-  var ma1;
+  var addressManuscript1;
+  var manuscript1;
 
   it('create new manuscript', async function() {
 
@@ -19,22 +19,25 @@ contract('Aletheia', function(accounts) {
     await instance.newManuscript(bytesOfAddress, {from: accounts[0]});
 
     // get address of new contact by IPFS link
-    adm1 = await instance.manuscriptAdress(bytesOfAddress);
-    ma1 = await MinimalManuscript.at(adm1);
+    addressManuscript1 = await instance.manuscriptAdress(bytesOfAddress);
+    manuscript1 = await MinimalManuscript.at(addressManuscript1);
 
     // check for transfer of ownership for new manuscript
-    let ownerMa1 = await ma1.getOwner();
-    assert.equal(ownerMa1, accounts[0], "new owner is not author 1");
+    let ownerManuscript1 = await manuscript1.getOwner();
+    assert.equal(ownerManuscript1, accounts[0], "new owner is not author 1");
   })
 
   it('register new manuscript', async function() {
 
     // register manuscript
-    await instance.registerPaper(adm1, {from: accounts[0]});
+    await instance.registerPaper(addressManuscript1, {from: accounts[0]});
 
     // check for revert transaction when registerPaper() is not used by
     // manuscript owner
-    await expectRevert(instance.registerPaper(adm1, {from: accounts[1]}));
+    await expectRevert(instance.registerPaper(addressManuscript1, {from: accounts[1]}));
+
+    instance.remove();
+    await instance.registerPaper(addressManuscript1, {from: accounts[0]});
   })
 
 })
