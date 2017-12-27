@@ -8,14 +8,14 @@ import {Web3NetworkStatus} from './web3-network-status'
 
 @Injectable()
 export class Web3MonitorService extends EventEmitter {
-  address: string
+  addressPromise: Promise<string>
   web3: any
   poll: any
   constructor(@Inject(POLL_INTERVAL_MS) pollInterval: string,
-              @Inject(ADDRESS) address: string,
+              @Inject(ADDRESS) addressPromise: Promise<string>,
               @Inject(Web3Token) web3: any) {
     super()
-    this.address = address
+    this.addressPromise = addressPromise
     this.web3 = web3
     this.poll = setInterval(this.onPoll.bind(this), pollInterval)
     this.checkConnection()
@@ -42,26 +42,28 @@ export class Web3MonitorService extends EventEmitter {
         this.emit('network-update', err)
         return
       } else {
+        this.addressPromise.then((address) => {
 
-        if(this.address === null) {
-          const err = new Error('Unable to find blockchain address')
-          console.error(err, err.stack)
-          this.emit('network-update', err)
-          return
-        }
-        this.web3.eth.getBalance(this.address, (err, weiBalance) => {
-          const ethBalance = this.web3.fromWei(weiBalance, 'ether')
-          if (err) {
+          if(address === null) {
+            const err = new Error('Unable to find blockchain address')
             console.error(err, err.stack)
             this.emit('network-update', err)
             return
-          } else {
-            this.emit('network-update', null, new Web3NetworkStatus(
-              numPeers,
-              this.address,
-              ethBalance
-            ))
           }
+          this.web3.eth.getBalance(address, (err, weiBalance) => {
+            const ethBalance = this.web3.fromWei(weiBalance, 'ether')
+            if (err) {
+              console.error(err, err.stack)
+              this.emit('network-update', err)
+              return
+            } else {
+              this.emit('network-update', null, new Web3NetworkStatus(
+                numPeers,
+                address,
+                ethBalance
+              ))
+            }
+          })
         })
       }
     })

@@ -1,11 +1,11 @@
 export class Web3NetworkStatus {
-  constructor (peers: number, account: string, balance: number ){
+  constructor (peers: number, address: string, balance: number ){
     this.peers = peers
-    this.account = account
+    this.address = address
     this.balance = balance
   }
   peers: number
-  account: string
+  address: string
   balance: number
   // todo: add blocknumber
 }

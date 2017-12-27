@@ -15,26 +15,26 @@ enum StatusEnum {
 })
 export class NetworkStatusComponent {
   web3Monitor: Web3MonitorService
-
-  peers: number
   address: string
+  peers: number
   status: StatusEnum //todo: error handling
   balance: number
 
-  constructor(@Inject(ADDRESS) address: string,
+  constructor(
               web3Monitor: Web3MonitorService) {
     this.web3Monitor = web3Monitor
-    this.address = address
     web3Monitor.addListener('network-update', (err, status : Web3NetworkStatus) => {
       if(err) {
         this.peers = 0
         this.status = StatusEnum.Error
+        this.address = ''
+        this.balance = 0
         return
       }
       else if (status.peers === 0) {
        this.status = StatusEnum.Error
       }
-
+      this.address = status.address
       this.status = StatusEnum.Connected
       this.peers = status.peers
       this.balance = status.balance

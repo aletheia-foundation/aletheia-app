@@ -1,3 +1,14 @@
+/* TODO: mobile devices */
 .network-status {
   display: flex;
+  padding: 20px 20px;
+  .peers-connected {
+    padding: 0 10px;
+  }
+  .profile-link {
+    padding: 0 10px;
+  }
+  .balance {
+    padding: 0 10px;
+  }
 }
