@@ -10,3 +10,4 @@ chains.json
 .ipfs-develop/
 package-lock.json
 build
+MinimalManuscriptTest.spec.js
