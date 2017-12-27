@@ -23,9 +23,12 @@ import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.
 
 import {SubmittedPapersIndex} from './providers/contracts/submitted-papers-index/submitted-papers-index.token'
 import {submittedPapersIndexFactory} from './providers/contracts/submitted-papers-index/submitted-papers-index.factory'
-import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
+import {ADDRESS, POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
 import {Web3Token} from './providers/web3/web3/web3.token'
-import {web3Factory} from './providers/web3/web3/web3.factory'
+import {web3Factory} from './providers/web3/web3/web3.factory';
+import { NetworkStatusComponent } from './components/network-status/network-status.component'
+import { Web3MonitorService } from './providers/web3/web3-monitor/web3-monitor.service'
+import {web3AccountFactory} from './providers/web3/web3-account/web3-account.factory'
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import {web3Factory} from './providers/web3/web3/web3.factory'
     HomeComponent,
     HowItWorksComponent,
     SubmitPaperComponent,
-    BecomeAReviewerComponent
+    BecomeAReviewerComponent,
+    NetworkStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,15 @@ import {web3Factory} from './providers/web3/web3/web3.factory'
     { provide: Web3HelperService, useClass: Web3HelperService},
     {
       provide: Web3ClientService,
-      useClass: Web3ClientService }
+      useClass: Web3ClientService
+    },
+    {
+      provide: ADDRESS, deps: [Web3Token], useFactory: web3AccountFactory
+    },
+    {
+      provide: Web3MonitorService,
+      useClass: Web3MonitorService
+    }
   ],
   bootstrap: [AppComponent]
 })
