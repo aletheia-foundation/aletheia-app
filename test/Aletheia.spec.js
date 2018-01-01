@@ -19,7 +19,7 @@ contract('Aletheia', function(accounts) {
     await instance.newManuscript(bytesOfAddress, {from: accounts[0]});
 
     // get address of new contact by IPFS link
-    addressManuscript1 = await instance.manuscriptAdress(bytesOfAddress);
+    addressManuscript1 = await instance.manuscriptAddress(bytesOfAddress);
     manuscript1 = await MinimalManuscript.at(addressManuscript1);
 
     // check for transfer of ownership for new manuscript

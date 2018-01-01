@@ -1,11 +1,12 @@
 pragma solidity ^0.4.18;
 
-import './Ownable.sol';
-import './Manuscript.sol';
+import "./Ownable.sol";
+import "./Manuscript.sol";
+
 
 /** @title Minimal manuscript. */
 contract MinimalManuscript is Ownable, Manuscript {
-    bytes32 _dataAddress;
+    bytes32 public _dataAddress;
     address[] public authors;
     address[] public citations;
     mapping(address => bool) public signedByAuthor;
@@ -24,19 +25,19 @@ contract MinimalManuscript is Ownable, Manuscript {
         return _dataAddress;
     }
 
-    function addAuthor(address newAuthor) onlyOwner public {
-        for (uint i = 0; i<authors.length; i++) {
+    function addAuthor(address newAuthor) public onlyOwner {
+        for (uint i = 0; i < authors.length; i++) {
             // ToDo: should function throw if author is already registered?
             if (authors[i] == newAuthor) { return; }
         }
         authors.push(newAuthor);
     }
 
-    function citePaper(address citee) onlyOwner public {
+    function citePaper(address citee) public onlyOwner {
         // ToDo: make self citation of this paper impossible.
-        for (uint i = 0; i<citations.length; i++) {
+        for (uint i = 0; i < citations.length; i++) {
             //ToDo: should function throw if paper is already registered?
-            if(citations[i] == citee) { return; }
+            if (citations[i] == citee) { return; }
         }
 
         citations.push(citee);
@@ -48,32 +49,12 @@ contract MinimalManuscript is Ownable, Manuscript {
         // we waste a bunch of gas. Fewer transactions = better.
     }
 
-    function removeItemByIndex(address[] storage someList, uint i) internal {
-        require(i < someList.length);
-        while (i<someList.length-1) {
-            someList[i] = someList[i+1];
-            i++;
-        }
-        someList.length--;
-    }
-
-    function findItem(address[] someList, address item) internal constant
-        returns(uint itemIndex)
-        {
-        // returns index of item in someList, if item is not in someList the
-        // transaction is reverted
-        for (uint i = 0; i<someList.length; i++) {
-            if (someList[i] == item) { return i;}
-        }
-        revert();
-    }
-
-    function removeCitation(address citee) onlyOwner public {
+    function removeCitation(address citee) public onlyOwner {
         uint i = findItem(citations, citee);
         removeItemByIndex(citations, i);
     }
 
-    function removeAuthor(address author) onlyOwner public {
+    function removeAuthor(address author) public onlyOwner {
         uint i = findItem(authors, author);
         removeItemByIndex(authors, i);
     }
@@ -99,6 +80,24 @@ contract MinimalManuscript is Ownable, Manuscript {
         return citations[paperIdx];
     }
 
+    function removeItemByIndex(address[] storage someList, uint i) internal {
+        require(i < someList.length);
+        while (i < someList.length-1) {
+            someList[i] = someList[i+1];
+            i++;
+        }
+        someList.length--;
+    }
 
+    function findItem(address[] someList, address item) internal pure
+        returns(uint itemIndex)
+    {
+    // returns index of item in someList, if item is not in someList the
+    // transaction is reverted
+        for (uint i = 0; i < someList.length; i++) {
+            if (someList[i] == item) { return i;}
+        }
+        revert();
+    }
 
 }
