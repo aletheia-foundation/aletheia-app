@@ -10,12 +10,12 @@ contract('Aletheia', function(accounts) {
   var instance;
   var addressManuscript1;
   var manuscript1;
+  var bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
 
   it('create new manuscript', async function() {
 
     instance = await Aletheia.deployed();
     // create new manuscript 1
-    bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
     await instance.newManuscript(bytesOfAddress, {from: accounts[0]});
 
     // get address of new contact by IPFS link
@@ -35,9 +35,22 @@ contract('Aletheia', function(accounts) {
     // check for revert transaction when registerPaper() is not used by
     // manuscript owner
     await expectRevert(instance.registerPaper(addressManuscript1, {from: accounts[1]}));
+  })
 
-    instance.remove();
-    await instance.registerPaper(addressManuscript1, {from: accounts[0]});
+  it('checks ownership restrictions', async function() {
+
+    // check for revert transaction of remove() when msg.sender is not owner
+    await expectRevert(instance.remove({from: accounts[1]}));
+  })
+
+  it('removes Aletheia contract', async function() {
+
+    // selfdestruct Aletheia contract
+    await instance.remove({from: accounts[0]});
+
+    // verify empty storage of manuscriptAddress
+    var addressManuscript2 = await instance.manuscriptAddress(bytesOfAddress);
+    assert.equal(addressManuscript2, 0, "address storage is not set to zero")
   })
 
 })

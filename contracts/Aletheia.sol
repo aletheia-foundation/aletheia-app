@@ -11,7 +11,7 @@ contract Aletheia is Ownable {
     mapping(address => bool) public registered;
     mapping(bytes32 => address) public manuscriptAddress;
 
-    function remove() public payable {
+    function remove() public onlyOwner payable {
         selfdestruct(msg.sender);
     }
 
