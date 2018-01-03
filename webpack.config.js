@@ -29,11 +29,11 @@ function getPlugins() {
   }));
 
   plugins.push(new NoEmitOnErrorsPlugin());
-
   plugins.push(new GlobCopyWebpackPlugin({
     "patterns": [
       "assets",
-      "favicon.ico"
+      "favicon.ico",
+      "index.html"
     ],
     "globOptions": {
       "cwd": process.cwd() + "/src",

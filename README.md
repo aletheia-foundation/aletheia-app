@@ -84,6 +84,17 @@ This project requires IPFS and Ethereum clients to be running in the background
   npm run electron:serve
 ```
 
+# Test the electron build
+
+`npm run electron:serve`
+
+note: this will not be able to connect to the local ethereum testrpc *(npm run ethereum-local)* and can only be tested on a real testnet e.g.: 
+ 
+```bash
+    npm run ethereum-testnet
+```
+
+
 # Tests
 Tests require IPFS and Ethereum clients to be running in the background
 ```bash
