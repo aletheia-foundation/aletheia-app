@@ -99,14 +99,6 @@
     "webpack-dev-server": "2.7.1"
   },
   "dependencies": {
-    "config": "1.26.1",
-    "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
-    "jquery": "3.2.1",
-    "q": "1.5.0",
-    "request-promise-native": "1.0.4",
-    "truffle-contract": "2.0.1",
-    "truffle-expect": "0.0.3",
-    "web3": "0.18.4",
     "@angular/common": "4.3.5",
     "@angular/compiler": "4.3.5",
     "@angular/core": "4.3.5",
@@ -115,9 +107,17 @@
     "@angular/platform-browser": "4.3.5",
     "@angular/platform-browser-dynamic": "4.3.5",
     "@angular/router": "4.3.5",
+    "config": "1.26.1",
     "core-js": "2.4.1",
     "enhanced-resolve": "3.3.0",
+    "ipfs-api": "17.2.6",
+    "jquery": "3.2.1",
+    "q": "1.5.0",
+    "request-promise-native": "1.0.4",
     "rxjs": "5.4.3",
+    "truffle-contract": "2.0.1",
+    "truffle-expect": "0.0.3",
+    "web3": "0.18.4",
     "zone.js": "0.8.17"
   }
 }
