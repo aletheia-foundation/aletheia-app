@@ -7,13 +7,12 @@ const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
 
 const { NoEmitOnErrorsPlugin, LoaderOptionsPlugin, DefinePlugin, HashedModuleIdsPlugin } = require('webpack');
-const { GlobCopyWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
+const { GlobCopyWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin, UglifyJsPlugin } = require('webpack').optimize;
 const { AotPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
-const baseHref = "";
 const deployUrl = "";
 
 const isProd = (process.env.NODE_ENV === 'production');
@@ -31,9 +30,7 @@ function getPlugins() {
   plugins.push(new NoEmitOnErrorsPlugin());
   plugins.push(new GlobCopyWebpackPlugin({
     "patterns": [
-      "assets",
-      "favicon.ico",
-      "index.html"
+      "favicon.ico"
     ],
     "globOptions": {
       "cwd": process.cwd() + "/src",
@@ -73,8 +70,6 @@ function getPlugins() {
     }
   }));
 
-  plugins.push(new BaseHrefWebpackPlugin({}));
-
   plugins.push(new CommonsChunkPlugin({
     "name": "inline",
     "minChunks": null
@@ -92,45 +87,6 @@ function getPlugins() {
     "filename": "[name].bundle.css",
     "disable": true
   }));
-
-  plugins.push(new LoaderOptionsPlugin({
-    "sourceMap": false,
-    "options": {
-      "postcss": [
-        autoprefixer(),
-        postcssUrl({
-            "url": (obj) => {
-            // Only convert root relative URLs, which CSS-Loader won't process into require().
-            if (!obj.url.startsWith('/') || obj.url.startsWith('//')) {
-    return obj.url;
-  }
-  if (deployUrl.match(/:\/\//)) {
-    // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-    return `${deployUrl.replace(/\/$/, '')}${obj.url}`;
-  }
-  else if (baseHref.match(/:\/\//)) {
-    // If baseHref contains a scheme, include it as is.
-    return baseHref.replace(/\/$/, '') +
-      `/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
-  }
-  else {
-    // Join together base-href, deploy-url and the original URL.
-    // Also dedupe multiple slashes into single ones.
-    return `/${baseHref}/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
-  }
-}
-})
-],
-  "sassLoader": {
-    "sourceMap": false,
-      "includePaths": []
-  },
-  "lessLoader": {
-    "sourceMap": false
-  },
-  "context": ""
-}
-}));
 
   if (isProd) {
     plugins.push(new HashedModuleIdsPlugin({
@@ -173,7 +129,6 @@ function getPlugins() {
 
   return plugins;
 }
-
 module.exports = {
   "devtool": "source-map",
   "externals": {
@@ -202,7 +157,7 @@ module.exports = {
       ".ts",
       ".js",
       ".scss",
-      ".json"
+      ".json",
     ],
     "aliasFields": [],
     "alias": { // WORKAROUND See. angular-cli/issues/5433
@@ -253,19 +208,17 @@ module.exports = {
         "loader": "file-loader?name=[name].[hash:20].[ext]"
       },
       {
-        "test": /\.(jpg|png|gif|otf|ttf|woff|woff2|cur|ani)$/,
-        "loader": "url-loader?name=[name].[hash:20].[ext]&limit=10000"
-      },
-      {
-        "exclude": [
-          path.join(process.cwd(), "src/styles.scss")
+        "test": /\.(ico|jpg|png|gif|otf|ttf|woff|woff2|cur|ani)$/,
+        "use": [
+          {
+            loader: "file-loader",
+            options:{
+              name: function(file) {
+                return "[path][name].[ext]";
+              },
+            },
+          }
         ],
-        "test": /\.css$/,
-        "loaders": [
-          "exports-loader?module.exports.toString()",
-          "css-loader?{\"sourceMap\":false,\"importLoaders\":1}",
-          "postcss-loader"
-        ]
       },
       {
         "exclude": [

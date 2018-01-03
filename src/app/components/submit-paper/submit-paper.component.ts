@@ -4,7 +4,7 @@ import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.se
 @Component({
   selector: 'app-submit-paper',
   templateUrl: './submit-paper.component.html',
-  styleUrls: ['./submit-paper.component.css']
+  styleUrls: ['./submit-paper.component.scss']
 })
 export class SubmitPaperComponent implements OnInit {
 

@@ -1,34 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'app/app.component.scss';
+@import 'assets/font-awesome-4.7.0/css/font-awesome.min.css';
 
 @font-face {
   font-family: "Domine-Bold";
-  src: url('/assets/fonts/Domine-Bold.ttf')
+  src: url('./assets/fonts/Domine-Bold.ttf')
 }
 
 @font-face {
   font-family: "Domine-Regular";
-  src: url('/assets/fonts/Domine-Regular.ttf')
-}
-
-@font-face {
-  font-family: "Domine-Light";
-  src: url('/assets/fonts/Domine-Light.ttf')
+  src: url('./assets/fonts/Domine-Regular.ttf')
 }
 
 @font-face {
   font-family: "Montserrat-Bold";
-  src: url('/assets/fonts/Montserrat-Bold.ttf')
+  src: url('./assets/fonts/Montserrat-Bold.ttf')
 }
 
 @font-face {
   font-family: "Montserrat-Regular";
-  src: url('/assets/fonts/Montserrat-Regular.ttf')
+  src: url('./assets/fonts/Montserrat-Regular.ttf')
 }
 
 @font-face {
   font-family: "Montserrat-Light";
-  src: url('/assets/fonts/Montserrat-Light.ttf')
+  src: url('./assets/fonts/Montserrat-Light.ttf')
 }
 
 html, body {
