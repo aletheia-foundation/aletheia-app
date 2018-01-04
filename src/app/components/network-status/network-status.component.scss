@@ -1,14 +1,31 @@
 /* TODO: mobile devices */
+@import '../../../theme/colors';
+
 .network-status {
   display: flex;
   padding: 20px 20px;
+  .error-status {
+    border: 1px solid $error-color;
+    border-radius: 3px;
+    padding: 5px 10px;
+    .fa {
+      color: $error-color;
+    }
+  }
   .peers-connected {
-    padding: 0 10px;
+    padding: 5px 10px;
+    &.no-peers {
+      border: 1px solid $warning-color;
+      border-radius: 3px;
+      .fa {
+        color: $warning-color;
+      }
+    }
   }
   .profile-link {
-    padding: 0 10px;
+    padding: 5px 10px;
   }
   .balance {
-    padding: 0 10px;
+    padding: 5px 10px;
   }
 }

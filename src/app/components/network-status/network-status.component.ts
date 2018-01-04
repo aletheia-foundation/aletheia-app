@@ -5,7 +5,8 @@ import {ADDRESS} from '../../Injection-tokens'
 
 enum StatusEnum {
   Connected,
-  Error
+  Error,
+  NoPeers
 }
 
 @Component({
@@ -17,12 +18,13 @@ export class NetworkStatusComponent {
   web3Monitor: Web3MonitorService
   address: string
   peers: number
-  status: StatusEnum //todo: error handling
+  status: StatusEnum
   balance: number
 
   constructor(
               web3Monitor: Web3MonitorService) {
     this.web3Monitor = web3Monitor
+
     web3Monitor.addListener('network-update', (err, status : Web3NetworkStatus) => {
       if(err) {
         this.peers = 0
@@ -31,22 +33,36 @@ export class NetworkStatusComponent {
         this.balance = 0
         return
       }
-      else if (status.peers === 0) {
-       this.status = StatusEnum.Error
+
+      if (status.peers === 0) {
+       this.status = StatusEnum.NoPeers
+      }
+      else {
+        this.status = StatusEnum.Connected
       }
       this.address = status.address
-      this.status = StatusEnum.Connected
       this.peers = status.peers
       this.balance = status.balance
-
     })
+
     web3Monitor.addListener('balance-update', (err, ethBalance) => {
       if(err) {
-        // todo error handling
         this.status = StatusEnum.Error
         return
       }
       this.balance = ethBalance
     })
+  }
+
+  isConnected() {
+    return this.status === StatusEnum.Connected
+  }
+
+  isError() {
+    return this.status === StatusEnum.Error
+  }
+
+  isNoPeers() {
+    return this.status === StatusEnum.NoPeers
   }
 }
