@@ -4,9 +4,10 @@ import { NetworkStatusComponent } from './network-status.component';
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 import {EventEmitter} from 'events'
 import {Web3NetworkStatus} from '../../providers/web3/web3-monitor/web3-network-status'
+import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 
 class MockWeb3MonitorService extends EventEmitter {
-
+  public networkStatus: BehaviorSubject<Web3NetworkStatus> = new BehaviorSubject(new Web3NetworkStatus(null, 0, '', 0))
 }
 
 describe('NetworkStatusComponent', () => {
@@ -38,7 +39,7 @@ describe('NetworkStatusComponent', () => {
 
   describe('when 10 peers are connected', () => {
     beforeEach(() => {
-      mockWeb3Monitor.emit('network-update', null, new Web3NetworkStatus(10, '0x12345', 200))
+      mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 10, '0x12345', 200))
       fixture.detectChanges()
     })
     it('should show the network status as connected', () => {
@@ -46,11 +47,20 @@ describe('NetworkStatusComponent', () => {
       expect(compiled.querySelector('.peers-connected').innerText).toContain('10')
       expect(compiled.querySelector('.balance').innerText).toContain('200')
     })
+    describe('when the balance is changed', () => {
+      beforeEach(()=>{
+        mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 10, '0x12345', 500))
+        fixture.detectChanges()
+      })
+      it('should show the new balance', () =>{
+        expect(compiled.querySelector('.balance').innerText).toContain('500')
+      })
+    })
   })
 
   describe('when 0 peers are connected', () => {
     beforeEach(() => {
-      mockWeb3Monitor.emit('network-update', null, new Web3NetworkStatus(0, '0x12345', 300))
+      mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 0, '0x12345', 300))
       fixture.detectChanges()
     })
     it('should show the network status as warning', () => {
@@ -62,9 +72,8 @@ describe('NetworkStatusComponent', () => {
   })
 
   describe('when the local node cannot be reached', () => {
-
     beforeEach(() => {
-      mockWeb3Monitor.emit('network-update',  new Error('Unable to find blockchain address'), null)
+      mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(new Error('Unable to find blockchain address'), 0, '', 0))
       fixture.detectChanges()
     })
     it('should show the network status as error', () => {
@@ -73,5 +82,17 @@ describe('NetworkStatusComponent', () => {
       expect(compiled.querySelector('.profile-link')).toBe(null)
       expect(compiled.querySelector('.balance')).toBe(null)
     })
+    describe('when the node is restarted', () => {
+      beforeEach(()=>{
+        mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 10, '0x12345', 200))
+        fixture.detectChanges()
+      })
+      it('should show the network status as connected', () =>{
+        expect(compiled.querySelector('.connected-status')).not.toBe(null)
+        expect(compiled.querySelector('.peers-connected').innerText).toContain('10')
+        expect(compiled.querySelector('.balance').innerText).toContain('200')
+      })
+    })
   })
+
 });

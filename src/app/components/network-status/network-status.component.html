@@ -5,9 +5,9 @@
   <div *ngIf="!isError()" class="peers-connected" [ngClass]="{'no-peers': isNoPeers()}">
     <span *ngIf="isConnected()" class="fa fa-check connected-status"></span>
     <span *ngIf="isNoPeers()" class="fa fa-warning warning-status"></span>
-    {{peers}} peers connected
+    {{(this.web3Monitor.networkStatus | async).peers}} peers connected
   </div>
 
-  <div *ngIf="!isError()" class="profile-link">Account: {{address}}</div>
-  <div *ngIf="!isError()" class="balance"><span>Ψ</span>{{balance}}</div>
+  <div *ngIf="!isError()" class="profile-link">Account: {{(this.web3Monitor.networkStatus | async).address}}</div>
+  <div *ngIf="!isError()" class="balance"><span>Ψ</span>{{(this.web3Monitor.networkStatus | async).balance}}</div>
 </div>
