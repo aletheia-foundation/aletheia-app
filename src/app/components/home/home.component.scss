@@ -1,6 +1,4 @@
-body {
-  height: 100vh;
-}
+@import '../../../theme/variables-and-mixins.scss';
 
 span {
   padding: 0px 10px 0px 10px;
@@ -48,17 +46,16 @@ button[type="submit"] {
   color: #EEEEEE;
 }
 .container {
-  height: 100%;
   display: flex;
   background-color: #32B67A;
   color: #EEEEEE;
-  font-family: "Montserrat-Regular";
+  font-family: $font-family-base;
   text-align: center;
   flex-direction: column;
   align-items: center;
 
   .title {
-    font-family: "Domine-Regular";
+    font-family: $font-family-serif;
     font-size: 48px;
   }
 
@@ -73,7 +70,7 @@ button[type="submit"] {
 
   a {
     color: inherit;
-    font-family: "Montserrat-Light";
+    font-weight: 300;
     font-size: 14px;
     text-decoration: none;
   }

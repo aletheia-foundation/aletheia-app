@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
+import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 
 @Component({
   selector: 'app-submit-paper',
@@ -7,16 +8,25 @@ import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.se
   styleUrls: ['./submit-paper.component.scss']
 })
 export class SubmitPaperComponent implements OnInit {
+  web3Monitor: Web3MonitorService
 
-  constructor(web3Client: Web3ClientService) {
+  constructor(web3Client: Web3ClientService,  web3Monitor: Web3MonitorService) {
+    this.web3Monitor = web3Monitor
+  }
 
+  hasInsufficientBalance () {
+    let balance = this.web3Monitor.networkStatus.getValue().balance
+    return !balance || balance <= 0;
+  }
+
+  showTopUpMessage() {
+    console.log('TODO: show topup message')
   }
 
   shareFileButtonClick() {
-    // if (!this._hasEnoughBalance()) {
-    //   return this._promptTopUpBalance()
-    // }
-    //
+    if (this.hasInsufficientBalance()) {
+      return this.showTopUpMessage()
+    }
     // const filePath = dialog.showOpenDialog({properties: ['openFile']})
     //
     // if (typeof filePath !== 'object' || !filePath[0]) {

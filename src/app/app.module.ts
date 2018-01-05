@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {InjectionToken, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -43,7 +44,8 @@ import {web3AccountFactory} from './providers/web3/web3-account/web3-account.fac
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [
     ElectronService,

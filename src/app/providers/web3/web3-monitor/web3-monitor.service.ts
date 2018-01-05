@@ -1,5 +1,4 @@
 import {Inject, Injectable} from '@angular/core'
-import {EventEmitter} from 'events'
 import {ADDRESS, POLL_INTERVAL_MS} from '../../../Injection-tokens'
 import {Web3Token} from '../web3/web3.token'
 import {Web3NetworkStatus} from './web3-network-status'
@@ -8,7 +7,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 
 
 @Injectable()
-export class Web3MonitorService extends EventEmitter {
+export class Web3MonitorService {
   addressPromise: Promise<string>
   web3: any
   poll: any
@@ -17,8 +16,6 @@ export class Web3MonitorService extends EventEmitter {
   constructor(@Inject(POLL_INTERVAL_MS) pollInterval: string,
               @Inject(ADDRESS) addressPromise: Promise<string>,
               @Inject(Web3Token) web3: any) {
-    super()
-    console.log('constructor called for web3-monitor')
     this.addressPromise = addressPromise
     this.web3 = web3
     this.networkStatus = new BehaviorSubject(new Web3NetworkStatus(
@@ -65,7 +62,6 @@ export class Web3MonitorService extends EventEmitter {
               this.networkStatus.next(new Web3NetworkStatus(err, 0, '', 0 ))
               return
             } else {
-              console.log('updating ether balance', ethBalance)
               this.networkStatus.next(new Web3NetworkStatus(
                 null,
                 numPeers,

@@ -1,0 +1,13 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+$error-color: #b60c19;
+$warning-color: #b6b213;
+
+// Fonts
+
+$font-family-sans-serif:      "Montserrat", sans-serif;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-serif:        "Domine", serif;
+$font-family-base:            $font-family-sans-serif;

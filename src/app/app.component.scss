@@ -1,12 +1,14 @@
 body {
     height: 100%;
+    height: 100vh;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     background-color: #32B67A;
-    align-items: flex-end;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 nav {

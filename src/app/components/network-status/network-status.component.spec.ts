@@ -2,11 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NetworkStatusComponent } from './network-status.component';
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
-import {EventEmitter} from 'events'
 import {Web3NetworkStatus} from '../../providers/web3/web3-monitor/web3-network-status'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 
-class MockWeb3MonitorService extends EventEmitter {
+class MockWeb3MonitorService {
   public networkStatus: BehaviorSubject<Web3NetworkStatus> = new BehaviorSubject(new Web3NetworkStatus(null, 0, '', 0))
 }
 
