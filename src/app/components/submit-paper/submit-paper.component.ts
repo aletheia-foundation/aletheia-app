@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/insufficient-balance-modal.component'
 
 @Component({
   selector: 'app-submit-paper',
@@ -9,9 +11,11 @@ import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor
 })
 export class SubmitPaperComponent implements OnInit {
   web3Monitor: Web3MonitorService
+  modalService: NgbModal
 
-  constructor(web3Client: Web3ClientService,  web3Monitor: Web3MonitorService) {
+  constructor(web3Client: Web3ClientService,  web3Monitor: Web3MonitorService, modalService: NgbModal) {
     this.web3Monitor = web3Monitor
+    this.modalService = modalService
   }
 
   hasInsufficientBalance () {
@@ -20,7 +24,9 @@ export class SubmitPaperComponent implements OnInit {
   }
 
   showTopUpMessage() {
-    console.log('TODO: show topup message')
+    const modalRef = this.modalService.open(InsufficientBalanceModalComponent);
+    console.log('address', this.web3Monitor.networkStatus.getValue().address)
+    modalRef.componentInstance.address = this.web3Monitor.networkStatus.getValue().address
   }
 
   shareFileButtonClick() {

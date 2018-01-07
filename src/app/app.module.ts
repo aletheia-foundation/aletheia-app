@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BecomeAReviewerComponent } from './components/become-a-reviewer/become-a-reviewer.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { SubmitPaperComponent } from './components/submit-paper/submit-paper.component';
+import { InsufficientBalanceModalComponent } from './components/submit-paper/insufficient-balance-modal/insufficient-balance-modal.component'
 
 import { AppRoutingModule } from './app-routing.module';
 import { ElectronService } from './providers/electron.service';
@@ -29,7 +30,7 @@ import {Web3Token} from './providers/web3/web3/web3.token'
 import {web3Factory} from './providers/web3/web3/web3.factory';
 import { NetworkStatusComponent } from './components/network-status/network-status.component'
 import { Web3MonitorService } from './providers/web3/web3-monitor/web3-monitor.service'
-import {web3AccountFactory} from './providers/web3/web3-account/web3-account.factory'
+import {web3AccountFactory} from './providers/web3/web3-account/web3-account.factory';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,11 @@ import {web3AccountFactory} from './providers/web3/web3-account/web3-account.fac
     HowItWorksComponent,
     SubmitPaperComponent,
     BecomeAReviewerComponent,
-    NetworkStatusComponent
+    NetworkStatusComponent,
+    InsufficientBalanceModalComponent
+  ],
+  entryComponents: [
+    InsufficientBalanceModalComponent
   ],
   imports: [
     BrowserModule,

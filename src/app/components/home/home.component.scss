@@ -5,11 +5,11 @@ span {
 }
 
 #search-papers {
-  color: #EEEEEE;
+  color: $body-color;
   background-color: #32B67A;
   width: 400px;
   border-radius: 10px;
-  border: 1px solid #EEEEEE;
+  border: 1px solid $gray-100;
   font-size: 16px;
 }
 
@@ -28,27 +28,27 @@ button[type="submit"] {
   background: none;
   border: none;
   outline: none;
-  color: #EEEEEE;
+  color: $body-color;
   border-left: 1px solid #eeeeee;
   font-size: 16px;
 }
 
 #search-papers::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #EEEEEE;
+  color: $body-color;
 }
 #search-papers::-moz-placeholder { /* Firefox 19+ */
-  color: #EEEEEE;
+  color: $body-color;
 }
 #search-papers:-ms-input-placeholder { /* IE 10+ */
-  color: #EEEEEE;
+  color: $body-color;
 }
 #search-papers:-moz-placeholder { /* Firefox 18- */
-  color: #EEEEEE;
+  color: $body-color;
 }
 .container {
   display: flex;
   background-color: #32B67A;
-  color: #EEEEEE;
+  color: $body-color;
   font-family: $font-family-base;
   text-align: center;
   flex-direction: column;
