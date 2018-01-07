@@ -26,7 +26,8 @@ contract Aletheia is Ownable {
         returns(address _newManuscriptAddress)
     {
         MinimalManuscript m = new MinimalManuscript(_hash);
-        m.transferOwnership(msg.sender);
+        m.grantOwnership(msg.sender);
+        m.removeOwnership(this);
         manuscriptAddress[_hash] = m;
         return m;
     }
@@ -36,7 +37,7 @@ contract Aletheia is Ownable {
         // changed => new community vote / peer review necessary
         Manuscript paper = Manuscript(_manuscriptAddress);
         // only owner of manuscript should be able to register paper
-        require(paper.getOwner() == msg.sender);
+        require(paper.isOwner(msg.sender));
 
         // Check to see if that address has already been registered.
         if (registered[_manuscriptAddress] == true) {

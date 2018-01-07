@@ -18,11 +18,11 @@ contract('Aletheia', function(accounts) {
     instanceRep = await Reputation.deployed();
     instance = await Aletheia.deployed();
 
-    await instanceRep.transferOwnership(instance.address, {from: accounts[0]});
+    await instanceRep.grantOwnership(instance.address, {from: accounts[0]});
 
     // check new owner of reputation
-    var ownerRep = await instanceRep.owner();
-    assert.equal(ownerRep, instance.address, "new owner is not Aletheia")
+    var ownerRep = await instanceRep.owners(instance.address);
+    assert.equal(ownerRep, true, "new owner is not Aletheia")
   })
 
   it('create new manuscripts', async function() {
@@ -34,8 +34,8 @@ contract('Aletheia', function(accounts) {
     manuscript1 = await MinimalManuscript.at(addressManuscript1);
 
     // check for transfer of ownership for new manuscript
-    let ownerManuscript1 = await manuscript1.getOwner();
-    assert.equal(ownerManuscript1, accounts[0], "new owner is not author 1");
+    let ownerManuscript1 = await manuscript1.isOwner(accounts[0]);
+    assert.equal(ownerManuscript1, true, "new owner is not author 1");
   })
 
   it('register new manuscript', async function() {

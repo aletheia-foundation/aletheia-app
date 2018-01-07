@@ -13,12 +13,12 @@ contract MinimalManuscript is Ownable, Manuscript {
 
     function MinimalManuscript(bytes32 _da) public {
         require(_da != 0x00);
-        owner = msg.sender;
+        //owner = msg.sender;
         _dataAddress = _da;
     }
 
-    function getOwner() public constant returns(address) {
-        return owner;
+    function isOwner(address account) public constant returns(bool) {
+        return owners[account];
     }
 
     function authorSigned(address _author) public constant returns(bool) {
