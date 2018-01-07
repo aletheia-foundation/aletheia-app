@@ -5,16 +5,27 @@ console.log('*********', Object.keys(contract))
 
 var Aletheia = artifacts.require('../contracts/Aletheia.sol')
 var MinimalManuscript = artifacts.require('../contracts/MinimalManuscript.sol')
+var Reputation = artifacts.require('../contracts/Reputation.sol')
 
 contract('Aletheia', function(accounts) {
-  var instance;
+  var instance, instanceRep;
   var addressManuscript1;
   var manuscript1;
   var bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
 
-  it('create new manuscript', async function() {
+  it('transfer ownership of reputation contract to Aletheia', async function() {
 
+    instanceRep = await Reputation.deployed();
     instance = await Aletheia.deployed();
+
+    await instanceRep.transferOwnership(instance.address, {from: accounts[0]});
+
+    // check new owner of reputation
+    var ownerRep = await instanceRep.owner();
+    assert.equal(ownerRep, instance.address, "new owner is not Aletheia")
+  })
+
+  it('create new manuscripts', async function() {
     // create new manuscript 1
     await instance.newManuscript(bytesOfAddress, {from: accounts[0]});
 

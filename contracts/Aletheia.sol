@@ -1,15 +1,21 @@
 pragma solidity ^0.4.18;
 
 import "./Ownable.sol";
+import "./Reputation.sol";
 import "./Manuscript.sol";
 import "./MinimalManuscript.sol";
 
 
 contract Aletheia is Ownable {
 
+    Reputation public reputation;
     mapping(address => uint256) public balanceOf;
     mapping(address => bool) public registered;
     mapping(bytes32 => address) public manuscriptAddress;
+
+    function Aletheia(address reputationAddress) public {
+        reputation = Reputation(reputationAddress);
+    }
 
     function remove() public onlyOwner payable {
         selfdestruct(msg.sender);
@@ -49,4 +55,6 @@ contract Aletheia is Ownable {
             balanceOf[paper.citation(paperIdx)] += 10;
         }*/
     }
+
+
 }

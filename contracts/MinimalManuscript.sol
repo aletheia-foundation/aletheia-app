@@ -21,6 +21,10 @@ contract MinimalManuscript is Ownable, Manuscript {
         return owner;
     }
 
+    function authorSigned(address _author) public constant returns(bool) {
+        return signedByAuthor[_author];
+    }
+
     function dataAddress() public constant returns(bytes32 _da) {
         return _dataAddress;
     }

@@ -5,21 +5,24 @@ const expectThrow = require('../test/helpers/expectThrow')
 console.log('*********', Object.keys(contract))
 
 var Reputation = artifacts.require('../contracts/Reputation.sol')
+var Aletheia = artifacts.require('../contracts/Aletheia.sol')
 
 contract('Reputation', function(accounts) {
-  var instance;
+  var instance, aletheia;
   var reputation1, reputation2, reputation3, reputation4, reputation5, reputation6;
   var manuscript1;
 
   it('add reputation to account', async function() {
-
+    aletheia = await Aletheia.deployed();
     instance = await Reputation.deployed();
+    aletheiaAddress = aletheia.address;
+
     // check inital reputation
     reputation1 = await instance.reputationOf(accounts[0]);
     assert.equal(reputation1, 0, "inital reputation is not 0");
 
     // add reputation
-    await instance.addReputation(accounts[0], 100);
+    await instance.addReputation(accounts[0], 100, {from: accounts[0]});
 
     // check final reputation
     reputation2 = await instance.reputationOf(accounts[0]);
@@ -42,7 +45,7 @@ contract('Reputation', function(accounts) {
   })
 
   it('check that negative reputation is impossible', async function() {
-    
+
     // check inital reputation
     reputation5 = await instance.reputationOf(accounts[0]);
     assert.equal(reputation5, 50, "inital reputation is not 50");
