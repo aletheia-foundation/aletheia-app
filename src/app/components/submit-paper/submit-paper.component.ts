@@ -3,6 +3,8 @@ import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.se
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/insufficient-balance-modal.component'
+import {ElectronService} from '../../providers/electron.service'
+import {ErrorHandlerService} from '../../providers/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-submit-paper',
@@ -10,12 +12,13 @@ import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/in
   styleUrls: ['./submit-paper.component.scss']
 })
 export class SubmitPaperComponent implements OnInit {
-  web3Monitor: Web3MonitorService
-  modalService: NgbModal
 
-  constructor(web3Client: Web3ClientService,  web3Monitor: Web3MonitorService, modalService: NgbModal) {
-    this.web3Monitor = web3Monitor
-    this.modalService = modalService
+  constructor(private web3Client: Web3ClientService,
+              private web3Monitor: Web3MonitorService,
+              private modalService: NgbModal,
+              private electronService: ElectronService,
+              private errorHandler: ErrorHandlerService
+  ) {
   }
 
   hasInsufficientBalance () {
@@ -33,8 +36,12 @@ export class SubmitPaperComponent implements OnInit {
     if (this.hasInsufficientBalance()) {
       return this.showTopUpMessage()
     }
-    // const filePath = dialog.showOpenDialog({properties: ['openFile']})
-    //
+    if(!this.electronService.isElectron()){
+      return this.errorHandler.handleError(new Error('File open dialog is only available in electron'))
+    }
+    const filePath = this.electronService.electron.dialog.showOpenDialog({properties: ['openFile']})
+
+
     // if (typeof filePath !== 'object' || !filePath[0]) {
     //   this._view.showError(`Cannot read file: ${filePath}`)
     //   return

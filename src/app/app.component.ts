@@ -7,6 +7,11 @@ import { ElectronService } from './providers/electron.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  notificationOptions = {
+    position: ['top', 'right'],
+    timeOut: 10000,
+    showProgressBar: false
+  }
   constructor(public electronService: ElectronService) {
 
     if (electronService.isElectron()) {

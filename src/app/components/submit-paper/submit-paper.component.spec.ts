@@ -7,6 +7,8 @@ import {Web3NetworkStatus} from '../../providers/web3/web3-monitor/web3-network-
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/insufficient-balance-modal.component'
+import {ElectronService} from '../../providers/electron.service'
+import {ErrorHandlerService} from '../../providers/error-handler/error-handler.service'
 
 class MockWeb3ClientService {}
 
@@ -24,7 +26,9 @@ class MockNgbModal {
     return this.component
   }
 }
-
+class MockErrorHandlerService {
+  handleError (error: Error) {}
+}
 describe('SubmitPaperComponent', () => {
   let component: SubmitPaperComponent
   let fixture: ComponentFixture<SubmitPaperComponent>
@@ -37,6 +41,8 @@ describe('SubmitPaperComponent', () => {
       imports: [NgbModule.forRoot()],
       declarations: [ SubmitPaperComponent ],
       providers: [
+        ElectronService,
+        {provide: ErrorHandlerService, useClass: MockErrorHandlerService},
         {provide: Web3ClientService, useClass: MockWeb3ClientService},
         {provide: Web3MonitorService, useValue: mockWeb3Monitor},
         {provide: NgbModal, useValue: mockNgbModal }

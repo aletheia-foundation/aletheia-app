@@ -31,6 +31,9 @@ import {web3Factory} from './providers/web3/web3/web3.factory';
 import { NetworkStatusComponent } from './components/network-status/network-status.component'
 import { Web3MonitorService } from './providers/web3/web3-monitor/web3-monitor.service'
 import {web3AccountFactory} from './providers/web3/web3-account/web3-account.factory';
+import {SimpleNotificationsModule} from 'angular2-notifications'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {ErrorHandlerService} from './providers/error-handler/error-handler.service'
 
 @NgModule({
   declarations: [
@@ -50,10 +53,13 @@ import {web3AccountFactory} from './providers/web3/web3-account/web3-account.fac
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    BrowserAnimationsModule,
+    NgbModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [
     ElectronService,
+    ErrorHandlerService,
     { provide: WEB3_URL, useValue: 'http://localhost:8545'},
     {
       provide: Web3Provider,
