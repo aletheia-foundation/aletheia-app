@@ -1,6 +1,10 @@
-.simple-notification {
-  box-shadow: $popover-box-shadow;
-  .icon {
-    display: none;
+div.simple-notification-wrapper {
+  width: 600px;
+  .simple-notification {
+    box-shadow: $popover-box-shadow;
+    width: 600px;
+    .icon {
+      display: none;
+    }
   }
 }

@@ -6,6 +6,7 @@ import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/in
 import {ElectronService} from '../../providers/electron.service'
 import {ErrorHandlerService} from '../../providers/error-handler/error-handler.service'
 import {IpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.service'
+import {NotificationsService} from 'angular2-notifications'
 
 @Component({
   selector: 'app-submit-paper',
@@ -13,13 +14,15 @@ import {IpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.se
   styleUrls: ['./submit-paper.component.scss']
 })
 export class SubmitPaperComponent implements OnInit {
+  uploadingPaper: boolean = false
 
   constructor(private web3Client: Web3ClientService,
               private web3Monitor: Web3MonitorService,
               private modalService: NgbModal,
               private electronService: ElectronService,
               private errorHandler: ErrorHandlerService,
-              private ipfsClient: IpfsClientService
+              private ipfsClient: IpfsClientService,
+              private notificationService: NotificationsService
   ) {
   }
 
@@ -58,35 +61,32 @@ export class SubmitPaperComponent implements OnInit {
     }
     console.log(fileName)
     this.submitManuscript(fileName[0], filePath[0])
-
   }
+
   submitManuscript(fileName: string, filePath: string) {
-
+    console.log('submit manuscript')
     this.ipfsClient.addFileFromPath(fileName, filePath)
-    .then((result) => {
-      console.log(result)
+    .then((ipfsFileRef) => {
+      if (typeof ipfsFileRef !== 'object' || !ipfsFileRef[0] || !ipfsFileRef[0].hash) {
+        console.log('ipfsFileRef: ', ipfsFileRef);
+        throw new Error('ipfsFileRef[0].hash was null')
+      }
+      this.uploadingPaper = true
+      return this.web3Client.indexNewFile(ipfsFileRef[0].hash)
+    }).then((transactionHash) => {
+        return this.web3Client.awaitTransaction(transactionHash)
+    }).then((blockHash) => {
+      // will probably have to poll for inclusion in the blockchain =(
+      if (typeof blockHash !== 'string') {
+        console.log('blockHash: ', blockHash)
+        throw new Error('hash of ethereum block was invalid')
+      }
+      this.notificationService.success("Paper submitted successfully:", "The paper will be voted on before being stored permanently on the Aletheia network")
+      this.uploadingPaper = false
+    }).catch((err) => {
+      this.uploadingPaper = false
+      this.errorHandler.handleError(err, `Unable to share file: ${fileName}`)
     })
-    //   if (typeof result !== 'object' || !result[0] || !result[0].hash) {
-    //     throw {err: 'result[0].hash was null', result }
-    //   }
-    //   return this._web3Client.indexNewFile(result[0].hash).then((transactionHash) => {
-    //     this._view.showUploadInProgress({transactionHash})
-    //     return this._web3Client.awaitTransaction(transactionHash)
-    //   }).then((blockHash) => {
-    //     // will probably have to poll for inclusion in the blockchain =(
-    //     if (typeof blockHash !== 'string') {
-    //       throw { err: 'hash of ethereum block was invalid', blockHash }
-    //     }
-    //     this._view.showUploadSucces({
-    //       hash: result[0].hash,
-    //       path: result[0].path
-    //     })
-    //   })
-    // }).catch((err) => {
-    //   console.error(err, err.stack)
-    //   this._view.showUploadError({path: fileName})
-    // })
-
   }
   ngOnInit() {
 

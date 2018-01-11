@@ -7,6 +7,7 @@ serve = args.some(val => val === '--serve');
 
 if (serve) {
     require('electron-reload')(__dirname, {
+        electron: './node_modules/.bin/electron'
     });
 }
 
