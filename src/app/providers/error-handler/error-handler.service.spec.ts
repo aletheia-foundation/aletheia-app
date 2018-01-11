@@ -18,6 +18,8 @@ describe('ErrorHandlerService', () => {
       ]
     })
     spyOn(mockNotificationService, 'error')
+    spyOn(mockNotificationService, 'warn')
+
   })
 
   it('handleError should call notification service error', inject([ErrorHandlerService], (service: ErrorHandlerService) => {
