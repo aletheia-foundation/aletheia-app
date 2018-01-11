@@ -101,7 +101,8 @@ function getPlugins() {
         "environments/index.ts": "environments/index.prod.ts"
       },
       "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json"
+      "tsConfigPath": "src/tsconfig.app.json",
+      skipCodeGeneration: true
     }));
 
     plugins.push(new UglifyJsPlugin({
@@ -131,6 +132,7 @@ function getPlugins() {
 }
 module.exports = {
   "devtool": "source-map",
+  "target":  "electron-renderer",
   "externals": {
     "electron": "require('electron')",
     "child_process": "require('child_process')",

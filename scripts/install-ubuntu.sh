@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -x
 
 # install nodejs 6.x from nodesource
@@ -17,10 +17,5 @@ sudo apt-get install -y nodejs
 # and create an alias in your .bash_profile: alias node=nodejs
 
 sudo apt-get install ethereum -y
-
-# easiest is with the snap package manager https://github.com/ipfs/go-ipfs#build-from-source
-# unfortunately ipfs is not available within apt or yum yet.
-sudo apt-get install -y snapd
-sudo snap install ipfs
 
 npm install -g electron

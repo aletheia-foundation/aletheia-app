@@ -34,6 +34,9 @@ import {web3AccountFactory} from './providers/web3/web3-account/web3-account.fac
 import {SimpleNotificationsModule} from 'angular2-notifications'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {ErrorHandlerService} from './providers/error-handler/error-handler.service'
+import {IpfsClientService} from './providers/ipfs/ipfs-client/ipfs-client.service'
+import {Config} from '../../config/Config'
+import {configFactory} from './providers/config/config.factory'
 
 @NgModule({
   declarations: [
@@ -59,7 +62,9 @@ import {ErrorHandlerService} from './providers/error-handler/error-handler.servi
   ],
   providers: [
     ElectronService,
+    {provide: Config, useFactory: configFactory},
     ErrorHandlerService,
+    IpfsClientService,
     { provide: WEB3_URL, useValue: 'http://localhost:8545'},
     {
       provide: Web3Provider,

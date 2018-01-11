@@ -43,7 +43,6 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 
   # note, this is not strictly required for local development as the fake ethereum client `testrpc` can be used.
   brew install ethereum # installs geth
-  brew install ipfs
   brew install nodejs
   # OSX should have python 2.X pre installed
   npm install -g electron
@@ -57,7 +56,7 @@ These instructions were tested on ubuntu 16.10
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
   cd aletheia-app
-  # this installs nodejs 6.x, geth, ipfs and electron
+  # this installs nodejs 6.x, geth and electron
   sudo ./scripts/install-ubuntu.sh
 ```
 
@@ -98,8 +97,8 @@ note: this will not be able to connect to the local ethereum testrpc *(npm run e
 # Tests
 Tests require IPFS and Ethereum clients to be running in the background
 ```bash
-  # while `npm run ethereum-local` and `npm run ethereum-local` are running in two other tabs:
-  npm test
+  # while `npm run ethereum-local` and `npm run ipfs-local` are running in two other tabs:
+  npm run test
 ```
 
 # Testnet

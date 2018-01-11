@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 source "$(pwd)/scripts/env-testnet.sh"
 

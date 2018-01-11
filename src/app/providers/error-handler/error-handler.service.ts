@@ -11,5 +11,8 @@ export class ErrorHandlerService {
     this.notificationService.error("Error", error.message)
   }
 
-  //todo: handleWarning
+  handleWarning(warning: Error) {
+    console.log(warning)
+    this.notificationService.warn("Warning", warning.message)
+  }
 }

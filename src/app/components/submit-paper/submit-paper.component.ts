@@ -5,6 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/insufficient-balance-modal.component'
 import {ElectronService} from '../../providers/electron.service'
 import {ErrorHandlerService} from '../../providers/error-handler/error-handler.service'
+import {IpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.service'
 
 @Component({
   selector: 'app-submit-paper',
@@ -17,7 +18,8 @@ export class SubmitPaperComponent implements OnInit {
               private web3Monitor: Web3MonitorService,
               private modalService: NgbModal,
               private electronService: ElectronService,
-              private errorHandler: ErrorHandlerService
+              private errorHandler: ErrorHandlerService,
+              private ipfsClient: IpfsClientService
   ) {
   }
 
@@ -39,24 +41,34 @@ export class SubmitPaperComponent implements OnInit {
     if(!this.electronService.isElectron()){
       return this.errorHandler.handleError(new Error('File open dialog is only available in electron'))
     }
-    const filePath = this.electronService.electron.dialog.showOpenDialog({properties: ['openFile']})
 
+    const filePath = this.electronService.dialog.showOpenDialog({properties: ['openFile']})
 
-    // if (typeof filePath !== 'object' || !filePath[0]) {
-    //   this._view.showError(`Cannot read file: ${filePath}`)
-    //   return
-    // }
-    // const fileName = filePath[0].match(/[^/]+$/)
-    //
-    // // todo, prevent denial of service here: https://github.com/aletheia-foundation/aletheia-app/issues/43
-    // ipfsClient.addFileFromPath({
-    //   fileName,
-    //   filePath: filePath[0]
-    // }).then((result) => {
+    if(typeof filePath !== 'object') {
+      // assume user cancelled the dialog, no action required.
+      return
+    }
+    if (!filePath[0]) {
+      return this.errorHandler.handleWarning(new Error(`No file was selected`))
+    }
+    const fileName = filePath[0].match(/[^/]+$/)
+    if (!fileName) {
+      // user did something strange in the dialog
+      return this.errorHandler.handleError(new Error(`Unable to upload file or folder: ${filePath}`))
+    }
+    console.log(fileName)
+    this.submitManuscript(fileName[0], filePath[0])
+
+  }
+  submitManuscript(fileName: string, filePath: string) {
+
+    this.ipfsClient.addFileFromPath(fileName, filePath)
+    .then((result) => {
+      console.log(result)
+    })
     //   if (typeof result !== 'object' || !result[0] || !result[0].hash) {
     //     throw {err: 'result[0].hash was null', result }
     //   }
-    //
     //   return this._web3Client.indexNewFile(result[0].hash).then((transactionHash) => {
     //     this._view.showUploadInProgress({transactionHash})
     //     return this._web3Client.awaitTransaction(transactionHash)
@@ -76,7 +88,6 @@ export class SubmitPaperComponent implements OnInit {
     // })
 
   }
-
   ngOnInit() {
 
   }

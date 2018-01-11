@@ -2,7 +2,7 @@ const child_process = require('child_process');
 const fs = require('fs');
 
 const devPath = ".ipfs-develop";
-
+const ipfsExecutable = './node_modules/go-ipfs-dep/go-ipfs/ipfs';
 let isWin = /^win/.test(process.platform);
 
 let shell = (cmd, callback) => {
@@ -13,13 +13,13 @@ let shell = (cmd, callback) => {
 }
 
 let runIpfs = () => {
-  shell (`ipfs daemon -c ${devPath}`);
+  shell (`${ipfsExecutable} daemon -c ${devPath}`);
 }
 
 let initDev = !fs.existsSync(devPath);
 
 if(initDev) {
-  shell (`ipfs init -c ${devPath}`, (err, stdout, stderr) => {
+  shell (`${ipfsExecutable} init -c ${devPath}`, (err, stdout, stderr) => {
     if(!err) runIpfs();
   });
 } else {

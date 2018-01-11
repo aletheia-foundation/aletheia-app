@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 source ./scripts/env-testnet.sh
 
 BOOTNODE_1_IP=`dig +short theserverbythe.stream | awk '{print $1}'`
