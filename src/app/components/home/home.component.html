@@ -5,13 +5,13 @@
 
   <span class="subtitle">Search the world's peer reviewed scientific knowledge.</span>
 
-  <form>
+  <form (submit)="onSearch()">
     <input id="search-papers" type="text" placeholder="Search papers..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search papers...'"/>
     <button type="submit" placeholder="submit">
       <i class="fa fa-search" aria-hidden="true"></i>
     </button>
   </form>
   <div style="margin-top: 40px;">
-    <a routerLink="/how-it-works">How it works</a><span> | </span><a routerLink="/submit-paper">Submit a paper</a><span> | </span><a routerLink="/become-a-reviewer">Become a reviewer</a>
+    <a routerLink="/how-it-works">How it works</a><span> | </span><a routerLink="/list-papers">View all papers</a><span> | </span><a routerLink="/submit-paper">Submit a paper</a><span> | </span><a routerLink="/become-a-reviewer">Become a reviewer</a>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {BecomeAReviewerComponent} from './components/become-a-reviewer/become-a-reviewer.component';
 import {HowItWorksComponent} from './components/how-it-works/how-it-works.component';
 import {SubmitPaperComponent} from './components/submit-paper/submit-paper.component';
+import {ListPapersComponent} from './components/list-papers/list-papers.component'
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
     {
         path: 'submit-paper',
         component: SubmitPaperComponent
+    },
+    {
+        path: 'list-papers',
+        component: ListPapersComponent
     },
 ];
 

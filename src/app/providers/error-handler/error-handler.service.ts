@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import {NotificationsService} from 'angular2-notifications'
 
+export class MockErrorHandlerService {
+  handleError (error: Error, message? :string) {}
+  handleWarning (warning: Error, message? :string) {}
+}
+
 @Injectable()
 export class ErrorHandlerService {
   constructor(private notificationService: NotificationsService) { }

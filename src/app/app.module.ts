@@ -36,7 +36,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {ErrorHandlerService} from './providers/error-handler/error-handler.service'
 import {IpfsClientService} from './providers/ipfs/ipfs-client/ipfs-client.service'
 import {Config} from '../../config/Config'
-import {configFactory} from './providers/config/config.factory'
+import {configFactory} from './providers/config/config.factory';
+import { ListPapersComponent } from './components/list-papers/list-papers.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {configFactory} from './providers/config/config.factory'
     SubmitPaperComponent,
     BecomeAReviewerComponent,
     NetworkStatusComponent,
-    InsufficientBalanceModalComponent
+    InsufficientBalanceModalComponent,
+    ListPapersComponent
   ],
   entryComponents: [
     InsufficientBalanceModalComponent
@@ -70,7 +72,7 @@ import {configFactory} from './providers/config/config.factory'
       provide: Web3Provider,
       useFactory: web3ProviderFactory
     },
-    { provide: POLL_INTERVAL_MS, useValue: '1000'},
+    { provide: POLL_INTERVAL_MS, useValue: '5000'},
     { provide: EncodingHelperService, useClass: EncodingHelperService},
     {
       provide: SubmittedPapersIndex,

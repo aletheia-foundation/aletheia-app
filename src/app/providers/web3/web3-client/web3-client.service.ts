@@ -5,6 +5,12 @@ import {Web3HelperService} from '../web3-helper/web3-helper.service'
 import {SubmittedPapersIndex} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
 import {Web3Token} from '../web3/web3.token'
 
+export class MockWeb3ClientService {
+  indexNewFile() {}
+  awaitTransaction() {}
+  getAllManuscripts() {}
+}
+
 @Injectable()
 export class Web3ClientService {
   submittedPapersIndex: any
@@ -42,7 +48,7 @@ export class Web3ClientService {
       })
   }
 
-  getAllPapers () {
+  getAllManuscripts () {
     return this.submittedPapersIndex.getAll().then((fileHashesInHex) => {
       return fileHashesInHex.map(fileHash =>
         this.encodingHelper.hexSha256ToIpfsMultiHash(fileHash)

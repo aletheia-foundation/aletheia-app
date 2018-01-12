@@ -1,21 +1,16 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 
 import { SubmitPaperComponent } from './submit-paper.component'
-import {Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
+import {MockWeb3ClientService, Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 import {Web3NetworkStatus} from '../../providers/web3/web3-monitor/web3-network-status'
 import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import {InsufficientBalanceModalComponent} from './insufficient-balance-modal/insufficient-balance-modal.component'
 import {ElectronService} from '../../providers/electron.service'
-import {ErrorHandlerService} from '../../providers/error-handler/error-handler.service'
+import {ErrorHandlerService, MockErrorHandlerService} from '../../providers/error-handler/error-handler.service'
 import {IpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.service'
 import {NotificationsService} from 'angular2-notifications'
-
-class MockWeb3ClientService {
-  indexNewFile() {}
-  awaitTransaction() {}
-}
 
 class MockWeb3MonitorService {
   public networkStatus: BehaviorSubject<Web3NetworkStatus> = new BehaviorSubject(new Web3NetworkStatus(null, 0, '', 0))
@@ -30,9 +25,6 @@ class MockNgbModal {
   public open() {
     return this.component
   }
-}
-class MockErrorHandlerService {
-  handleError (error: Error) {}
 }
 
 class MockIpfsClientService {

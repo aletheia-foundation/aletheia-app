@@ -7,5 +7,4 @@ export function submittedPapersIndexFactory( provider ):Promise<any> {
     const indexContract = contract(SubmittedPapersIndexJson)
     indexContract.setProvider(provider)
     return indexContract.at((<any>submittedPapersIndexAddress).address)
-
 }
