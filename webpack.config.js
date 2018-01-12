@@ -5,11 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 
 const { NoEmitOnErrorsPlugin, LoaderOptionsPlugin, DefinePlugin, HashedModuleIdsPlugin } = require('webpack');
 const { GlobCopyWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin, UglifyJsPlugin } = require('webpack').optimize;
-const { AotPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const entryPoints = ["inline", "polyfills", "sw-register", "styles", "vendor", "main"];
@@ -95,37 +95,39 @@ function getPlugins() {
       "hashDigestLength": 4
     }));
 
-    plugins.push(new AotPlugin({
-      "mainPath": "main.ts",
-      "hostReplacementPaths": {
-        "environments/index.ts": "environments/index.prod.ts"
-      },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
-      skipCodeGeneration: true
-    }));
+    plugins.push(    new AngularCompilerPlugin({
+      tsConfigPath: 'src/tsconfig.app.json',
+      entryModule: __dirname + '/src/app/app.module#AppModule',
+      basPath: '',
+      mainPath: 'main.ts',
+      skipCodeGeneration: true,
+      sourceMap: true,
+    }))
 
-    plugins.push(new UglifyJsPlugin({
-      "mangle": {
-        "screw_ie8": true
-      },
-      "compress": {
-        "screw_ie8": true,
-        "warnings": false
-      },
-      "sourceMap": false
-    }));
+    // AngularCompilerPlugin currently ignores the `target` attribute for setting the output target JavaScript version
+    // https://github.com/mishoo/UglifyJS2/issues/448
+    // this means that es2016 is always produced, however this is incompatible with the UglifyJsPlugin
+    // todo: Look to re-enabling UglifyJsPlugin once one of those issues is resolved
+    // plugins.push(new UglifyJsPlugin({
+    //   "mangle": {
+    //     "screw_ie8": true
+    //   },
+    //   "compress": {
+    //     "screw_ie8": true,
+    //     "warnings": false
+    //   },
+    //   "sourceMap": false
+    // }));
 
   } else {
-    plugins.push(new AotPlugin({
-      "mainPath": "main.ts",
-      "hostReplacementPaths": {
-        "environments/index.ts": "environments/index.ts"
-      },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    }));
+    plugins.push(    new AngularCompilerPlugin({
+      tsConfigPath: 'src/tsconfig.app.json',
+      entryModule: __dirname + '/src/app/app.module#AppModule',
+      basPath: '',
+      mainPath: 'main.ts',
+      skipCodeGeneration: true,
+      sourceMap: true
+    }))
   }
 
   return plugins;
