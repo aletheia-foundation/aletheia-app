@@ -18,10 +18,10 @@ contract('Aletheia', function(accounts) {
     instanceRep = await Reputation.deployed();
     instance = await Aletheia.deployed();
 
-    await instanceRep.grantOwnership(instance.address, {from: accounts[0]});
+    await instanceRep.grantAccess(instance.address, {from: accounts[0]});
 
     // check new owner of reputation
-    var ownerRep = await instanceRep.owners(instance.address);
+    var ownerRep = await instanceRep.allowedAccounts(instance.address);
     assert.equal(ownerRep, true, "new owner is not Aletheia")
   })
 

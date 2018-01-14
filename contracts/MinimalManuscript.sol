@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "./Ownable.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Manuscript.sol";
 
 
@@ -18,7 +18,7 @@ contract MinimalManuscript is Ownable, Manuscript {
     }
 
     function isOwner(address account) public constant returns(bool) {
-        return owners[account];
+        return owner == account;
     }
 
     function authorSigned(address _author) public constant returns(bool) {

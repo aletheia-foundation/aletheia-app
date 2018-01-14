@@ -1,6 +1,6 @@
 pragma solidity ^0.4.15;
 
-import './Ownable.sol';
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 interface Manuscript {
     function dataAddress() public constant returns(bytes32);

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "./Ownable.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Reputation.sol";
 import "./Manuscript.sol";
 import "./MinimalManuscript.sol";
@@ -26,8 +26,9 @@ contract Aletheia is Ownable {
         returns(address _newManuscriptAddress)
     {
         MinimalManuscript m = new MinimalManuscript(_hash);
-        m.grantOwnership(msg.sender);
-        m.removeOwnership(this);
+        m.transferOwnership(msg.sender);
+        /* m.grantOwnership(msg.sender);
+        m.removeOwnership(this); */
         manuscriptAddress[_hash] = m;
         return m;
     }

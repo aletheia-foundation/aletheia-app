@@ -1,5 +1,5 @@
-var Ownable = artifacts.require('../contracts/Ownable.sol')
+var Accessible = artifacts.require('../contracts/Accessible.sol')
 
 module.exports = function (deployer) {
-  deployer.deploy(Ownable)
+  deployer.deploy(Accessible)
 }

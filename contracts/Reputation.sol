@@ -1,10 +1,10 @@
 pragma solidity ^0.4.18;
 
-import "./Ownable.sol";
+import "./Accessible.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 
 
-contract Reputation is Ownable {
+contract Reputation is Accessible {
 
     using SafeMath for uint256;
 
@@ -14,11 +14,11 @@ contract Reputation is Ownable {
         return reputation[account];
     }
 
-    function addReputation(address account, uint256 amount) public onlyOwner {
+    function addReputation(address account, uint256 amount) public onlyAllowedAccount {
         reputation[account] = reputation[account].add(amount);
     }
 
-    function removeReputation(address account, uint256 amount) public onlyOwner {
+    function removeReputation(address account, uint256 amount) public onlyAllowedAccount {
         reputation[account] = reputation[account].sub(amount);
     }
 
