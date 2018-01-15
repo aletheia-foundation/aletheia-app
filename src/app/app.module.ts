@@ -2,7 +2,7 @@ import 'zone.js/dist/zone-mix';
 import 'reflect-metadata';
 import 'polyfills';
 import { BrowserModule } from '@angular/platform-browser';
-import {InjectionToken, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -23,8 +23,8 @@ import { Web3HelperService } from './providers/web3/web3-helper/web3-helper.serv
 import {Web3Provider} from './providers/web3/web3-provider/web3-provider.token'
 import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.factory'
 
-import {SubmittedPapersIndex} from './providers/contracts/submitted-papers-index/submitted-papers-index.token'
-import {submittedPapersIndexFactory} from './providers/contracts/submitted-papers-index/submitted-papers-index.factory'
+import {SubmittedPapersIndexPromise} from './providers/contracts/submitted-papers-index/submitted-papers-index.token'
+import {submittedPapersIndexPromiseFactory} from './providers/contracts/submitted-papers-index/submitted-papers-index.factory'
 import {ADDRESS, POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
 import {Web3Token} from './providers/web3/web3/web3.token'
 import {web3Factory} from './providers/web3/web3/web3.factory';
@@ -38,6 +38,14 @@ import {IpfsClientService} from './providers/ipfs/ipfs-client/ipfs-client.servic
 import {Config} from '../../config/Config'
 import {configFactory} from './providers/config/config.factory';
 import { ListPapersComponent } from './components/list-papers/list-papers.component'
+import {Web3NetworkIdPromise} from './providers/web3/web3-network-id/web3-network-id.token'
+import {web3NetworkIdFactory} from './providers/web3/web3-network-id/web3-network-id.factory'
+
+export function loadWeb3Client(web3Client: Web3ClientService) {
+  return () => {
+    return web3Client.load();
+  };
+}
 
 @NgModule({
   declarations: [
@@ -75,19 +83,30 @@ import { ListPapersComponent } from './components/list-papers/list-papers.compon
     { provide: POLL_INTERVAL_MS, useValue: '5000'},
     { provide: EncodingHelperService, useClass: EncodingHelperService},
     {
-      provide: SubmittedPapersIndex,
-      deps: [Web3Provider],
-      useFactory: submittedPapersIndexFactory
-    },
-    {
       provide: Web3Token,
       deps: [Web3Provider],
       useFactory: web3Factory
+    },
+    {
+      provide: Web3NetworkIdPromise,
+      deps: [Web3Token],
+      useFactory: web3NetworkIdFactory
+    },
+    {
+      provide: SubmittedPapersIndexPromise,
+      deps: [Web3Provider, Web3NetworkIdPromise],
+      useFactory: submittedPapersIndexPromiseFactory
     },
     { provide: Web3HelperService, useClass: Web3HelperService},
     {
       provide: Web3ClientService,
       useClass: Web3ClientService
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadWeb3Client,
+      deps: [Web3ClientService],
+      multi: true
     },
     {
       provide: ADDRESS, deps: [Web3Token], useFactory: web3AccountFactory

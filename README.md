@@ -60,7 +60,7 @@ These instructions were tested on ubuntu 16.10
   sudo ./scripts/install-ubuntu.sh
 ```
 
-# Run project
+# Run project in web browser
 
 Clone this repo and cd into its directory
 
@@ -72,37 +72,64 @@ This project requires IPFS and Ethereum clients to be running in the background
   npm config set python $(which python) # Python 2 is needed, not python 3
   npm install
   npm run ethereum-local
-
+```
+```bash
   # in tab 2 (must be in project directory)
   npm run ipfs-local
+```
+```bash
 
   # in tab 3 (must be in project directory)
-  # to run the website
   npm run start:web # (app will start but be unable to connect to filesharing or blockchain)
-  # to run the electron app
-  npm run electron:serve
+
 ```
 
-# Test the electron build
+# Test the app build on the testnet
 
 `npm run electron:serve`
 
-note: this will not be able to connect to the local ethereum testrpc *(npm run ethereum-local)* and can only be tested on a real testnet e.g.: 
+note: this will not be able to connect to the local ethereum testrpc *(npm run ethereum-local)* 
+and can only be tested on the real testnet e.g.: 
  
 ```bash
-    npm run ethereum-testnet
+    # In tab 1
+    npm run ethereum-testnet 
+    
+    # in tab 2 
+    npm run ipfs-local
+    
+    # In tab 3
+    npm run electron:serve
+```
+
+# Test the dist build
+You can also generate the actual executables for different platforms with 
+```bash
+    npm run electron:linux
+    npm run electron:windows
+    npm run electron:mac
 ```
 
 
 # Tests
-Tests require IPFS and Ethereum clients to be running in the background
+Linting
+```bash
+npm run lint
+```
+
+Tests run in a browser with karma
+
 ```bash
   # while `npm run ethereum-local` and `npm run ipfs-local` are running in two other tabs:
   npm run test
 ```
 
-# Testnet
-Todo: add instructions for testnet
+Smart contract tests with truffle
+```bash
+  # in tab 1 
+  npm run ethereum-local
 
-# code style
-Project uses the Javascript standard style
+  # in tab 2
+  npm run test-truffle
+```
+

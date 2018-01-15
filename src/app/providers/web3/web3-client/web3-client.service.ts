@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core'
 
 import {EncodingHelperService} from '../../encoding-helper/encoding-helper.service'
 import {Web3HelperService} from '../web3-helper/web3-helper.service'
-import {SubmittedPapersIndex} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
+import {SubmittedPapersIndexPromise} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
 import {Web3Token} from '../web3/web3.token'
 
 export class MockWeb3ClientService {
@@ -14,22 +14,23 @@ export class MockWeb3ClientService {
 @Injectable()
 export class Web3ClientService {
   submittedPapersIndex: any
-  encodingHelper: EncodingHelperService
-  web3Helper: Web3HelperService
-  web3: any
 
   constructor (
-               @Inject(SubmittedPapersIndex) submittedPapersIndex: any,
-               @Inject(EncodingHelperService) encodingHelper: EncodingHelperService,
-               @Inject(Web3HelperService) web3Helper: Web3HelperService,
-               @Inject(Web3Token) web3: any
+              @Inject(SubmittedPapersIndexPromise) private submittedPapersIndexPromise: any,
+              @Inject(EncodingHelperService) private encodingHelper: EncodingHelperService,
+              @Inject(Web3HelperService) private web3Helper: Web3HelperService,
+              @Inject(Web3Token) private web3: any
   ) {
-    this.submittedPapersIndex = submittedPapersIndex
-    this.encodingHelper = encodingHelper
-    this.web3Helper = web3Helper
-    this.web3 = web3
   }
 
+  // submittedPapersIndex and web3 to be set in an app initialiser
+  load () {
+    console.log('loading')
+    return this.submittedPapersIndexPromise.then( (submittedPapersIndex) => {
+        this.submittedPapersIndex = submittedPapersIndex
+      }
+    )
+  }
 
   indexNewFile (fileHash) {
     const bytesOfAddress = this.encodingHelper.ipfsAddressToHexSha256(fileHash)
