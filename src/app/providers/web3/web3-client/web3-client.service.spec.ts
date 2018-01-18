@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { Web3ClientService } from './web3-client.service';
-import {SubmittedPapersIndex} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
+import {SubmittedPapersIndexPromise} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
 import {EncodingHelperService} from '../../encoding-helper/encoding-helper.service'
 import {Web3HelperService} from '../web3-helper/web3-helper.service'
 import {POLL_INTERVAL_MS} from '../../../Injection-tokens'
@@ -22,12 +22,12 @@ describe('Web3ClientService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide:Web3Provider, useFactory: fakeWeb3ProviderFactory},
-        {provide:SubmittedPapersIndex, useFactory: SubmittedPapersIndexMockFactory},
+        {provide: Web3Provider, useFactory: fakeWeb3ProviderFactory},
+        {provide: SubmittedPapersIndexPromise, useFactory: SubmittedPapersIndexMockFactory},
         EncodingHelperService,
         Web3HelperService,
         {provide: Web3Token, deps: [Web3Provider], useFactory: web3Factory},
-        {provide:POLL_INTERVAL_MS, useValue: ''},
+        {provide: POLL_INTERVAL_MS, useValue: ''},
         Web3ClientService
       ]
     });

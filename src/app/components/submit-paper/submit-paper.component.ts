@@ -13,8 +13,8 @@ import {NotificationsService} from 'angular2-notifications'
   templateUrl: './submit-paper.component.html',
   styleUrls: ['./submit-paper.component.scss']
 })
-export class SubmitPaperComponent implements OnInit {
-  uploadingPaper: boolean = false
+export class SubmitPaperComponent{
+  uploadingPaper = false
 
   constructor(private web3Client: Web3ClientService,
               private web3Monitor: Web3MonitorService,
@@ -27,27 +27,25 @@ export class SubmitPaperComponent implements OnInit {
   }
 
   hasInsufficientBalance () {
-    let balance = this.web3Monitor.networkStatus.getValue().balance
+    const balance = this.web3Monitor.networkStatus.getValue().balance
     return !balance || balance <= 0;
   }
 
   showTopUpMessage() {
-    const modalRef = this.modalService.open(InsufficientBalanceModalComponent);
-    console.log('address', this.web3Monitor.networkStatus.getValue().address)
-    modalRef.componentInstance.address = this.web3Monitor.networkStatus.getValue().address
+    this.modalService.open(InsufficientBalanceModalComponent);
   }
 
   shareFileButtonClick() {
     if (this.hasInsufficientBalance()) {
       return this.showTopUpMessage()
     }
-    if(!this.electronService.isElectron()){
+    if (!this.electronService.isElectron()) {
       return this.errorHandler.handleError(new Error('File open dialog is only available in electron'))
     }
 
     const filePath = this.electronService.dialog.showOpenDialog({properties: ['openFile']})
 
-    if(typeof filePath !== 'object') {
+    if (typeof filePath !== 'object') {
       // assume user cancelled the dialog, no action required.
       return
     }
@@ -74,22 +72,21 @@ export class SubmitPaperComponent implements OnInit {
       this.uploadingPaper = true
       return this.web3Client.indexNewFile(ipfsFileRef[0].hash)
     }).then((transactionHash) => {
-        return this.web3Client.awaitTransaction(transactionHash)
+      return this.web3Client.awaitTransaction(transactionHash)
     }).then((blockHash) => {
       // will probably have to poll for inclusion in the blockchain =(
       if (typeof blockHash !== 'string') {
         console.log('blockHash: ', blockHash)
         throw new Error('hash of ethereum block was invalid')
       }
-      this.notificationService.success("Paper submitted successfully:", "The paper will be voted on before being stored permanently on the Aletheia network")
+      this.notificationService.success(
+        'Paper submitted successfully:',
+        'The paper will be voted on before being stored permanently on the Aletheia network'
+      )
       this.uploadingPaper = false
     }).catch((err) => {
       this.uploadingPaper = false
       this.errorHandler.handleError(err, `Unable to share file: ${fileName}`)
     })
   }
-  ngOnInit() {
-
-  }
-
 }

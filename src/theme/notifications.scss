@@ -1,5 +1,6 @@
 div.simple-notification-wrapper {
   width: 600px;
+  z-index: 2000;
   .simple-notification {
     box-shadow: $popover-box-shadow;
     width: 600px;

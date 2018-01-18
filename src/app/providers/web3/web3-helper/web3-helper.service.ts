@@ -8,9 +8,15 @@ export class Web3HelperService {
 
   getTransactionReceiptMined(web3, txnHash) {
     const interval = 500;
+    const maxPolls = 60;
+    let timesPolled = 0;
     const transactionReceiptAsync = function(txnHash, resolve, reject) {
       try {
-        var receipt = web3.eth.getTransactionReceipt(txnHash);
+        if (timesPolled > maxPolls) {
+          reject(new Error('Timeout exceeded for an action to be accepted by the aletheia network'))
+        }
+        const receipt = web3.eth.getTransactionReceipt(txnHash);
+        timesPolled++
         if (receipt == null) {
           setTimeout(function () {
             transactionReceiptAsync(txnHash, resolve, reject);
@@ -24,7 +30,7 @@ export class Web3HelperService {
     };
 
     if (Array.isArray(txnHash)) {
-      var promises = [];
+      const promises = [];
       txnHash.forEach(function (oneTxHash) {
         promises.push(web3.eth.getTransactionReceiptMined(oneTxHash, interval));
       });

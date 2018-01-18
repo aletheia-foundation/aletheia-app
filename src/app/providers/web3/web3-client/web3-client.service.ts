@@ -25,7 +25,6 @@ export class Web3ClientService {
 
   // submittedPapersIndex and web3 to be set in an app initialiser
   load () {
-    console.log('loading')
     return this.submittedPapersIndexPromise.then( (submittedPapersIndex) => {
         this.submittedPapersIndex = submittedPapersIndex
       }

@@ -88,12 +88,14 @@ describe('SubmitPaperComponent', () => {
 
   describe('Clicking on button when balance is zero', () => {
     beforeEach(() => {
+      spyOn(mockNgbModal, 'open')
       mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 0, '0xTESTADDRESS', 0))
       compiled.querySelector('.submit-paper-button').click()
       fixture.detectChanges()
     })
-    it('should show a modal popup with address of the user', () => {
+    it('should show a modal popup', () => {
       expect(mockNgbModal.component.componentInstance.address).toEqual('0xTESTADDRESS')
+      expect(mockNgbModal.open).toHaveBeenCalled()
     })
   })
 

@@ -1,16 +1,23 @@
-<div class="modal-header">
-  <h4 class="modal-title">Get Aletheia Goodwill</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <p>
-    Aletheia Goodwill works is needed to submit manuscripts to the Aletheia network.
-    You can get Aletheia Goodwill by solving a captcha at the:
-  </p>
-  <a class="aletheia-faucet-link" href="https://theserverbythe.stream?address={{address}}">Aletheia Goodwill Faucet</a>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div>
+<form #form="ngForm" (ngSubmit)="onSubmitAnswer(form.value)">
+
+  <div class="modal-header">
+    <h4 class="modal-title">Get Aletheia Goodwill</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Aletheia Goodwill works is needed to submit manuscripts to the Aletheia network.
+      You can get Aletheia Goodwill by solving a captcha:
+    </p>
+      <img id="captcha-img" src="{{captchaUrl}}"/>
+      <input name="captcha-answer" [(ngModel)]="captchaAnswer"/>
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Get Aletheia Goodwill</button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</form>
