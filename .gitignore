@@ -11,3 +11,4 @@ chains.json
 .ipfs-develop/
 app-builds
 dist
+package-lock.json

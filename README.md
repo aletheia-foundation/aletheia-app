@@ -37,6 +37,7 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 * A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
 ## OSX instructions
+
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
   cd aletheia-app
@@ -109,7 +110,9 @@ You can also generate the actual executables for different platforms with
     npm run electron:windows
     npm run electron:mac
 ```
+[![Video Tutorial](http://img.youtube.com/vi/vUyjEmcVSFA/0.jpg)](https://www.youtube.com/watch?v=vUyjEmcVSFA)
 
+Note: The video mentions installing/running the project on Mac OS. The steps followed in the video are also applicable to any Linux distribution (Ubuntu, CentOS, ...). 
 
 # Tests
 Linting
