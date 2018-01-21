@@ -14,7 +14,7 @@ import {Web3ClientService} from '../../../providers/web3/web3-client/web3-client
 })
 export class InsufficientBalanceModalComponent implements OnInit {
   captchaAnswer: string
-  loading: boolean
+  awaitingFaucetResult: boolean
   captchaUrl: string
 
   constructor(public activeModal: NgbActiveModal,
@@ -36,23 +36,25 @@ export class InsufficientBalanceModalComponent implements OnInit {
       receiver: this.accountService.getAccount(),
       captcha: this.captchaAnswer
     }
+    this.awaitingFaucetResult = true
     this.http.post(this.config.faucetUrl, requestArgs)
     .toPromise()
     .then((result: any) => {
       if (result.error || !result.success) {
         this.captchaUrl = this.generateCaptchaUrl()
+        this.captchaAnswer = ''
+        this.awaitingFaucetResult = false
         return this.errorHandler.handleError(result.error, result.error.message)
       }
-      this.loading = true
       return this.web3Client.awaitTransaction(result.success.txHash)
       .then(() => {
-        this.loading = false
+        this.awaitingFaucetResult = false
         this.notificationsService.success('Success', 'You have been granted Aletheia Goodwill')
         this.activeModal.close()
       })
     })
     .catch((err) => {
-      this.loading = false
+      this.awaitingFaucetResult = false
       this.captchaUrl = this.generateCaptchaUrl()
       this.errorHandler.handleError(err, 'Unable to recieve Aletheia Goodwill')
     })

@@ -11,12 +11,14 @@
       Aletheia Goodwill works is needed to submit manuscripts to the Aletheia network.
       You can get Aletheia Goodwill by solving a captcha:
     </p>
-      <img id="captcha-img" src="{{captchaUrl}}"/>
-      <input name="captcha-answer" [(ngModel)]="captchaAnswer"/>
+    <div class="captcha-section">
+      <img id="captcha-img" class="captcha-img" src="{{captchaUrl}}"/>
+      <input name="captcha-answer" class="captcha-answer" [(ngModel)]="captchaAnswer"/>
+    </div>
 
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Get Aletheia Goodwill</button>
+    <button type="submit" [disabled]="awaitingFaucetResult" class="btn btn-primary">Get Aletheia Goodwill</button>
 
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
   </div>

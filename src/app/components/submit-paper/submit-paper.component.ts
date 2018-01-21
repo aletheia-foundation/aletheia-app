@@ -13,7 +13,7 @@ import {NotificationsService} from 'angular2-notifications'
   templateUrl: './submit-paper.component.html',
   styleUrls: ['./submit-paper.component.scss']
 })
-export class SubmitPaperComponent{
+export class SubmitPaperComponent {
   uploadingPaper = false
 
   constructor(private web3Client: Web3ClientService,
@@ -62,7 +62,6 @@ export class SubmitPaperComponent{
   }
 
   submitManuscript(fileName: string, filePath: string) {
-    console.log('submit manuscript')
     this.ipfsClient.addFileFromPath(fileName, filePath)
     .then((ipfsFileRef) => {
       if (typeof ipfsFileRef !== 'object' || !ipfsFileRef[0] || !ipfsFileRef[0].hash) {

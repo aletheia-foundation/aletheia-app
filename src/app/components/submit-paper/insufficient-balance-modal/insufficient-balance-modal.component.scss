@@ -10,3 +10,12 @@ a {
     color: darken($primary, 15%);
   }
 }
+.captcha-section {
+  .captcha-answer, .captcha-img {
+    display: block;
+    margin: 10px auto;
+  }
+  .captcha-img {
+    height: 50px;
+  }
+}
