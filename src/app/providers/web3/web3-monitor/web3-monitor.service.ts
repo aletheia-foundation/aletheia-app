@@ -5,23 +5,29 @@ import {Web3NetworkStatus} from './web3-network-status'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 import {Web3AccountService} from '../web3-account/web3-account.service'
 
+export class MockWeb3MonitorService {
+  public networkStatus: BehaviorSubject<Web3NetworkStatus> = new BehaviorSubject(new Web3NetworkStatus(null, 0, '', 0))
+  start () {}
+}
+
 @Injectable()
 export class Web3MonitorService {
-  web3: any
   poll: any
   public networkStatus: BehaviorSubject<Web3NetworkStatus>
 
-  constructor(@Inject(POLL_INTERVAL_MS) pollInterval: string,
+  constructor(@Inject(POLL_INTERVAL_MS) private pollInterval: string,
               private accountService: Web3AccountService,
-              @Inject(Web3Token) web3: any) {
-    this.web3 = web3
+              @Inject(Web3Token) private web3: any) {
     this.networkStatus = new BehaviorSubject(new Web3NetworkStatus(
       null,
       0,
       '',
       0
     ))
-    this.poll = setInterval(this.onPoll.bind(this), pollInterval)
+  }
+
+  start() {
+    this.poll = setInterval(this.onPoll.bind(this), this.pollInterval)
     this.checkConnection()
   }
 
@@ -45,7 +51,7 @@ export class Web3MonitorService {
         return
       } else {
         const account = this.accountService.getAccount()
-        if (account === null) {
+        if (!account) {
           const error = new Error('Unable to find blockchain address')
           console.error(error, error.stack)
           this.networkStatus.next(new Web3NetworkStatus(error, 0, '', 0))

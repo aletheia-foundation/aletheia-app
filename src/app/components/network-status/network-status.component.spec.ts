@@ -1,19 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NetworkStatusComponent } from './network-status.component';
-import {Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
+import {MockWeb3MonitorService, Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
 import {Web3NetworkStatus} from '../../providers/web3/web3-monitor/web3-network-status'
-import {BehaviorSubject} from 'rxjs/BehaviorSubject'
-
-class MockWeb3MonitorService {
-  public networkStatus: BehaviorSubject<Web3NetworkStatus> = new BehaviorSubject(new Web3NetworkStatus(null, 0, '', 0))
-}
 
 describe('NetworkStatusComponent', () => {
   let component: NetworkStatusComponent
   let fixture: ComponentFixture<NetworkStatusComponent>
-  let mockWeb3Monitor = new MockWeb3MonitorService()
   let compiled: any
+  const mockWeb3Monitor = new MockWeb3MonitorService()
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

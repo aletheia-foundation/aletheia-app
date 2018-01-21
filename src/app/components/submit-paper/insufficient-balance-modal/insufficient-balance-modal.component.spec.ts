@@ -5,15 +5,19 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {Config} from '../../../../../config/Config'
 import {NotificationsService} from 'angular2-notifications'
-import {ErrorHandlerService} from '../../../providers/error-handler/error-handler.service'
-import {Web3AccountService} from '../../../providers/web3/web3-account/web3-account.service'
-import {Web3ClientService} from '../../../providers/web3/web3-client/web3-client.service'
+import {ErrorHandlerService, MockErrorHandlerService} from '../../../providers/error-handler/error-handler.service'
+import {MockWeb3AccountService, Web3AccountService} from '../../../providers/web3/web3-account/web3-account.service'
+import {MockWeb3ClientService, Web3ClientService} from '../../../providers/web3/web3-client/web3-client.service'
 import {HttpClientModule} from '@angular/common/http'
 
 describe('InsufficientBalanceModalComponent', () => {
   let component: InsufficientBalanceModalComponent
   let fixture: ComponentFixture<InsufficientBalanceModalComponent>
   let compiled: any
+
+  const mockErrorHandlerService = new MockErrorHandlerService()
+  const mockWeb3AccountService = new MockWeb3AccountService()
+  const mockWeb3ClientService = new MockWeb3ClientService()
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,9 +26,9 @@ describe('InsufficientBalanceModalComponent', () => {
         NgbActiveModal,
         Config,
         NotificationsService,
-        ErrorHandlerService,
-        Web3AccountService,
-        Web3ClientService
+        { provide: ErrorHandlerService, useValue: mockErrorHandlerService },
+        { provide: Web3AccountService, useValue: mockWeb3AccountService },
+        { provide: Web3ClientService, useValue: mockWeb3ClientService }
       ],
       imports: [
         HttpClientModule,

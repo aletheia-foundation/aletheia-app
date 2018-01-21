@@ -14,6 +14,7 @@ export class NetworkStatusComponent {
   constructor(
               web3Monitor: Web3MonitorService) {
     this.web3Monitor = web3Monitor
+    this.web3Monitor.start()
   }
 
   isConnected() {

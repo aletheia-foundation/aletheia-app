@@ -17,7 +17,8 @@ export class InsufficientBalanceModalComponent implements OnInit {
   awaitingFaucetResult: boolean
   captchaUrl: string
 
-  constructor(public activeModal: NgbActiveModal,
+  constructor(
+    public activeModal: NgbActiveModal,
               private http: HttpClient,
               private config: Config,
               private notificationsService: NotificationsService,

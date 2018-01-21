@@ -48,16 +48,16 @@ class MockNotificationService {
 describe('SubmitPaperComponent', () => {
   let component: SubmitPaperComponent
   let fixture: ComponentFixture<SubmitPaperComponent>
-  let mockWeb3Monitor = new MockWeb3MonitorService()
-  let mockWeb3Client = new MockWeb3ClientService()
-  let mockNgbModal = new MockNgbModal()
   let compiled: any
-  let mockElectronService = new MockElectronService()
-  let mockIpfsClientService = new MockIpfsClientService()
-  let mockNotificationService = new MockNotificationService()
-  let mockErrorHandlerService = new MockErrorHandlerService()
-  beforeEach(async(() => {
+  const mockWeb3Monitor = new MockWeb3MonitorService()
+  const mockWeb3Client = new MockWeb3ClientService()
+  const mockNgbModal = new MockNgbModal()
+  const mockElectronService = new MockElectronService()
+  const mockIpfsClientService = new MockIpfsClientService()
+  const mockNotificationService = new MockNotificationService()
+  const mockErrorHandlerService = new MockErrorHandlerService()
 
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [NgbModule.forRoot()],
       declarations: [ SubmitPaperComponent ],
@@ -94,7 +94,6 @@ describe('SubmitPaperComponent', () => {
       fixture.detectChanges()
     })
     it('should show a modal popup', () => {
-      expect(mockNgbModal.component.componentInstance.address).toEqual('0xTESTADDRESS')
       expect(mockNgbModal.open).toHaveBeenCalled()
     })
   })
