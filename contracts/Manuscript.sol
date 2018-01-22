@@ -1,6 +1,6 @@
 pragma solidity ^0.4.15;
 
-import './Ownable.sol';
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 interface Manuscript {
     function dataAddress() public constant returns(bytes32);
@@ -12,6 +12,7 @@ interface Manuscript {
     function authorCount() public constant returns (uint);
     function citation(uint authorIdx) public constant returns (address);
     function author(uint paperIdx) public constant returns (address);
-    function getOwner() public constant returns(address);
+    function isOwner(address account) public constant returns(bool);
+    function authorSigned(address _author) public constant returns (bool);
     function signAuthorship() public;
 }
