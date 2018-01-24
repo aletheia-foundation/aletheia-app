@@ -2,6 +2,14 @@ pipeline {
     agent any
     tools { nodejs "node9.4" }
     stages {
+        stage('Publish build results') {
+            steps {
+                withCredentials([string(credentialsId: 'aletheia-ci-user-access-token', variable: 'SECRET')]) {
+                    echo 'secret loaded'
+                    githubNotify context: '$SECRET', description: 'This is a shorted example',  status: 'SUCCESS'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'build stage'
@@ -25,14 +33,6 @@ pipeline {
         stage('Deploy contracts') {
             steps {
                 echo 'deploy contracts stage'
-            }
-        }
-        stage('Publish build results') {
-            steps {
-                withCredentials([string(credentialsId: 'aletheia-ci-user-access-token', variable: 'SECRET')]) {
-                    echo 'secret loaded'
-                    githubNotify context: '$SECRET', description: 'This is a shorted example',  status: 'SUCCESS'
-                }
             }
         }
     }
