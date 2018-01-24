@@ -27,5 +27,13 @@ pipeline {
                 echo 'deploy contracts stage'
             }
         }
+        stage('Publish build results') {
+            steps {
+                withCredentials(secretText[credentialsId: 'aletheia-ci-user-access-token', secretVariable: 'SECRET']) {
+
+                }
+                githubNotify context: '$SECRET', description: 'This is a shorted example',  status: 'SUCCESS'
+            }
+        }
     }
 }
