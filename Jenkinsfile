@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Publish build results') {
             steps {
-                withCredentials(string[credentialsId: 'aletheia-ci-user-access-token', variable: 'SECRET']) {
+                withCredentials([string(credentialsId: 'aletheia-ci-user-access-token', variable: 'SECRET')]) {
                     echo 'secret loaded'
                     githubNotify context: '$SECRET', description: 'This is a shorted example',  status: 'SUCCESS'
                 }
