@@ -1,7 +1,4 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectThrow = require('../test/helpers/expectThrow')
-// const assert = require('assert')
-console.log('*********', Object.keys(contract))
 
 var SubmittedPapersIndex = artifacts.require('../contracts/SubmittedPapersIndex.sol')
 
@@ -24,12 +21,13 @@ contract('SubmittedPapersIndex', function (accounts) {
   });
 
   it('set storage value', async function () {
-    const bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
+
+    const bytesOfAddress ='0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6'
     var instance = await SubmittedPapersIndex.deployed();
     await instance.push(bytesOfAddress);
     const result = await instance.getAll();
 
-    assert.equal(EncodingHelper.hexSha256ToIpfsMultiHash(result[0]), 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
+    assert.equal(result[0], '0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6')
   });
 
 })

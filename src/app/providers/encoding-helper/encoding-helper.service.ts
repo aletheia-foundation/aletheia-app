@@ -13,7 +13,7 @@ export class EncodingHelperService {
   }
 
   ipfsAddressToHexSha256(ipfsMultiHash) {
-    if(ipfsMultiHash.length !== 46){
+    if (ipfsMultiHash.length !== 46) {
       throw {msg: 'expected ipfs MultiHash address to be 46 characters long.', ipfsMultiHash}
     }
     const hexString = this.bs58ToWeb3Bytes(ipfsMultiHash)
@@ -26,7 +26,7 @@ export class EncodingHelperService {
     return bs58.encode(rawHexBuffer);
   }
 
-  remove0x(bytesStr){
+  remove0x(bytesStr) {
     if (typeof bytesStr === 'string' && bytesStr.startsWith('0x')) {
       return bytesStr.slice(2);
     } else {

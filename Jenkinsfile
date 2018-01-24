@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo 'test stage'
                 sh 'npm run test:ci'
+                sh 'npm run test-truffle:ci'
             }
         }
         stage('Deploy') {
