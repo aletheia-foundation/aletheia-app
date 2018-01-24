@@ -23,7 +23,7 @@
     "electron:windows": "npm run build:prod && node package.js --asar --platform=win32 --arch=ia32",
     "electron:mac": "npm run build:prod && node package.js --asar --platform=darwin --arch=x64",
     "test": "karma start ./karma.conf.js",
-    "test:ci": "karma start ./karma.conf.js --singleRun true",
+    "test:ci": "karma start ./karma.conf.js --singleRun true --browsers 'ChromeHeadless'",
     "test-truffle": "./node_modules/.bin/truffle test"
   },
   "repository": "https://github.com/electron/electron-quick-start",
