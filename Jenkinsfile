@@ -19,9 +19,7 @@ pipeline {
             steps {
                 echo 'Generate app builds stage'
                 sh 'npm run electron:linux'
-                sh 'npm run electron:windows'
-                sh 'npm run electron:mac'
-                archiveArtifacts artifacts: '**/app-builds/**.*', fingerprint: true
+                archiveArtifacts artifacts: 'sapp-builds/**', fingerprint: true
             }
         }
         stage('Deploy contracts') {

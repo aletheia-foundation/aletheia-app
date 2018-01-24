@@ -16,7 +16,7 @@ describe('EncodingHelperService', () => {
   describe('ipfsAddressToHexSha256', () => {
     it('should convert sample address ', inject([EncodingHelperService], (service: EncodingHelperService) => {
       const result = service.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH')
-      expect(result).toBe('0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6' + ' MAKE IT FAIL!')
+      expect(result).toBe('0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6')
     }))
   })
 
