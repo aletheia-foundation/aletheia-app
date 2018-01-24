@@ -5,10 +5,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'build stage'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
+                echo 'test stage'
                 sh 'npm run test:ci'
             }
         }
