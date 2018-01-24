@@ -21,7 +21,7 @@ pipeline {
                 sh 'npm run electron:linux'
                 sh 'npm run electron:windows'
                 sh 'npm run electron:mac'
-                archiveArtifacts artifacts: 'app-builds/**.*', fingerprint: true
+                archiveArtifacts artifacts: '**/app-builds/**.*', fingerprint: true
             }
         }
         stage('Deploy contracts') {
