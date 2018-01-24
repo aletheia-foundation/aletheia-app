@@ -3,6 +3,9 @@
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
+    // AngularCompilerPlugin currently ignores the `target` attribute for setting the output target JavaScript version
+    // https://github.com/angular/angular-cli/issues/8375
+    // this means that es2016 is always produced
     "target": "es5",
     "baseUrl": "",
     "types": [
