@@ -9,7 +9,7 @@ pipeline {
             steps {
 
                 echo GIT_COMMIT_HASH
-                githubNotify  credentialsId: 'aletheia-ci-user-access-token',
+                githubNotify  credentialsId: 'aletheia-ci-user',
                     repo: 'aletheia-app',
                     account: 'aletheia-ci-user',
                     sha: GIT_COMMIT_HASH,
