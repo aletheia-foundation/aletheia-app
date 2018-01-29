@@ -14,27 +14,27 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'build stage'
-                sh 'blahs && npm install'
+                echo 'build step'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'test stage'
+                echo 'test step'
                 sh 'npm run test:ci'
                 sh 'npm run test-truffle:ci'
             }
         }
         stage('Generate app builds') {
             steps {
-                echo 'Generate app builds stage'
+                echo 'Generate app builds step'
                 sh 'npm run electron:linux'
                 archiveArtifacts artifacts: 'app-builds/**', fingerprint: true
             }
         }
         stage('Deploy contracts') {
             steps {
-                echo 'deploy contracts stage'
+                echo 'deploy contracts step'
             }
         }
     }
