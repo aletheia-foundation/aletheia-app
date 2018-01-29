@@ -4,6 +4,8 @@ _**Publish research for free, access research for free.**_
 
 Downloadable Aletheia App
 
+[![Build Status](https://139.162.6.228/buildStatus/icon?job=aletheia-app-pipeline)](https://139.162.6.228/job/aletheia-app-pipeline)
+
 # About
 
 ## Decentralisation
