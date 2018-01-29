@@ -1,3 +1,13 @@
+void setBuildStatus(String message, String state) {
+  step([
+      $class: "GitHubCommitStatusSetter",
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/aletheia-foundation/aletheia-app"],
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
 pipeline {
     agent any
     tools { nodejs "node9.4" }
@@ -9,12 +19,7 @@ pipeline {
             steps {
 
                 echo GIT_COMMIT_HASH
-                githubNotify  credentialsId: 'aletheia-ci-user',
-                    repo: 'aletheia-app',
-                    account: 'aletheia-foundation',
-                    sha: GIT_COMMIT_HASH,
-                    description: 'This is a shorted example',
-                    status: 'SUCCESS'
+                setBuildStatus("Build complete", "SUCCESS");
             }
         }
         stage('Build') {
