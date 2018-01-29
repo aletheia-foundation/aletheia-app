@@ -11,7 +11,7 @@ pipeline {
                 echo GIT_COMMIT_HASH
                 githubNotify  credentialsId: 'aletheia-ci-user',
                     repo: 'aletheia-app',
-                    account: 'aletheia-ci-user',
+                    account: 'aletheia-foundation',
                     sha: GIT_COMMIT_HASH,
                     description: 'This is a shorted example',
                     status: 'SUCCESS'
