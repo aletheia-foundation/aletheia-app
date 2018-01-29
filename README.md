@@ -120,7 +120,7 @@ Linting
 npm run lint
 ```
 
-Tests run in a browser with karma
+Tests run in a browser with karma.
 
 ```bash
   # while `npm run ethereum-local` and `npm run ipfs-local` are running in two other tabs:
