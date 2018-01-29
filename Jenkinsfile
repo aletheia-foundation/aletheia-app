@@ -12,7 +12,7 @@ pipeline {
                 githubNotify  credentialsId: 'aletheia-ci-user-access-token',
                     repo: 'aletheia-app',
                     account: 'aletheia-ci-user'
-                    sha: '${GIT_COMMIT_HASH}',
+                    sha: '${env.GIT_COMMIT_HASH}',
                     description: 'This is a shorted example',
                     status: 'SUCCESS'
             }
