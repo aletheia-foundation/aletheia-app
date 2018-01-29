@@ -37,13 +37,13 @@ pipeline {
                 echo 'deploy contracts stage'
             }
         }
-        post {
-            success {
-                setBuildStatus("Build complete", "SUCCESS");
-            }
-            failure {
-                setBuildStatus("Build failed", "FAILURE");
-            }
+    }
+    post {
+        success {
+            setBuildStatus("Build complete", "SUCCESS");
+        }
+        failure {
+            setBuildStatus("Build failed", "FAILURE");
         }
     }
 }
