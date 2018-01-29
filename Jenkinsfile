@@ -1,10 +1,13 @@
-GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
 pipeline {
     agent any
     tools { nodejs "node9.4" }
     stages {
         stage('Publish build results') {
+            environment {
+                GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+            }
             steps {
+
                 echo GIT_COMMIT_HASH
                 githubNotify  credentialsId: 'aletheia-ci-user-access-token',
                     repo: 'aletheia-app',
