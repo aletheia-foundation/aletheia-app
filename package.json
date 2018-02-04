@@ -88,7 +88,7 @@
     "stylus-loader": "3.0.1",
     "truffle": "3.3.2",
     "truffle-config": "1.0.0",
-    "truffle-contract": "2.0.1",
+    "truffle-contract": "3.0.0",
     "truffle-expect": "0.0.3",
     "ts-node": "^4.1.0",
     "tslint": "5.9.1",
@@ -122,7 +122,8 @@
     "q": "1.5.1",
     "request-promise-native": "1.0.5",
     "rxjs": "5.5.6",
-    "truffle-contract": "2.0.1",
+    "truffle-contract": "3.0.0",
+    "zeppelin-solidity": "^1.5.0",
     "truffle-expect": "0.0.3",
     "web3": "0.18.4",
     "zone.js": "0.8.20"
