@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-./node_modules/.bin/testrpc &
+npm run ethereum-local &
 echo $! >> testrpc.pid
 ./node_modules/.bin/truffle test
 kill -9 `cat testrpc.pid`

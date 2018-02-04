@@ -1,4 +1,3 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 
 console.log('*********', Object.keys(contract))
@@ -18,7 +17,7 @@ contract('MinimalManuscript', function (accounts) {
     // Todo: set different data addresses
     var bytesOfAddress = [];
     for(var cnt=0; cnt<4; cnt++) {
-      bytesOfAddress[cnt] = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
+      bytesOfAddress[cnt] = '0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6';
     }
 
     // create 4 minimal manuscripts manuscript[...] with adresses addressManuscript[...]

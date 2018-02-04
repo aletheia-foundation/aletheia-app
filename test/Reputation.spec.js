@@ -1,8 +1,5 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 const expectThrow = require('../test/helpers/expectThrow')
-
-console.log('*********', Object.keys(contract))
 
 var Reputation = artifacts.require('../contracts/Reputation.sol')
 var Aletheia = artifacts.require('../contracts/Aletheia.sol')

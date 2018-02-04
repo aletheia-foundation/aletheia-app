@@ -1,4 +1,3 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 const expectThrow = require('../test/helpers/expectThrow')
 

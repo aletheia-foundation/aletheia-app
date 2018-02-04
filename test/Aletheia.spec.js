@@ -1,4 +1,3 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 
 console.log('*********', Object.keys(contract))
@@ -11,7 +10,7 @@ contract('Aletheia', function(accounts) {
   var instance, instanceRep;
   var addressManuscript1;
   var manuscript1;
-  var bytesOfAddress = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
+  var bytesOfAddress = '0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6'
 
   it('transfer ownership of reputation contract to Aletheia', async function() {
 
