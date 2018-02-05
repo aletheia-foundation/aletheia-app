@@ -22,8 +22,8 @@ import {Web3HelperService} from './providers/web3/web3-helper/web3-helper.servic
 import {Web3Provider} from './providers/web3/web3-provider/web3-provider.token'
 import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.factory'
 
-import {SubmittedPapersIndexPromise} from './providers/contracts/submitted-papers-index/submitted-papers-index.token'
-import {submittedPapersIndexPromiseFactory} from './providers/contracts/submitted-papers-index/submitted-papers-index.factory'
+import {SubmittedPapersIndexPromise} from './providers/contracts/contract-tokens.token'
+import {ContractFactories} from './providers/contracts/contract-helper'
 import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
 import {Web3Token} from './providers/web3/web3/web3.token'
 import {web3Factory} from './providers/web3/web3/web3.factory'
@@ -95,7 +95,7 @@ export function loadWeb3Client(web3Client: Web3ClientService) {
     {
       provide: SubmittedPapersIndexPromise,
       deps: [Web3Provider, Web3NetworkIdPromise],
-      useFactory: submittedPapersIndexPromiseFactory
+      useFactory: ContractFactories.submittedPapersIndexPromiseFactory
     },
     {
       provide: Web3HelperService, useClass: Web3HelperService},

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core'
 
 import {EncodingHelperService} from '../../encoding-helper/encoding-helper.service'
 import {Web3HelperService} from '../web3-helper/web3-helper.service'
-import {SubmittedPapersIndexPromise} from '../../contracts/submitted-papers-index/submitted-papers-index.token'
+import {SubmittedPapersIndexPromise} from '../../contracts/contract-tokens.token'
 import {Web3Token} from '../web3/web3.token'
 
 export class MockWeb3ClientService {
