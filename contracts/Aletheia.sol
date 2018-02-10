@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Reputation.sol";
+import "./CommunityVotes.sol";
 import "./Manuscript.sol";
 import "./MinimalManuscript.sol";
 
@@ -9,12 +10,14 @@ import "./MinimalManuscript.sol";
 contract Aletheia is Ownable {
 
     Reputation public reputation;
+    CommunityVotes public communityVotes;
     mapping(address => uint256) public balanceOf;
     mapping(address => bool) public registered;
     mapping(bytes32 => address) public manuscriptAddress;
 
-    function Aletheia(address reputationAddress) public {
+    function Aletheia(address reputationAddress, address votesAddress) public {
         reputation = Reputation(reputationAddress);
+        communityVotes = CommunityVotes(communityVotes);
     }
 
     function remove() public onlyOwner payable {
