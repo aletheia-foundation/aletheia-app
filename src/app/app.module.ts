@@ -22,8 +22,7 @@ import {Web3HelperService} from './providers/web3/web3-helper/web3-helper.servic
 import {Web3Provider} from './providers/web3/web3-provider/web3-provider.token'
 import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.factory'
 
-import {SubmittedPapersIndexPromise} from './providers/contracts/contract-tokens.token'
-import {ContractFactories} from './providers/contracts/contract-helper'
+import {ContractLoaderService} from './providers/contracts/contract-loader.service'
 import {POLL_INTERVAL_MS, WEB3_URL} from './Injection-tokens'
 import {Web3Token} from './providers/web3/web3/web3.token'
 import {web3Factory} from './providers/web3/web3/web3.factory'
@@ -39,7 +38,8 @@ import {ListPapersComponent} from './components/list-papers/list-papers.componen
 import {Web3NetworkIdPromise} from './providers/web3/web3-network-id/web3-network-id.token'
 import {web3NetworkIdFactory} from './providers/web3/web3-network-id/web3-network-id.factory'
 import {loadWeb3Account, Web3AccountService} from './providers/web3/web3-account/web3-account.service'
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { SubmitPaperModalComponent } from './components/submit-paper/submit-paper-modal/submit-paper-modal.component'
 
 export function loadWeb3Client(web3Client: Web3ClientService) {
   return () => {
@@ -56,10 +56,12 @@ export function loadWeb3Client(web3Client: Web3ClientService) {
     BecomeAReviewerComponent,
     NetworkStatusComponent,
     InsufficientBalanceModalComponent,
-    ListPapersComponent
+    ListPapersComponent,
+    SubmitPaperModalComponent
   ],
   entryComponents: [
-    InsufficientBalanceModalComponent
+    InsufficientBalanceModalComponent,
+    SubmitPaperModalComponent
   ],
   imports: [
     BrowserModule,
@@ -93,12 +95,12 @@ export function loadWeb3Client(web3Client: Web3ClientService) {
       useFactory: web3NetworkIdFactory
     },
     {
-      provide: SubmittedPapersIndexPromise,
-      deps: [Web3Provider, Web3NetworkIdPromise],
-      useFactory: ContractFactories.submittedPapersIndexPromiseFactory
+      provide: ContractLoaderService,
+      useClass: ContractLoaderService
     },
     {
-      provide: Web3HelperService, useClass: Web3HelperService},
+      provide: Web3HelperService, useClass: Web3HelperService
+    },
     {
       provide: Web3ClientService,
       useClass: Web3ClientService

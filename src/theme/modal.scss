@@ -1,0 +1,10 @@
+
+.modal-header, .modal-body, .modal-content {
+  color: $gray-900;
+  a {
+    color: $primary;
+    &:hover {
+      color: darken($primary, 15%);
+    }
+  }
+}

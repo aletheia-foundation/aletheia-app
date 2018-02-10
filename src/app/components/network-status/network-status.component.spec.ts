@@ -42,7 +42,7 @@ describe('NetworkStatusComponent', () => {
       expect(compiled.querySelector('.balance').innerText).toContain('200')
     })
     describe('when the balance is changed', () => {
-      beforeEach(()=>{
+      beforeEach(() => {
         mockWeb3Monitor.networkStatus.next(new Web3NetworkStatus(null, 10, '0x12345', 500))
         fixture.detectChanges()
       })

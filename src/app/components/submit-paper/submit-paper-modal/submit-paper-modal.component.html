@@ -1,0 +1,26 @@
+<form #form="ngForm" (ngSubmit)="onSubmitPaper(form.value)">
+
+  <div class="modal-header">
+    <h4 class="modal-title">Submit a paper to aletheia</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      After submitting the paper it will be voted on by the community, If the paper is accepted, it will be freely downloadable for anyone running the Aletheia app.
+    </p>
+    <span class="upload-paper-filename">{{fileName}}</span>
+    <button type="button" class="btn btn-secondary select-file-button" [disabled]="uploadingPaper" (click)="shareFileButtonClick()">Select a paper to upload</button>
+
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [(ngModel)]="isAuthor" id="is-author-checkbox" name="is-author-checkbox">
+      <label class="custom-control-label" for="is-author-checkbox">I am the author of this manuscript</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" [disabled]="!fileName || uploadingPaper"  class="btn btn-primary">Get Aletheia Goodwill</button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</form>

@@ -41,6 +41,7 @@
 /* Extend bootstrap with our own styles as necessary */
 @import "theme/type";
 @import "theme/notifications";
+@import "theme/modal";
 
 html, body {
   margin: 0;

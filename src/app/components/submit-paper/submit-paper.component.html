@@ -9,12 +9,8 @@
   <div id="topup-message" style="display:none">To submit a paper to aletheia, you need Aletheia Goodwill. You can get Goodwill by solving a captcha
     <a href="../credit-account/credit-account.html">Get Goodwill</a>
   </div>
-  <button class="btn submit-paper-button" [disabled]="uploadingPaper" (click)="shareFileButtonClick()">Submit a paper</button>
+  <button class="btn submit-paper-button" (click)="submitPaperButtonClick()">Submit a paper</button>
 
-  <div class="upload-success-div" id="upload-success-div" style="display:none;">
-    File <span class="upload-success-file-name" id="upload-success-file-name"></span> shared successfully.
-    File identifier is: <span class="upload-success-file-id" id="upload-success-file-id"></span>
-  </div>
   <div>
     <a routerLink='/'>View all submitted papers</a>
     <div id="error-div"></div>

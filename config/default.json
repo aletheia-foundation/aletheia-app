@@ -6,6 +6,7 @@
   },
   "faucetUrl": "https://theserverbythe.stream",
   "web3": {
+    "defaultGas": 4712388,
     "url": "http://localhost:8545",
     "pollIntervalMs": 1000,
     "aletheiaContractAddress": ""

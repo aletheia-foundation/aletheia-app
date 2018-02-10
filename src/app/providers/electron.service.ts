@@ -6,6 +6,15 @@ import {ipcRenderer} from 'electron'
 import {dialog} from 'electron'
 import * as childProcess from 'child_process'
 
+export class MockElectronService {
+  public dialog = {
+    showOpenDialog: () => {}
+  }
+  isElectron() {
+    return true
+  }
+}
+
 @Injectable()
 export class ElectronService {
   public ipcRenderer: typeof ipcRenderer
