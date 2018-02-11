@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./Reputation.sol";
+import "./ManuscriptIndex.sol";
 import "./Manuscript.sol";
 import "./MinimalManuscript.sol";
 
@@ -9,12 +10,14 @@ import "./MinimalManuscript.sol";
 contract Aletheia is Ownable {
 
     Reputation public reputation;
+    ManuscriptIndex public manuscriptIndex;
     mapping(address => uint256) public balanceOf;
     mapping(address => bool) public registered;
     mapping(bytes32 => address) public manuscriptAddress;
 
-    function Aletheia(address reputationAddress) public {
+    function Aletheia(address reputationAddress, address manuscriptIndexAddress) public {
         reputation = Reputation(reputationAddress);
+        manuscriptIndex = ManuscriptIndex(manuscriptIndexAddress);
     }
 
     function remove() public onlyOwner payable {
@@ -25,11 +28,11 @@ contract Aletheia is Ownable {
     function newManuscript(bytes32 _hash) public
         returns(address _newManuscriptAddress)
     {
+        require(manuscriptAddress[_hash] == 0x00);
         MinimalManuscript m = new MinimalManuscript(_hash);
         m.transferOwnership(msg.sender);
-        /* m.grantOwnership(msg.sender);
-        m.removeOwnership(this); */
         manuscriptAddress[_hash] = m;
+        manuscriptIndex.add(_hash, m);
         return m;
     }
 
