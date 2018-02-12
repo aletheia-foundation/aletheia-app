@@ -49,6 +49,10 @@ contract('Aletheia', function(accounts) {
 
     // register manuscript
     await instance.registerPaper(addressManuscript1, {from: accounts[0]});
+    
+    // check success of registration
+    assert.equal(await instance.registered(addressManuscript1), true,
+     "manuscript is not registered");
 
     // check for revert transaction when registerPaper() is not used by
     // manuscript owner
@@ -66,9 +70,9 @@ contract('Aletheia', function(accounts) {
     // selfdestruct Aletheia contract
     await instance.remove({from: accounts[0]});
 
-    // verify empty storage of manuscriptAddress
-    var addressManuscript2 = await instance.manuscriptAddress(bytesOfAddress);
-    assert.equal(addressManuscript2, 0, "address storage is not set to zero")
+    // verify empty storage of registered
+    assert.equal(await instance.registered(addressManuscript1), false,
+     "registered mapping is not empty");
   })
 
 })
