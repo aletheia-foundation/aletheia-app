@@ -17,7 +17,7 @@ contract Aletheia is Ownable {
 
     function Aletheia(address reputationAddress, address votesAddress) public {
         reputation = Reputation(reputationAddress);
-        communityVotes = CommunityVotes(communityVotes);
+        communityVotes = CommunityVotes(votesAddress);
     }
 
     function remove() public onlyOwner payable {
@@ -40,15 +40,19 @@ contract Aletheia is Ownable {
         // ToDo: should check, if upon reregistration the data address was
         // changed => new community vote / peer review necessary
         Manuscript paper = Manuscript(_manuscriptAddress);
+        bytes32 _hash = paper.dataAddress();
         // only owner of manuscript should be able to register paper
         require(paper.isOwner(msg.sender));
+        // paper requires at least one authors
+        require(paper.authorCount() > 0);
 
         // Check to see if that address has already been registered.
         if (registered[_manuscriptAddress] == true) {
             // Update the citation count
 
         } else {
-            // Register the manuscript (and update the citations, after review?)
+            // Register the manuscript and start community vote (and update the citations, after review?)
+            communityVotes.createVoting(_hash);
             registered[_manuscriptAddress] = true;
         }
 
@@ -59,6 +63,12 @@ contract Aletheia is Ownable {
         /*for (uint paperIdx = 0; paperIdx < paper.citationCount(); paperIdx++) {
             balanceOf[paper.citation(paperIdx)] += 10;
         }*/
+    }
+
+    function communityVote(bytes32 _hash, bool _vote) public {
+        // add check if msg.sender is registered member of Aletheia
+        // member registration still to come...
+        communityVotes.vote(_hash, msg.sender, _vote);
     }
 
 

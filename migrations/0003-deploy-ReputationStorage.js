@@ -3,5 +3,5 @@ var CommunityVotes = artifacts.require('../contracts/CommunityVotes.sol')
 
 module.exports = function (deployer) {
   deployer.deploy(Reputation)
-  deployer.deploy(CommunityVotes)
+  deployer.deploy(CommunityVotes,8)
 }
