@@ -10,7 +10,6 @@ contract CommunityVotes is Accessible {
     uint public votingDuration;
 
     struct voter {
-        bool weight;  // ??? use if voter restriction should be implemented
         bool voted;
         bool vote;
     }
@@ -19,7 +18,6 @@ contract CommunityVotes is Accessible {
         uint startingBlock;
         address[] voterList;
         mapping(address => voter) voters;
-        uint numAccepted;
     }
 
     mapping(bytes32 => voting) public votingList;
@@ -53,21 +51,28 @@ contract CommunityVotes is Accessible {
         votingList[ipfsHash].voterList.push(_voter);
         votingList[ipfsHash].voters[_voter].voted = true;
         votingList[ipfsHash].voters[_voter].vote = _vote;
-        if (_vote == true) votingList[ipfsHash].numAccepted++;
-    }
-
-    function getVoting(bytes32 ipfsHash) public constant returns(uint, uint, address[]){
-        return (
-            votingList[ipfsHash].startingBlock,
-            votingList[ipfsHash].numAccepted,
-            votingList[ipfsHash].voterList
-            );
     }
 
     function getVote(bytes32 ipfsHash, address _voter) public constant returns(bool, bool){
         return (
             votingList[ipfsHash].voters[_voter].voted,
             votingList[ipfsHash].voters[_voter].vote
+            );
+    }
+
+    function getVoting(bytes32 ipfsHash) public constant returns(uint, uint, address[]){
+        uint numAccepted = 0;
+        // check how many votes accepted the manuscript
+        for (uint i; i < votingList[ipfsHash].voterList.length; i++) {
+            address _voter = votingList[ipfsHash].voterList[i];
+            if (votingList[ipfsHash].voters[_voter].vote == true) {
+                numAccepted++;
+            }
+        }
+        return (
+            votingList[ipfsHash].startingBlock,
+            numAccepted,
+            votingList[ipfsHash].voterList
             );
     }
 
