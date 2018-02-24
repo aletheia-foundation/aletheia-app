@@ -68,6 +68,12 @@ contract Aletheia is Ownable {
     function communityVote(bytes32 _hash, bool _vote) public {
         // add check if msg.sender is registered member of Aletheia
         // member registration still to come...
+        // check that authors cannot vote for their own manuscript
+        Manuscript paper = Manuscript(manuscriptAddress[_hash]);
+        require(!paper.isOwner(msg.sender));
+        for (uint i = 0; i < paper.authorCount(); i++) {
+            require(paper.author(i) != msg.sender);
+        }
         communityVotes.vote(_hash, msg.sender, _vote);
     }
 

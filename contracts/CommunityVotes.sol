@@ -5,6 +5,8 @@ import "./Accessible.sol";
 
 contract CommunityVotes is Accessible {
 
+    // voting votingDuration is set during contract creation
+    // should votingDuration be changeable later on?
     uint public votingDuration;
 
     struct voter {
@@ -27,7 +29,6 @@ contract CommunityVotes is Accessible {
     }
 
     function createVoting(bytes32 ipfsHash) public onlyAllowedAccount {
-        // add check for authorship ?
         require(votingList[ipfsHash].startingBlock == 0);
         votingList[ipfsHash].startingBlock = block.number;
     }

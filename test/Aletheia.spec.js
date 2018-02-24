@@ -47,7 +47,7 @@ contract('Aletheia', function(accounts) {
 
   it('add author to manuscript', async function() {
 
-    await manuscript1.addAuthor(accounts[0], {from: accounts[0]})
+    await manuscript1.addAuthor(accounts[1], {from: accounts[0]})
   })
 
   it('register new manuscript', async function() {
@@ -57,24 +57,33 @@ contract('Aletheia', function(accounts) {
     // check for revert transaction when registerPaper() is not used by
     // manuscript owner
     await expectRevert(instance.registerPaper(addressManuscript1, {from: accounts[1]}));
+    await expectRevert(instance.registerPaper(addressManuscript1, {from: accounts[2]}));
   })
 
   it('vote for and against manuscript', async function() {
 
-    for(var cnt=0; cnt<6; cnt++) {
+    // try to vote for manuscript as manuscript owner
+    await expectRevert(instance.communityVote(bytesOfAddress, true, {from: accounts[0]}));
+
+    // try to vote for manuscript as manuscript author
+    await expectRevert(instance.communityVote(bytesOfAddress, true, {from: accounts[1]}));
+
+    // vote for manuscript
+    var nClosed = 0;
+    for(var cnt=0; cnt<7; cnt++) {
+      // vote 3 times for manuscript then against it
+      var nForVote = 5;
+      if (cnt+2 < nForVote) {var vote = true} else {var vote = false}
+      // check that voting is still open
       if (await instanceVotes.votingActive(bytesOfAddress) > 1 ) {
-        await instance.communityVote(bytesOfAddress, true, {from: accounts[cnt]});
+        // vote
+        await instance.communityVote(bytesOfAddress, vote, {from: accounts[cnt+2]});
       }
       else {
-        await expectRevert(instance.communityVote(bytesOfAddress, true, {from: accounts[cnt]}));
-      }
-    }
-    for(var cnt=6; cnt<10; cnt++) {
-      if (await instanceVotes.votingActive(bytesOfAddress) > 1 ) {
-        await instance.communityVote(bytesOfAddress, false, {from: accounts[cnt]});
-      }
-      else {
-        await expectRevert(instance.communityVote(bytesOfAddress, false, {from: accounts[cnt]}));
+        // save cnt when voting was closed
+        if (nClosed == 0) {nClosed = cnt};
+        // try to vote
+        await expectRevert(instance.communityVote(bytesOfAddress, vote, {from: accounts[cnt+2]}));
       }
     }
 
