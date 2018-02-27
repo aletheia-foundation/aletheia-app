@@ -2,7 +2,7 @@ const expectRevert = require('../test/helpers/expectRevert')
 const expectThrow = require('../test/helpers/expectThrow')
 
 var Reputation = artifacts.require('../contracts/Reputation.sol')
-var Aletheia = artifacts.require('../contracts/Aletheia.sol')
+//var Aletheia = artifacts.require('../contracts/Aletheia.sol')
 
 contract('Reputation', function(accounts) {
   var instance;
@@ -10,9 +10,7 @@ contract('Reputation', function(accounts) {
   var manuscript1;
 
   it('add reputation to account', async function() {
-    //aletheia = await Aletheia.deployed();
     instance = await Reputation.deployed();
-    //aletheiaAddress = aletheia.address;
 
     // give access to accounts[0] to change reputation
     await instance.grantAccess(accounts[0]);
