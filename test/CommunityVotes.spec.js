@@ -66,7 +66,7 @@ contract('CommunityVotes', function(accounts) {
       nForVote = 5;
       if (cnt < nForVote) {var vote = true} else {var vote = false}
       // check that voting is still open
-      if (await instance.votingActive(bytesOfAddress[0]) > 1 ) {
+      if (await instance.votingActive(bytesOfAddress[0]) > 0 ) {
         // vote
         await instance.vote(bytesOfAddress[0], accounts[cnt], vote);
       }

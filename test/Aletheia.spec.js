@@ -75,7 +75,7 @@ contract('Aletheia', function(accounts) {
       var nForVote = 5;
       if (cnt+2 < nForVote) {var vote = true} else {var vote = false}
       // check that voting is still open
-      if (await instanceVotes.votingActive(bytesOfAddress) > 1 ) {
+      if (await instanceVotes.votingActive(bytesOfAddress) > 0 ) {
         // vote
         await instance.communityVote(bytesOfAddress, vote, {from: accounts[cnt+2]});
       }
@@ -108,9 +108,9 @@ contract('Aletheia', function(accounts) {
     // selfdestruct Aletheia contract
     await instance.remove({from: accounts[0]});
 
-    // verify empty storage of manuscriptAddress
-    var addressManuscript2 = await instance.manuscriptAddress(bytesOfAddress);
-    assert.equal(addressManuscript2, 0, "address storage is not set to zero")
+    // verify empty contract code
+    var codeContract = await web3.eth.getCode(instance.address);
+    assert.equal(codeContract, 0, "address storage is not set to zero")
   })
 
 })

@@ -30,7 +30,6 @@
     "mocha": "3.4.2",
     "sinon": "1.17.7",
     "solc": "0.4.11",
-    "truffle": "3.3.2",
     "truffle-config": "1.0.0",
     "truffle-contract": "3.0.0",
     "truffle-expect": "0.0.3"
@@ -39,6 +38,7 @@
     "config": "1.26.1",
     "ipfs-api": "git+https://github.com/aletheia-foundation/js-ipfs-api.git",
     "jquery": "3.2.1",
+    "npm": "^5.7.1",
     "q": "1.5.0",
     "request-promise-native": "^1.0.4",
     "truffle-contract": "3.0.0",
