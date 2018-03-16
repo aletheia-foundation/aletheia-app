@@ -1,7 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { Web3ClientService } from './web3-client.service';
-import {EncodingHelperService} from '../../encoding-helper/encoding-helper.service'
 import {Web3HelperService} from '../web3-helper/web3-helper.service'
 import {POLL_INTERVAL_MS} from '../../../Injection-tokens'
 import {web3Factory} from '../web3/web3.factory'
@@ -20,7 +19,6 @@ describe('Web3ClientService', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: Web3Provider, useFactory: fakeWeb3ProviderFactory},
-        EncodingHelperService,
         Web3HelperService,
         {provide: Web3Token, deps: [Web3Provider], useFactory: web3Factory},
         {provide: ContractLoaderService, useClass: MockContractLoaderService},

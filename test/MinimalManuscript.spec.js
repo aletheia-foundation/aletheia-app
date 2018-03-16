@@ -10,23 +10,24 @@ contract('MinimalManuscript', function (accounts) {
   var manuscript = [];
   // manuscript address variables
   var addressManuscript = [];
+  var bytesOfAddress = [];
 
-  it('creates manuscripts', async function() {
-
+  before(async function() {
     // set data addresses of manuscripts
     // Todo: set different data addresses
-    var bytesOfAddress = [];
-    for(var cnt=0; cnt<4; cnt++) {
+    for (var cnt = 0; cnt < 4; cnt++) {
       bytesOfAddress[cnt] = '0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6';
     }
 
     // create 4 minimal manuscripts manuscript[...] with adresses addressManuscript[...]
     // each manuscript has a different owner accounts[...]
-    for(var cnt=0; cnt<4; cnt++) {
-      manuscript[cnt] = await MinimalManuscript.new(bytesOfAddress[cnt], {from: accounts[cnt]});
+    for (var cnt = 0; cnt < 4; cnt++) {
+      manuscript[cnt] = await MinimalManuscript.new(bytesOfAddress[cnt], 'title', {from: accounts[cnt]});
       addressManuscript[cnt] = await manuscript[cnt].address;
     }
+  })
 
+  it('creates manuscripts', async function(){
     // check data addresses
     for(var cnt=0; cnt<4; cnt++) {
       let tempBytesOfAdress = await manuscript[cnt].dataAddress();
@@ -35,7 +36,11 @@ contract('MinimalManuscript', function (accounts) {
   })
 
   it('checks for revert transaction when data address is empty', async function(){
-    await expectRevert(MinimalManuscript.new(0x00));
+    await expectRevert(MinimalManuscript.new(0x00, 'title'));
+  })
+
+  it('checks for revert transaction when title is empty', async function(){
+    await expectRevert(MinimalManuscript.new(0x1234, ''));
   })
 
   it('adds authors to manuscripts', async function() {

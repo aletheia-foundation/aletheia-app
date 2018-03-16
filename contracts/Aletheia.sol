@@ -13,7 +13,6 @@ contract Aletheia is Ownable {
     ManuscriptIndex public manuscriptIndex;
     mapping(address => uint256) public balanceOf;
     mapping(address => bool) public registered;
-
     function Aletheia(address reputationAddress, address manuscriptIndexAddress) public {
         reputation = Reputation(reputationAddress);
         manuscriptIndex = ManuscriptIndex(manuscriptIndexAddress);
@@ -24,14 +23,13 @@ contract Aletheia is Ownable {
     }
 
     // deploy new manuscript (contract factory)
-    function newManuscript(bytes32 _hash) public
+    function newManuscript(bytes32 _hash, string title) public
         returns(address _newManuscriptAddress)
     {
         require(manuscriptIndex.manuscriptAddress(_hash) == 0x00);
-        //require(manuscriptAddress[_hash] == 0x00);
-        MinimalManuscript m = new MinimalManuscript(_hash);
+
+        MinimalManuscript m = new MinimalManuscript(_hash, title);
         m.transferOwnership(msg.sender);
-        //manuscriptAddress[_hash] = m;
         manuscriptIndex.add(_hash, m);
         return m;
     }
@@ -60,6 +58,4 @@ contract Aletheia is Ownable {
             balanceOf[paper.citation(paperIdx)] += 10;
         }*/
     }
-
-
 }

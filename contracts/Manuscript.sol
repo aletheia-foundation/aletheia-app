@@ -3,6 +3,7 @@ pragma solidity ^0.4.15;
 
 interface Manuscript {
     function dataAddress() public constant returns(bytes32);
+    function title() public constant returns(string);
     function addAuthor(address newAuthor) public;
     function citePaper(address citee) public;
     function removeCitation(address citee) public;

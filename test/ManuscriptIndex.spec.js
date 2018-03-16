@@ -1,6 +1,6 @@
-const EncodingHelper = require('../app/common/encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 const expectThrow = require('../test/helpers/expectThrow')
+const EncodingHelper = require('../test/helpers/test-encoding-helper')
 
 console.log('*********', Object.keys(contract))
 
@@ -8,19 +8,23 @@ var ManuscriptIndex = artifacts.require('../contracts/ManuscriptIndex.sol')
 
 contract('ManuscriptIndex', function(accounts) {
   var instance;
-  var ipfsAddress = [];
   var bytesOfAddress = [];
+  var contractAddresses = []
   var elem2rm;
   // some test ipfs addresses
-  ipfsAddress[0] = 'QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH';
-  ipfsAddress[1] = 'QmdavdTfHgbbLCp5DUkZDYGoHwgDuQ2Zf2vpMYnJ6i71n2';
-  ipfsAddress[2] = 'QmWk4iniHmBZwpjwSFNmP7im4uEgVBgSFiPu2pU168353k';
-  ipfsAddress[3] = 'QmdxbPmxWus45myDDCXMfvyBnn5mLf2QsocKeVnDgxj2QR';
-  ipfsAddress[4] = 'QmRPCdKARctQAoooPfaxZWjSMPuzSEvzL44k3e7PPKtVib';
-  ipfsAddress[5] = 'QmT8f6vZRdorpsWzyiSighyR7XzyeATqwqtQwwv38KvgHn';
-  for(var cnt=0; cnt<ipfsAddress.length; cnt++) {
-    bytesOfAddress[cnt] = EncodingHelper.ipfsAddressToHexSha256(ipfsAddress[cnt]);
-  }
+  bytesOfAddress[0] = EncodingHelper.ipfsAddressToHexSha256('QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH');
+  bytesOfAddress[1] = EncodingHelper.ipfsAddressToHexSha256('QmdavdTfHgbbLCp5DUkZDYGoHwgDuQ2Zf2vpMYnJ6i71n2');
+  bytesOfAddress[2] = EncodingHelper.ipfsAddressToHexSha256('QmWk4iniHmBZwpjwSFNmP7im4uEgVBgSFiPu2pU168353k');
+  bytesOfAddress[3] = EncodingHelper.ipfsAddressToHexSha256('QmdxbPmxWus45myDDCXMfvyBnn5mLf2QsocKeVnDgxj2QR');
+  bytesOfAddress[4] = EncodingHelper.ipfsAddressToHexSha256('QmRPCdKARctQAoooPfaxZWjSMPuzSEvzL44k3e7PPKtVib');
+  bytesOfAddress[5] = EncodingHelper.ipfsAddressToHexSha256('QmT8f6vZRdorpsWzyiSighyR7XzyeATqwqtQwwv38KvgHn');
+
+  contractAddresses[0] = '0x7d5a30189395a8b597676b232efc63bee5112816';
+  contractAddresses[1] = '0xbbe93612468715e04c4810efd86d5e19b9082df3';
+  contractAddresses[2] = '0x1ee892932fba13f097a5d61f86f52deffa6f9e3f';
+  contractAddresses[3] = '0xb51b051f50e4b981cf915d1c8a668787d8f053fc';
+  contractAddresses[4] = '0x70d3e00d16ac3abfdef782f66f299f252cbe34ab';
+  contractAddresses[5] = '0xe6a90b0ced905d9934f2f3141182e4674279391f';
 
   it('add documents to storage', async function() {
     instance = await ManuscriptIndex.deployed();
@@ -100,7 +104,6 @@ contract('ManuscriptIndex', function(accounts) {
     assert.equal(indexLength, bytesOfAddress.length,
       "number or elements in storage not correct");
   })
-
 
   it('remove document from storage', async function() {
 

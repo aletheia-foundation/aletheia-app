@@ -44,7 +44,11 @@ describe('ListPapersComponent', () => {
   describe('if manuscripts are found', () => {
     beforeEach(fakeAsync(() => {
       spyOn(mockWeb3Client, 'getAllManuscripts').and.returnValue(Promise.resolve([
-        '123456'
+        {
+          dataAddress: '0x12345678',
+          contractAddress: '0x1234567891011',
+          title: 'testing methods for angular apps'
+        }
       ]))
       spyOn(mockErrorHandler, 'handleError')
       component.ngOnInit()
@@ -52,7 +56,7 @@ describe('ListPapersComponent', () => {
       fixture.detectChanges()
     }))
     it('should show the papers', () => {
-      expect(compiled.querySelector('.manuscript-item').innerText).toContain('123456')
+      expect(compiled.querySelector('.manuscript-item').innerText).toContain('testing methods for angular apps')
       expect(compiled.querySelector('.no-manuscripts-message')).toBe(null)
       expect(mockErrorHandler.handleError).not.toHaveBeenCalled()
     })

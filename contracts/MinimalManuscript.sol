@@ -9,12 +9,16 @@ contract MinimalManuscript is Ownable, Manuscript {
     bytes32 public _dataAddress;
     address[] public authors;
     address[] public citations;
+    string public _title;
+
     mapping(address => bool) public signedByAuthor;
 
-    function MinimalManuscript(bytes32 _da) public {
+    function MinimalManuscript(bytes32 _da, string title) public {
         require(_da != 0x00);
+        require(bytes(title).length > 0);
         //owner = msg.sender;
         _dataAddress = _da;
+        _title = title;
     }
 
     function isOwner(address account) public constant returns(bool) {
@@ -27,6 +31,10 @@ contract MinimalManuscript is Ownable, Manuscript {
 
     function dataAddress() public constant returns(bytes32 _da) {
         return _dataAddress;
+    }
+
+    function title() public constant returns(string _t) {
+        return _title;
     }
 
     function addAuthor(address newAuthor) public onlyOwner {

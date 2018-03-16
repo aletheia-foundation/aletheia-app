@@ -13,15 +13,14 @@ contract('Aletheia', function(accounts) {
   var manuscript1;
   var bytesOfAddress = '0xbfccda787baba32b59c78450ac3d20b633360b43992c77289f9ed46d843561e6'
 
-  it('transfer ownership of reputation contract to Aletheia', async function() {
 
+  before(async function() {
     instanceRep = await Reputation.deployed();
     instanceManscptInd = await ManuscriptIndex.deployed();
     instance = await Aletheia.deployed();
+  })
 
-    await instanceRep.grantAccess(instance.address, {from: accounts[0]});
-    await instanceManscptInd.grantAccess(instance.address, {from: accounts[0]});
-
+  it('transfer ownership of reputation contract to Aletheia', async function() {
     // check new owner of reputation
     var ownerRep = await instanceRep.allowedAccounts(instance.address);
     assert.equal(ownerRep, true, "new owner is not Aletheia")
@@ -33,7 +32,7 @@ contract('Aletheia', function(accounts) {
 
   it('create new manuscripts', async function() {
     // create new manuscript 1
-    await instance.newManuscript(bytesOfAddress, {from: accounts[0]});
+    await instance.newManuscript(bytesOfAddress, 'the title', {from: accounts[0]});
 
     // get address of new contact by IPFS link
     addressManuscript1 = await instanceManscptInd.manuscriptAddress(bytesOfAddress);

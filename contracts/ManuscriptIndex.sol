@@ -2,15 +2,17 @@ pragma solidity ^0.4.18;
 
 import "./Accessible.sol";
 
-
+// A linked list for storing manuscripts inspired by:
+// https://github.com/Modular-Network/ethereum-libraries/blob/master/LinkedListLib/LinkedListLib.sol
 contract ManuscriptIndex is Accessible {
-    // storage is realized as double linked list indexes
 
-    // PREV == false
-    // NEXT == true
+    // storage is realized as double linked list indexes
     mapping(bytes32 => mapping(bool => bytes32) ) public dllIndex;
     mapping(bytes32 => address) public manuscriptAddress;
 
+    // adds a new manuscript address
+    // `_hash` an ipfs hash to use for retrieving the manuscript
+    // `_addr` the address of a new manuscript contract to add to Aletheia
     function add(bytes32 _hash, address _addr) public onlyAllowedAccount {
         // require input to be not empty
         require(_hash != 0x00 && _addr != 0x00);
@@ -40,5 +42,4 @@ contract ManuscriptIndex is Accessible {
         delete dllIndex[_hash][true];
         delete manuscriptAddress[_hash];
     }
-
 }

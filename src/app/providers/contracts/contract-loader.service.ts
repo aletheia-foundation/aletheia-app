@@ -2,6 +2,7 @@ import contract from 'truffle-contract'
 import {Inject, Injectable} from '@angular/core'
 import {Config} from '../../../../config/Config'
 import * as AletheiaJson from '../../../../build/contracts/Aletheia.json'
+import * as ManuscriptIndexJson from '../../../../build/contracts/ManuscriptIndex.json'
 import * as MinimalManuscriptJson from '../../../../build/contracts/MinimalManuscript.json'
 import {Web3AccountService} from '../web3/web3-account/web3-account.service'
 import {Web3Provider} from '../web3/web3-provider/web3-provider.token'
@@ -23,6 +24,10 @@ export class ContractLoaderService {
 
   public loadAletheia(): Promise<any> {
     return this.loadContract(AletheiaJson)
+  }
+
+  public loadManuscriptIndex(): Promise<any> {
+    return this.loadContract(ManuscriptIndexJson)
   }
 
   public minimalManuscriptAt(manuscriptAddress): any {

@@ -14,9 +14,9 @@ import {NotificationsService} from 'angular2-notifications'
 export class SubmitPaperModalComponent implements OnInit {
   fileName = ''
   filePath = ''
+  title = ''
   isAuthor = false
   uploadingPaper = false
-
   constructor(
     private web3Client: Web3ClientService,
     private activeModal: NgbActiveModal,
@@ -61,7 +61,7 @@ export class SubmitPaperModalComponent implements OnInit {
         throw new Error('ipfsFileRef[0].hash was null')
       }
       this.uploadingPaper = true
-      return this.web3Client.submitManuscript(ipfsFileRef[0].hash, this.isAuthor)
+      return this.web3Client.submitManuscript(ipfsFileRef[0].hash, this.title, this.isAuthor)
     }).then((receipt) => {
       if (typeof receipt.tx !== 'string') {
         console.log('receipt: ', receipt)

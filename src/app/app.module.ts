@@ -17,7 +17,6 @@ import {AppRoutingModule} from './app-routing.module'
 import {ElectronService} from './providers/electron.service'
 
 import {Web3ClientService} from './providers/web3/web3-client/web3-client.service'
-import {EncodingHelperService} from './providers/encoding-helper/encoding-helper.service'
 import {Web3HelperService} from './providers/web3/web3-helper/web3-helper.service'
 import {Web3Provider} from './providers/web3/web3-provider/web3-provider.token'
 import {web3ProviderFactory} from './providers/web3/web3-provider/web3-provider.factory'
@@ -83,7 +82,6 @@ export function loadWeb3Client(web3Client: Web3ClientService) {
       useFactory: web3ProviderFactory
     },
     {provide: POLL_INTERVAL_MS, useValue: '5000'},
-    {provide: EncodingHelperService, useClass: EncodingHelperService},
     {
       provide: Web3Token,
       deps: [Web3Provider],
