@@ -49,6 +49,9 @@ export class SubmitPaperModalComponent implements OnInit {
       // user did something strange in the dialog
       return this.errorHandler.handleError(new Error(`Unable to upload file or folder: ${filePath}`))
     }
+    if (!/\.pdf$/.test(fileName[0])) {
+      return this.errorHandler.handleError(new Error(`Currently only pdf files can be uploaded`))
+    }
     this.fileName = fileName[0]
     this.filePath = filePath[0]
   }

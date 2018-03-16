@@ -1,9 +1,9 @@
 <h1>All manuscripts</h1>
 <ul>
   <li *ngFor=" let manuscript of manuscripts" class="manuscript-item">
-    title: <span>{{manuscript.title}}</span>
-    contract address: <span>{{manuscript.contractAddress}}</span>
-    data address: <span>{{manuscript.dataAddress}}</span>
+    <b>{{manuscript.title}}</b>
+    <i>unreviewed</i>
+    <a (click)="downloadManuscript(manuscript.dataAddress, manuscript.title)" href="javascript:;">Download document</a>
   </li>
 </ul>
 <div class="no-manuscripts-message" *ngIf="manuscripts.length === 0">
