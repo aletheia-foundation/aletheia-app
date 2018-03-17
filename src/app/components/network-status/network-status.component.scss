@@ -1,0 +1,35 @@
+/* TODO: mobile devices */
+@import '../../../theme/variables-and-mixins';
+
+.network-status {
+  display: flex;
+  padding: 20px 20px;
+  .error-status {
+    display:inline-block;
+    border: 1px solid $error-color;
+    border-radius: 3px;
+    padding: 5px 10px;
+    .fa {
+      color: $error-color;
+    }
+  }
+  .peers-connected {
+    display: inline-block;
+    padding: 5px 10px;
+    &.no-peers {
+      border: 1px solid $warning-color;
+      border-radius: 3px;
+      .fa {
+        color: $warning-color;
+      }
+    }
+  }
+  .profile-link {
+    display: inline-block;
+    padding: 5px 10px;
+  }
+  .balance {
+    display: inline-block;
+    padding: 5px 10px;
+  }
+}

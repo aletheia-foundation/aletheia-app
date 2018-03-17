@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/usr/bin/env bash
 source ./scripts/env-testnet.sh
 
 if [ -d "$TEST_DATA_DIR" ]; then

@@ -4,10 +4,9 @@
     "gatewayUrl": "/ip4/127.0.0.1/tcp/5001",
     "pollIntervalMs": 1000
   },
-  "faucet": {
-    "url": "https://theserverbythe.stream"
-  },
+  "faucetUrl": "https://theserverbythe.stream",
   "web3": {
+    "defaultGas": 4712388,
     "url": "http://localhost:8545",
     "pollIntervalMs": 1000,
     "aletheiaContractAddress": ""

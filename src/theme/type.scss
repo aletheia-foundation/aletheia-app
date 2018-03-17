@@ -1,0 +1,35 @@
+//note: url paths are relative to ../styles.scss
+
+@font-face {
+  font-family: "Domine";
+  src: url('./assets/fonts/Domine-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Domine";
+  src: url('./assets/fonts/Domine-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url('./assets/fonts/Montserrat-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url('./assets/fonts/Montserrat-Regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url('./assets/fonts/Montserrat-Light.ttf');
+  font-weight: 300;
+}
+
+h1, .h1 {
+  font-family: $font-family-serif;
+}

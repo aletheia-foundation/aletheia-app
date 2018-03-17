@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Submit a document to Aletheia</h1>
+  <div id="status-bar" class="status-bar"></div>
+  <div id="status-bar-ethereum" class="status-bar"></div>
+  <div id="account-div"></div>
+  <div id="balance-div"></div>
+  <div id="holder">
+
+  <div id="topup-message" style="display:none">To submit a paper to aletheia, you need Aletheia Goodwill. You can get Goodwill by solving a captcha
+    <a href="../credit-account/credit-account.html">Get Goodwill</a>
+  </div>
+  <button class="btn submit-paper-button" (click)="submitPaperButtonClick()">Submit a paper</button>
+
+  <div>
+    <a routerLink='/'>View all submitted papers</a>
+    <div id="error-div"></div>
+  </div>
+  </div>
+</div>

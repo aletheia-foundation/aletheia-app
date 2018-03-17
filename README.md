@@ -32,6 +32,7 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 # Requirements
 
 * Nodejs 6+
+* Python 2 (not python 3) test this with `python --version`
 * A running local IPFS node
 * A running ethereum node. Recommended to use `testrpc` for local development and `geth` for the testnet
 
@@ -43,8 +44,8 @@ For local development, a blockchain can be faked using [testrpc](https://github.
 
   # note, this is not strictly required for local development as the fake ethereum client `testrpc` can be used.
   brew install ethereum # installs geth
-  brew install ipfs
   brew install nodejs
+  # OSX should have python 2.X pre installed
   npm install -g electron
 
 ```
@@ -56,11 +57,11 @@ These instructions were tested on ubuntu 16.10
 ```bash
   git clone https://github.com/aletheia-foundation/aletheia-app.git
   cd aletheia-app
-  # this installs nodejs 6.x, geth, ipfs and electron
+  # this installs nodejs 6.x, geth and electron
   sudo ./scripts/install-ubuntu.sh
 ```
 
-# Run project
+# Run project in web browser
 
 Clone this repo and cd into its directory
 
@@ -69,30 +70,69 @@ This project requires IPFS and Ethereum clients to be running in the background
 ```bash
   # open three terminal tabs in the project folder:
   # in tab 1
+  npm config set python $(which python) # Python 2 is needed, not python 3
   npm install
   npm run ethereum-local
-
+```
+```bash
   # in tab 2 (must be in project directory)
   npm run ipfs-local
+```
+```bash
 
   # in tab 3 (must be in project directory)
-  npm start # (app will start but be unable to connect to filesharing or blockchain)
+  npm run start:web # (app will start but be unable to connect to filesharing or blockchain)
+
 ```
 
+# Test the app build on the testnet
+
+`npm run electron:serve`
+
+note: this will not be able to connect to the local ethereum testrpc *(npm run ethereum-local)* 
+and can only be tested on the real testnet e.g.: 
+ 
+```bash
+    # In tab 1
+    npm run ethereum-testnet 
+    
+    # in tab 2 
+    npm run ipfs-local
+    
+    # In tab 3
+    npm run electron:serve
+```
+
+# Test the dist build
+You can also generate the actual executables for different platforms with 
+```bash
+    npm run electron:linux
+    npm run electron:windows
+    npm run electron:mac
+```
 [![Video Tutorial](http://img.youtube.com/vi/vUyjEmcVSFA/0.jpg)](https://www.youtube.com/watch?v=vUyjEmcVSFA)
 
 Note: The video mentions installing/running the project on Mac OS. The steps followed in the video are also applicable to any Linux distribution (Ubuntu, CentOS, ...). 
 
-
 # Tests
-Tests require IPFS and Ethereum clients to be running in the background
+Linting
 ```bash
-  # while `npm run ethereum-local` and `npm run ethereum-local` are running in two other tabs:
-  npm test
+npm run lint
 ```
 
-# Testnet
-Todo: add instructions for testnet
+Tests run in a browser with karma.
 
-# code style
-Project uses the Javascript standard style
+```bash
+  # while `npm run ethereum-local` and `npm run ipfs-local` are running in two other tabs:
+  npm run test
+```
+
+Smart contract tests with truffle
+```bash
+  # in tab 1 
+  npm run ethereum-local
+
+  # in tab 2
+  npm run test-truffle
+```
+

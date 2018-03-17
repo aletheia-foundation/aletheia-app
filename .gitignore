@@ -1,3 +1,4 @@
+.idea
 node_modules
 ipfs-repo
 .DS_Store
@@ -8,5 +9,8 @@ out
 *.sol*.bin
 chains.json
 .ipfs-develop/
+app-builds
+dist
 package-lock.json
 build
+MinimalManuscriptTest.spec.js

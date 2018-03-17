@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+IPFS_EXECUTABLE='./node_modules/go-ipfs-dep/go-ipfs/ipfs'
 
 IPFS_DIR='.ipfs-develop'
 if [ ! -d "$IPFS_DIR" ]; then
   # Control will enter here if $DIRECTORY exists.
-  ipfs init -c $IPFS_DIR
+  IPFS_EXECUTABLE init -c $IPFS_DIR
 fi
-ipfs daemon -c $IPFS_DIR
+IPFS_EXECUTABLE daemon -c $IPFS_DIR

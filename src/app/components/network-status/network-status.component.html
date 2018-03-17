@@ -1,0 +1,13 @@
+<div class="network-status">
+  <div class="connection-status-icon" >
+   <span *ngIf="isError()" class="error-status"><span class="fa fa-exclamation-circle"></span> Error connecting to Aletheia network</span>
+  </div>
+  <div *ngIf="!isError()" class="peers-connected" [ngClass]="{'no-peers': isNoPeers()}">
+    <span *ngIf="isConnected()" class="fa fa-check connected-status"></span>
+    <span *ngIf="isNoPeers()" class="fa fa-warning warning-status"></span>
+    {{(this.web3Monitor.networkStatus | async).peers}} peers connected
+  </div>
+
+  <div *ngIf="!isError()" class="profile-link">Account: {{(this.web3Monitor.networkStatus | async).address}}</div>
+  <div *ngIf="!isError()" class="balance"><span>Ψ</span>{{(this.web3Monitor.networkStatus | async).balance}}</div>
+</div>

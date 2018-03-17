@@ -1,0 +1,17 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+// Colors
+$error-color: #b60c19;
+$warning-color: #b6b213;
+$link-color: #fff;
+$link-hover-color: #fff;
+$body-color: $gray-100;
+
+
+// Fonts
+$font-family-sans-serif:      "Montserrat", sans-serif;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-serif:        "Domine", serif;
+$font-family-base:            $font-family-sans-serif;
