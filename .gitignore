@@ -14,3 +14,4 @@ dist
 package-lock.json
 build
 MinimalManuscriptTest.spec.js
+CommunityVoteSimple.sol
