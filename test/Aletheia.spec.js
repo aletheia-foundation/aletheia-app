@@ -80,7 +80,7 @@ contract('Aletheia', function(accounts) {
           if (cnt < nForVote) {var vote = true} else {var vote = false}
           // check that voting is still open
 
-          if (await instanceVotes.votingActive(bytesOfAddress) > 1 ) {
+          if (await instanceVotes.votingActive(bytesOfAddress) > 0 ) {
             // vote
             await instance.communityVote(bytesOfAddress, vote, {from: accounts[cnt+2]});
           }
