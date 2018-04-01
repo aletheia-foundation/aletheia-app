@@ -8,6 +8,7 @@ import {EncodingHelper} from '../../encoding-helper/encoding-helper'
 export class MockIpfsClientService {
   addFileFromPath() {
   }
+  async getStream() {}
 }
 
 //  Ipfs can only be loaded in electron mode (not web or in karma unit tests)

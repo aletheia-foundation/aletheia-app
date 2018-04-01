@@ -47,18 +47,12 @@ export class Web3ClientService {
     const fileHashBytes = EncodingHelper.ipfsAddressToHexSha256(fileHash)
     const from = this.web3Account.getAccount()
     // todo: ensure that we have created an account.
-    return this.aletheia.newManuscript(fileHashBytes, title)
+    const authors = isAuthor ? [from] : []
+    return this.aletheia.newManuscript(fileHashBytes, title, authors)
     .then((manuscriptReceipt) => {
       // This is available because the smartcontract defines address as a return value
       const newManuscriptAddress = manuscriptReceipt.logs[0].address
       return this.contractLoader.minimalManuscriptAt(newManuscriptAddress)
-      .then((manuscript) => {
-        if (isAuthor) {
-          return manuscript.addAuthor(from)
-        } else {
-          return manuscriptReceipt
-        }
-      })
     })
   }
 

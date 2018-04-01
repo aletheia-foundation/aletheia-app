@@ -9,6 +9,7 @@ contract ManuscriptIndex is Accessible {
     // storage is realized as double linked list indexes
     mapping(bytes32 => mapping(bool => bytes32) ) public dllIndex;
     mapping(bytes32 => address) public manuscriptAddress;
+    mapping(bytes32 => bool) public accepted;
 
     // adds a new manuscript address
     // `_hash` an ipfs hash to use for retrieving the manuscript

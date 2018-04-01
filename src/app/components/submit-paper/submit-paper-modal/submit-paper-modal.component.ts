@@ -65,10 +65,10 @@ export class SubmitPaperModalComponent implements OnInit {
       }
       this.uploadingPaper = true
       return this.web3Client.submitManuscript(ipfsFileRef[0].hash, this.title, this.isAuthor)
-    }).then((receipt) => {
-      if (typeof receipt.tx !== 'string') {
-        console.log('receipt: ', receipt)
-        throw new Error('receipt from ethereum transaction was invalid')
+    }).then((minimalManuscriptContract) => {
+      if (!minimalManuscriptContract.address) {
+        console.log('minimalManuscriptContract: ', minimalManuscriptContract)
+        throw new Error('The manuscript contract returned had no address')
       }
       this.uploadingPaper = false
       this.notificationService.success(

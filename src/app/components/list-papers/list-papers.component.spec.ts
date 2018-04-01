@@ -3,6 +3,8 @@ import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/t
 import { ListPapersComponent } from './list-papers.component'
 import {MockWeb3ClientService, Web3ClientService} from '../../providers/web3/web3-client/web3-client.service'
 import {ErrorHandlerService, MockErrorHandlerService} from '../../providers/error-handler/error-handler.service'
+import {IpfsClientService, MockIpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.service'
+import {ElectronService, MockElectronService} from '../../providers/electron.service'
 
 describe('ListPapersComponent', () => {
   let component: ListPapersComponent
@@ -10,12 +12,14 @@ describe('ListPapersComponent', () => {
   let fixture: ComponentFixture<ListPapersComponent>
   let mockWeb3Client: MockWeb3ClientService = new MockWeb3ClientService()
   let mockErrorHandler: MockErrorHandlerService = new MockErrorHandlerService()
+  let mockIpfsClientService = new MockIpfsClientService()
+  let mockElectronService = new MockElectronService()
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ListPapersComponent ],
       providers: [
-        // {provide: Web3ClientService, useClass: MockWeb3ClientService},
-        // {provide: ErrorHandlerService, useClass: MockErrorHandlerService},
+        {provide: ElectronService, useValue: mockElectronService},
+        {provide: IpfsClientService, useValue: mockIpfsClientService},
         {provide: Web3ClientService, useValue: mockWeb3Client},
         {provide: ErrorHandlerService, useValue: mockErrorHandler}
       ]
