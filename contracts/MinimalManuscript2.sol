@@ -11,33 +11,33 @@ contract MinimalManuscript2 is Ownable, Manuscript {
     address[] public citations;
     mapping(address => bool) public signedByAuthor;
 
-    function MinimalManuscript2(bytes32 _da) public {
-        require(_da != 0x00);
-        //owner = msg.sender;
-        _dataAddress = _da;
+    function MinimalManuscript2() public {
+        // master contract and all directly created manuscripts have
+        // _dataAddress = 0x1 -> no init possible
+        _dataAddress = 0x1;
     }
 
-    function init(bytes32 _da) public {
-        require(_dataAddress == 0); // ensure not init'd already.
+    function init(bytes32 _da, address _owner) external {
+        require(_dataAddress == 0x00); // ensure not init'd already.
         require(_da != 0x00);
 
         _dataAddress = _da;
-        owner = msg.sender;
+        owner = _owner;
     }
 
-    function isOwner(address account) public constant returns(bool) {
+    function isOwner(address account) external constant returns(bool) {
         return owner == account;
     }
 
-    function authorSigned(address _author) public constant returns(bool) {
+    function authorSigned(address _author) external constant returns(bool) {
         return signedByAuthor[_author];
     }
 
-    function dataAddress() public constant returns(bytes32 _da) {
+    function dataAddress() external constant returns(bytes32 _da) {
         return _dataAddress;
     }
 
-    function addAuthor(address newAuthor) public onlyOwner {
+    function addAuthor(address newAuthor) external onlyOwner {
         for (uint i = 0; i < authors.length; i++) {
             // ToDo: should function throw if author is already registered?
             if (authors[i] == newAuthor) { return; }
@@ -45,7 +45,7 @@ contract MinimalManuscript2 is Ownable, Manuscript {
         authors.push(newAuthor);
     }
 
-    function citePaper(address citee) public onlyOwner {
+    function citePaper(address citee) external onlyOwner {
         // ToDo: make self citation of this paper impossible.
         for (uint i = 0; i < citations.length; i++) {
             //ToDo: should function throw if paper is already registered?
@@ -61,34 +61,34 @@ contract MinimalManuscript2 is Ownable, Manuscript {
         // we waste a bunch of gas. Fewer transactions = better.
     }
 
-    function removeCitation(address citee) public onlyOwner {
+    function removeCitation(address citee) external onlyOwner {
         uint i = findItem(citations, citee);
         removeItemByIndex(citations, i);
     }
 
-    function removeAuthor(address author) public onlyOwner {
+    function removeAuthor(address author) external onlyOwner {
         uint i = findItem(authors, author);
         removeItemByIndex(authors, i);
     }
 
-    function signAuthorship() public {
+    function signAuthorship() external {
         findItem(authors, msg.sender);
         signedByAuthor[msg.sender] = true;
     }
 
-    function citationCount()  public constant returns (uint _citationCount) {
+    function citationCount()  external constant returns (uint _citationCount) {
         return citations.length;
     }
 
-    function authorCount() public constant returns (uint _authorCount) {
+    function authorCount() external constant returns (uint _authorCount) {
         return authors.length;
     }
 
-    function author(uint authorIdx) public constant returns (address authorList) {
+    function author(uint authorIdx) external constant returns (address authorList) {
         return authors[authorIdx];
     }
 
-    function citation(uint paperIdx) public constant returns (address citationList) {
+    function citation(uint paperIdx) external constant returns (address citationList) {
         return citations[paperIdx];
     }
 

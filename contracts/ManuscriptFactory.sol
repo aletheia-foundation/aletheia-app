@@ -1,14 +1,13 @@
-pragma solidity 0.4.19;
+pragma solidity ^0.4.19;
 
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./MinimalManuscript2.sol";
 import "./CloneFactory.sol";
 
 
-contract ManuscriptFactory is CloneFactory {
+contract ManuscriptFactory is CloneFactory, Ownable {
 
     address public libraryAddress;
-
-    mapping (bytes32 => address) public manuscriptRegistry;
 
     event ManuscriptCreated(address newManuscriptAddress, address libraryAddress);
 
@@ -16,15 +15,14 @@ contract ManuscriptFactory is CloneFactory {
         libraryAddress = _libraryAddress;
     }
 
-    function onlyCreate() public {
+    function onlyCreate() public onlyOwner {
+        // simple cloning test
         createClone(libraryAddress);
     }
 
-    function createManuscript(bytes32 _da) public {
+    function createManuscript(bytes32 _dataAddress) public {
         address clone = createClone(libraryAddress);
-        MinimalManuscript2(clone).init(_da);
-        MinimalManuscript2(clone).transferOwnership(msg.sender);
-        ManuscriptCreated(clone, libraryAddress);
-        manuscriptRegistry[_da] = clone;
+        MinimalManuscript2(clone).init(_dataAddress, msg.sender);
+        emit ManuscriptCreated(clone, libraryAddress);
     }
 }

@@ -5,5 +5,4 @@ var MinimalManuscript2 = artifacts.require('../contracts/MinimalManuscript2.sol'
 module.exports = function (deployer) {
   deployer.deploy(Reputation)
   deployer.deploy(CommunityVotes,10)
-  deployer.deploy(MinimalManuscript2,0x01)
 }

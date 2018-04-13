@@ -6,5 +6,4 @@ var ManuscriptFactory = artifacts.require('../contracts/ManuscriptFactory.sol')
 
 module.exports = function (deployer) {
    deployer.deploy(Aletheia, Reputation.address, CommunityVotes.address)
-   deployer.deploy(ManuscriptFactory, MinimalManuscript2.address)
 };

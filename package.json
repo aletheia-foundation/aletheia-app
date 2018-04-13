@@ -44,6 +44,6 @@
     "truffle-contract": "3.0.0",
     "truffle-expect": "0.0.3",
     "web3": "0.18.4",
-    "zeppelin-solidity": "^1.5.0"
+    "zeppelin-solidity": "^1.8.0"
   }
 }
