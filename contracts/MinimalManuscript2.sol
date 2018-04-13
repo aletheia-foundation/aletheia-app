@@ -9,12 +9,15 @@ contract MinimalManuscript2 is Ownable, Manuscript {
     bytes32 public _dataAddress;
     address[] public authors;
     address[] public citations;
+    string public _title;
+
     mapping(address => bool) public signedByAuthor;
 
     function MinimalManuscript2() public {
         // master contract and all directly created manuscripts have
         // _dataAddress = 0x1 -> no init possible
         _dataAddress = 0x1;
+        _title = "master"; 
     }
 
     function init(bytes32 _da, address _owner) external {
@@ -35,6 +38,10 @@ contract MinimalManuscript2 is Ownable, Manuscript {
 
     function dataAddress() external constant returns(bytes32 _da) {
         return _dataAddress;
+    }
+
+    function title() external constant returns(string _t) {
+        return _title;
     }
 
     function addAuthor(address newAuthor) external onlyOwner {

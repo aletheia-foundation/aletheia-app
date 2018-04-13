@@ -1,4 +1,4 @@
-const EncodingHelper = require('../app/common/encoding-helper')
+const EncodingHelper = require('../test/helpers/test-encoding-helper')
 const expectRevert = require('../test/helpers/expectRevert')
 
 
@@ -78,7 +78,7 @@ contract('ManuscriptFactory', function (accounts) {
   })
 
   it('check that directly created manuscripts are dead', async function() {
-    
+
     manuscript[2] = await MinimalManuscript2.new({from: accounts[1]});
     assert.equal(await manuscript[2].owner(), accounts[1], 'owner not correct');
     await expectRevert(manuscript[2].init(bytesOfAddress[2], accounts[3]));
