@@ -5,7 +5,7 @@ import "./Manuscript.sol";
 
 
 /** @title Minimal manuscript. */
-contract MinimalManuscript is Ownable, Manuscript {
+contract MinimalManuscript2 is Ownable, Manuscript {
     bytes32 public _dataAddress;
     address[] public authors;
     address[] public citations;
@@ -13,12 +13,19 @@ contract MinimalManuscript is Ownable, Manuscript {
 
     mapping(address => bool) public signedByAuthor;
 
-    function MinimalManuscript(bytes32 _da, string title) public {
+    function MinimalManuscript2() public {
+        // master contract and all directly created manuscripts have
+        // _dataAddress = 0x1 -> no init possible
+        _dataAddress = 0x1;
+        _title = "master"; 
+    }
+
+    function init(bytes32 _da, address _owner) external {
+        require(_dataAddress == 0x00); // ensure not init'd already.
         require(_da != 0x00);
-        require(bytes(title).length > 0);
-        //owner = msg.sender;
+
         _dataAddress = _da;
-        _title = title;
+        owner = _owner;
     }
 
     function isOwner(address account) external constant returns(bool) {

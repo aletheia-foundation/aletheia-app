@@ -3,32 +3,16 @@ const expectRevert = require('../test/helpers/expectRevert')
 console.log('*********', Object.keys(contract))
 
 var MinimalManuscript = artifacts.require('../contracts/MinimalManuscript.sol')
-var ManuscriptFactory = artifacts.require('../contracts/ManuscriptFactory.sol')
 
 contract('MinimalManuscript', function (accounts) {
-  var global;
-  var factory;
+
   // manuscript variables
   var manuscript = [];
   // manuscript address variables
   var addressManuscript = [];
   var bytesOfAddress = [];
 
-  const initFactory = async function (contract) {
-    var _factory = await contract.new(global.address);
-    factory = {
-      createManuscript: function (value1, value2, option) {
-        return _factory.createManuscript(value1, value2, option)
-          .then(tx => {
-            return MinimalManuscript.at(tx.logs[0].args.newManuscriptAddress);
-          })
-      }
-    }
-  };
-
   before(async function() {
-    global = await MinimalManuscript.new();
-    await initFactory(ManuscriptFactory);
     // set data addresses of manuscripts
     // Todo: set different data addresses
     for (var cnt = 0; cnt < 4; cnt++) {
@@ -38,7 +22,7 @@ contract('MinimalManuscript', function (accounts) {
     // create 4 minimal manuscripts manuscript[...] with adresses addressManuscript[...]
     // each manuscript has a different owner accounts[...]
     for (var cnt = 0; cnt < 4; cnt++) {
-      manuscript[cnt] = await factory.createManuscript(bytesOfAddress[cnt],'title', {from: accounts[cnt]});
+      manuscript[cnt] = await MinimalManuscript.new(bytesOfAddress[cnt], 'title', {from: accounts[cnt]});
       addressManuscript[cnt] = await manuscript[cnt].address;
     }
   })
@@ -52,11 +36,11 @@ contract('MinimalManuscript', function (accounts) {
   })
 
   it('checks for revert transaction when data address is empty', async function(){
-    await expectRevert(factory.createManuscript(0x00, 'title'));
+    await expectRevert(MinimalManuscript.new(0x00, 'title'));
   })
 
   it('checks for revert transaction when title is empty', async function(){
-    await expectRevert(factory.createManuscript(0x1234, ''));
+    await expectRevert(MinimalManuscript.new(0x1234, ''));
   })
 
   it('adds authors to manuscripts', async function() {

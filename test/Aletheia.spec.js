@@ -39,11 +39,12 @@ contract('Aletheia', function(accounts) {
   describe('create new manuscripts', function() {
     before(async function() {
       // create new manuscript 1
-      let tx = await instance.newManuscript(bytesOfAddress, 'the title', [accounts[0]], {from: accounts[0]});
-      console.log('      gas cost: ', tx.receipt.gasUsed)
+      await instance.newManuscript(bytesOfAddress, 'the title', [accounts[0]], {from: accounts[0]});
+
       // get address of new contact by IPFS link
       addressManuscript1 = await instanceManscptInd.manuscriptAddress(bytesOfAddress);
       manuscript1 = await MinimalManuscript.at(addressManuscript1);
+
     })
 
     it('should transfer ownership of new manuscript to the creator', async function() {
