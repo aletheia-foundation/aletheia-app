@@ -4,7 +4,7 @@ const expectRevert = require('../test/helpers/expectRevert')
 
 console.log('*********', Object.keys(contract))
 
-var MinimalManuscript2 = artifacts.require('../contracts/MinimalManuscript2.sol')
+var MinimalManuscript = artifacts.require('../contracts/MinimalManuscript.sol')
 var ManuscriptFactory = artifacts.require('../contracts/ManuscriptFactory.sol')
 
 contract('ManuscriptFactory', function (accounts) {
@@ -32,17 +32,17 @@ contract('ManuscriptFactory', function (accounts) {
       cloneCost: function() {
         return _factory.onlyCreate().then(tx => tx.receipt.gasUsed);
       },
-      createManuscript: function (value, option) {
-        return _factory.createManuscript(value, option)
+      createManuscript: function (value1, value2, option) {
+        return _factory.createManuscript(value1, value2, option)
           .then(tx => {
-            return MinimalManuscript2.at(tx.logs[0].args.newManuscriptAddress);
+            return MinimalManuscript.at(tx.logs[0].args.newManuscriptAddress);
           })
       }
     }
   };
 
   before(async function () {
-    global = await MinimalManuscript2.new();
+    global = await MinimalManuscript.new();
     await initFactory(ManuscriptFactory);
   })
 
@@ -55,31 +55,31 @@ contract('ManuscriptFactory', function (accounts) {
 
   it('create new cheap manuscript ', async function() {
 
-    manuscript[0] = await factory.createManuscript(bytesOfAddress[0]);
+    manuscript[0] = await factory.createManuscript(bytesOfAddress[0], 'title');
     assert.equal(await manuscript[0]._dataAddress(), bytesOfAddress[0], "manuscript address is not correct" );
     assert.equal(await global._dataAddress(), 0x1, "address of master contract is not 0x1")
   })
 
   it('check ownership of new manuscripts', async function() {
-
-    manuscript[1] = await factory.createManuscript(bytesOfAddress[0], {from: accounts[1]});
+    
+    manuscript[1] = await factory.createManuscript(bytesOfAddress[0], 'title', {from: accounts[1]});
     assert.equal(await manuscript[1].owner(), accounts[1], "owner is not correct" );
   })
 
   it('check for false input to ManuscriptFactory', async function() {
 
-    await expectRevert(factory.createManuscript(0))
+    await expectRevert(factory.createManuscript(0, 'title'))
   })
 
   it('check revert of init master contract & other existing contract', async function() {
 
-    await expectRevert(global.init(2, accounts[0]))
-    await expectRevert(manuscript[0].init(2, accounts[2]))
+    await expectRevert(global.init(2, 'some title'))
+    await expectRevert(manuscript[0].init(2, 'other title'))
   })
 
   it('check that directly created manuscripts are dead', async function() {
 
-    manuscript[2] = await MinimalManuscript2.new({from: accounts[1]});
+    manuscript[2] = await MinimalManuscript.new({from: accounts[1]});
     assert.equal(await manuscript[2].owner(), accounts[1], 'owner not correct');
     await expectRevert(manuscript[2].init(bytesOfAddress[2], accounts[3]));
   })

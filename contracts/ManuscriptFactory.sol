@@ -1,7 +1,7 @@
 pragma solidity ^0.4.19;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
-import "./MinimalManuscript2.sol";
+import "./MinimalManuscript.sol";
 import "./CloneFactory.sol";
 
 
@@ -20,9 +20,11 @@ contract ManuscriptFactory is CloneFactory, Ownable {
         createClone(libraryAddress);
     }
 
-    function createManuscript(bytes32 _dataAddress) public {
+    function createManuscript(bytes32 _dataAddress, string title) public returns(address) {
         address clone = createClone(libraryAddress);
-        MinimalManuscript2(clone).init(_dataAddress, msg.sender);
+        MinimalManuscript(clone).init(_dataAddress, title);
         emit ManuscriptCreated(clone, libraryAddress);
+        MinimalManuscript(clone).transferOwnership(msg.sender);
+        return clone;
     }
 }
