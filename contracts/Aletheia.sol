@@ -6,16 +6,24 @@ import "./ManuscriptIndex.sol";
 import "./CommunityVotes.sol";
 import "./Manuscript.sol";
 import "./MinimalManuscript.sol";
+import "./ManuscriptFactory.sol";
 
 
-contract Aletheia is Ownable {
+contract Aletheia is Ownable, ManuscriptFactory {
 
     Reputation public reputation;
     ManuscriptIndex public manuscriptIndex;
     CommunityVotes public communityVotes;
     mapping(address => uint256) public balanceOf;
 
-    function Aletheia(address reputationAddress, address manuscriptIndexAddress, address votesAddress) public {
+    function Aletheia(
+        address reputationAddress,
+        address manuscriptIndexAddress,
+        address votesAddress,
+        address libraryManuscriptMaster)
+        ManuscriptFactory(libraryManuscriptMaster)
+        public
+    {
         reputation = Reputation(reputationAddress);
         manuscriptIndex = ManuscriptIndex(manuscriptIndexAddress);
         communityVotes = CommunityVotes(votesAddress);
@@ -31,13 +39,24 @@ contract Aletheia is Ownable {
     {
         require(manuscriptIndex.manuscriptAddress(_hash) == 0x00);
 
-        MinimalManuscript m = new MinimalManuscript(_hash, title);
+        address mAddress = createClone(libraryAddress);
+        MinimalManuscript m = MinimalManuscript(mAddress);
+        m.init(_hash, title);
+
         for (uint i = 0; i < authors.length; i++) {
             m.addAuthor(authors[i]);
         }
         m.transferOwnership(msg.sender);
+        emit ManuscriptCreated(mAddress, libraryAddress);
         communityVotes.createVoting(_hash);
-        manuscriptIndex.add(_hash, m);
+        manuscriptIndex.add(_hash, mAddress);
+
+        // ToDo: If authors are already set with newManuscript(), and
+        // voting is started automatically, then also citations should be set.
+        // Moreover, the manuscript should become immutable in the sense that
+        // hash, title, author & citations are fixed and cannot be changed anymore
+        // => corresponding functions for addind authors and citations can be
+        // removed.
 
         // ToDo: Update of citation count should be performed
         // after review of paper
@@ -45,8 +64,8 @@ contract Aletheia is Ownable {
         // several times?
         /*for (uint paperIdx = 0; paperIdx < paper.citationCount(); paperIdx++) {
             balanceOf[paper.citation(paperIdx)] += 10;
-        }*/
-        return m;
+        } */
+        return mAddress;
     }
 
     function communityVote(bytes32 _hash, bool _vote) public {

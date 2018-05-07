@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "start": "webpack-dev-server --target web --content-base . --port 4200 --inline",
     "start:web": "npm run truffle:migrate && npm run start",
-    "truffle:migrate": "./node_modules/.bin/truffle migrate",
+    "truffle:migrate": "truffle migrate",
     "build:electron:main": "tsc main.ts --outDir dist && copyfiles package.json dist && cd dist && npm install --prod && cd ..",
     "build": "webpack --display-error-details && npm run build:electron:main",
     "build:prod": "cross-env NODE_ENV=production npm run build",
@@ -25,10 +25,13 @@
     "electron:mac": "npm run build:prod && node package.js --asar --platform=darwin --arch=x64",
     "test": "karma start ./karma.conf.js",
     "test:ci": "karma start ./karma.conf.js --singleRun true --browsers 'ChromeHeadless'",
-    "test-truffle": "./node_modules/.bin/truffle test",
+    "test-truffle": "truffle test",
     "test-truffle:ci": "./scripts/test-truffle-ci.sh"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
   "keywords": [
     "Aletheia",
     "Decentralised",
@@ -124,9 +127,16 @@
     "request-promise-native": "1.0.5",
     "rxjs": "5.5.6",
     "truffle-contract": "3.0.0",
-    "zeppelin-solidity": "^1.5.0",
     "truffle-expect": "0.0.3",
     "web3": "0.18.4",
+    "zeppelin-solidity": "1.8.0",
     "zone.js": "0.8.20"
+  },
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "directories": {
+    "test": "test"
   }
 }

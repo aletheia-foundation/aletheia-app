@@ -39,12 +39,11 @@ contract('Aletheia', function(accounts) {
   describe('create new manuscripts', function() {
     before(async function() {
       // create new manuscript 1
-      await instance.newManuscript(bytesOfAddress, 'the title', [accounts[0]], {from: accounts[0]});
-
+      let tx = await instance.newManuscript(bytesOfAddress, 'the title', [accounts[0]], {from: accounts[0]});
+      console.log('      gas cost: ', tx.receipt.gasUsed)
       // get address of new contact by IPFS link
       addressManuscript1 = await instanceManscptInd.manuscriptAddress(bytesOfAddress);
       manuscript1 = await MinimalManuscript.at(addressManuscript1);
-
     })
 
     it('should transfer ownership of new manuscript to the creator', async function() {
@@ -80,7 +79,7 @@ contract('Aletheia', function(accounts) {
           if (cnt < nForVote) {var vote = true} else {var vote = false}
           // check that voting is still open
 
-          if (await instanceVotes.votingActive(bytesOfAddress) > 1 ) {
+          if (await instanceVotes.votingActive(bytesOfAddress) > 0 ) {
             // vote
             await instance.communityVote(bytesOfAddress, vote, {from: accounts[cnt+2]});
           }

@@ -1,52 +1,35 @@
 pragma solidity ^0.4.18;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
-import "./Manuscript.sol";
+import "./MinimalManuscript.sol";
 
 
 /** @title Minimal manuscript. */
-contract MinimalManuscript is Ownable, Manuscript {
-    bytes32 public _dataAddress;
+contract CheapManuscript {
+    /* bytes32 public _dataAddress;
     address[] public authors;
     address[] public citations;
-    string public title;
-
     mapping(address => bool) public signedByAuthor;
 
-    function MinimalManuscript() public {
-        // master contract and all directly created manuscripts have
-        // _dataAddress = 0x1 -> no init possible
-        _dataAddress = 0x1;
-        title = "master";
-    }
-
-    function init(bytes32 _da, string _title) external {
-        require(_dataAddress == 0x00); // ensure not init'd already.
+    function MinimalManuscript(bytes32 _da) public {
         require(_da != 0x00);
-        require(bytes(_title).length > 0);
-
+        //owner = msg.sender;
         _dataAddress = _da;
-        owner = msg.sender;
-        title = _title;
-    }
+    } */
 
-    function isOwner(address account) external constant returns(bool) {
+    /* function isOwner(address account) public constant returns(bool) {
         return owner == account;
     }
 
-    function authorSigned(address _author) external constant returns(bool) {
+    function authorSigned(address _author) public constant returns(bool) {
         return signedByAuthor[_author];
     }
 
-    function dataAddress() external constant returns(bytes32 _da) {
+    function dataAddress() public constant returns(bytes32 _da) {
         return _dataAddress;
     }
 
-    function title() external constant returns(string _t) {
-        return title;
-    }
-
-    function addAuthor(address newAuthor) external onlyOwner {
+    function addAuthor(address newAuthor) public onlyOwner {
         for (uint i = 0; i < authors.length; i++) {
             // ToDo: should function throw if author is already registered?
             if (authors[i] == newAuthor) { return; }
@@ -54,7 +37,7 @@ contract MinimalManuscript is Ownable, Manuscript {
         authors.push(newAuthor);
     }
 
-    function citePaper(address citee) external onlyOwner {
+    function citePaper(address citee) public onlyOwner {
         // ToDo: make self citation of this paper impossible.
         for (uint i = 0; i < citations.length; i++) {
             //ToDo: should function throw if paper is already registered?
@@ -70,34 +53,34 @@ contract MinimalManuscript is Ownable, Manuscript {
         // we waste a bunch of gas. Fewer transactions = better.
     }
 
-    function removeCitation(address citee) external onlyOwner {
+    function removeCitation(address citee) public onlyOwner {
         uint i = findItem(citations, citee);
         removeItemByIndex(citations, i);
     }
 
-    function removeAuthor(address author) external onlyOwner {
+    function removeAuthor(address author) public onlyOwner {
         uint i = findItem(authors, author);
         removeItemByIndex(authors, i);
     }
 
-    function signAuthorship() external {
+    function signAuthorship() public {
         findItem(authors, msg.sender);
         signedByAuthor[msg.sender] = true;
     }
 
-    function citationCount()  external constant returns (uint _citationCount) {
+    function citationCount()  public constant returns (uint _citationCount) {
         return citations.length;
     }
 
-    function authorCount() external constant returns (uint _authorCount) {
+    function authorCount() public constant returns (uint _authorCount) {
         return authors.length;
     }
 
-    function author(uint authorIdx) external constant returns (address authorList) {
+    function author(uint authorIdx) public constant returns (address authorList) {
         return authors[authorIdx];
     }
 
-    function citation(uint paperIdx) external constant returns (address citationList) {
+    function citation(uint paperIdx) public constant returns (address citationList) {
         return citations[paperIdx];
     }
 
@@ -119,6 +102,6 @@ contract MinimalManuscript is Ownable, Manuscript {
             if (someList[i] == item) { return i;}
         }
         revert();
-    }
+    } */
 
 }
