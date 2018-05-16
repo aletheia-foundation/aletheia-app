@@ -24,14 +24,14 @@ contract Accessible is Ownable {
 
     function grantAccess(address newAccount) public onlyOwnerOrAllowed {
         require(newAccount != address(0) && !allowedAccounts[newAccount]);
-        AccessGranted(newAccount);
+        emit AccessGranted(newAccount);
         allowedAccounts[newAccount] = true;
         numberOfAccounts += 1;
     }
 
     function removeAccess(address removeAccount) public onlyOwnerOrAllowed {
         require(allowedAccounts[removeAccount]);
-        AccessRemoved(removeAccount);
+        emit AccessRemoved(removeAccount);
         allowedAccounts[removeAccount] = false;
         numberOfAccounts -= 1;
     }

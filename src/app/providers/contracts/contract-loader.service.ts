@@ -44,7 +44,7 @@ export class ContractLoaderService {
       const contractInstance = contract(ContractJson)
       const networkInfo = (<any> ContractJson).networks[networkId]
       if (!networkInfo) {
-        const errorMessage = `Unable to find aletheia contract on blockchain with networkId: ${networkId}
+        const errorMessage = `Unable to find ${ContractJson.contractName} contract on blockchain with networkId: ${networkId}
         It's probably because 'truffle migrate' has not been run since restarting the geth node.
         Otherwise the build output might be out of date and you should pull the latest version
         `

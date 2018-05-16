@@ -30,7 +30,10 @@
     "test:truffle": "./node_modules/.bin/truffle test",
     "test:truffle:ci": "./scripts/test-truffle-ci.sh"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electron/electron-quick-start.git"
+  },
   "keywords": [
     "Aletheia",
     "Decentralised",
@@ -89,7 +92,7 @@
     "source-map-loader": "0.2.3",
     "style-loader": "0.19.1",
     "stylus-loader": "3.0.1",
-    "truffle": "^4.0.6",
+    "truffle": "4.1.8",
     "truffle-config": "1.0.0",
     "truffle-contract": "3.0.0",
     "truffle-expect": "0.0.3",
@@ -128,7 +131,14 @@
     "truffle-contract": "3.0.0",
     "truffle-expect": "0.0.3",
     "web3": "0.18.4",
-    "zeppelin-solidity": "^1.5.0",
+    "zeppelin-solidity": "1.8.0",
     "zone.js": "0.8.20"
+  },
+  "bugs": {
+    "url": "https://github.com/electron/electron-quick-start/issues"
+  },
+  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "directories": {
+    "test": "test"
   }
 }
