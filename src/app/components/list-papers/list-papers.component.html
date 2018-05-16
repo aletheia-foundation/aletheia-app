@@ -1,8 +1,19 @@
 <h1>All manuscripts</h1>
 <ul>
   <li *ngFor=" let manuscript of manuscripts" class="manuscript-item">
+    <span *ngIf="manuscript.author != (this.web3Monitor.networkStatus | async).address">
+      {{(this.web3Monitor.networkStatus | async)}}
+    </span>
     <b>{{manuscript.title}}</b>
-    <i>unreviewed</i>
+    <i>
+      {{manuscript.votingStatus}}
+      <span *ngIf="manuscript.blocksRemaining > 0">
+        ({{manuscript.blocksRemaining}} blocks remaining)
+      </span>
+    </i>
+
+    <a href="javascript:;" (click)="voteOnManuscript(manuscript, true)">Vote to Accept</a>
+    <a href="javascript:;" (click)="voteOnManuscript(manuscript, false)">Vote to Reject</a>
     <a (click)="downloadManuscript(manuscript.dataAddress, manuscript.title)" href="javascript:;">Download document</a>
   </li>
 </ul>

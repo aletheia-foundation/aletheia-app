@@ -145,8 +145,6 @@ module.exports = {
     "assert": "require('assert')",
     "dns": "require('dns')",
     "net": "require('net')",
-    "os": "require('os')",
-    "path": "require('path')",
     "querystring": "require('querystring')",
     "readline": "require('readline')",
     "repl": "require('repl')",
@@ -328,6 +326,8 @@ module.exports = {
   "plugins": getPlugins(),
   "node": {
     fs: "empty",
+    path: true,
+    os: true,
     global: true,
     crypto: "empty",
     tls: "empty",

@@ -1,4 +1,4 @@
-{
+module.exports = {
   "ipfsRepoPath": "./ipfs-repo",
   "ipfs": {
     "gatewayUrl": "/ip4/127.0.0.1/tcp/5001",
@@ -6,6 +6,7 @@
   },
   "faucetUrl": "https://theserverbythe.stream",
   "web3": {
+    "accountNumber": process.env.ACCOUNT_NUMBER || 0,
     "defaultGas": 4712388,
     "url": "http://localhost:8545",
     "pollIntervalMs": 1000,

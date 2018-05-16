@@ -1,7 +1,10 @@
-import * as path from 'path'
-import * as os from 'os'
-import * as fs from 'fs'
+
+const path = window.require ? window.require('path') : null
+const os = window.require ? window.require('os') : null
+const fs = window.require ? window.require('fs') : null
+
 export class FileHelper {
+
 
   public static toAbsoluteDownloadFilePath(title: string, extension: string) {
     return path.join(os.homedir(), 'Downloads', title.replace(/\W/, '-') + extension)

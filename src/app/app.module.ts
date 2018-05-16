@@ -39,6 +39,7 @@ import {web3NetworkIdFactory} from './providers/web3/web3-network-id/web3-networ
 import {loadWeb3Account, Web3AccountService} from './providers/web3/web3-account/web3-account.service'
 import {HttpClientModule} from '@angular/common/http';
 import { SubmitPaperModalComponent } from './components/submit-paper/submit-paper-modal/submit-paper-modal.component'
+import {RouterModule} from '@angular/router'
 
 export function loadWeb3Client(web3Client: Web3ClientService) {
   return () => {

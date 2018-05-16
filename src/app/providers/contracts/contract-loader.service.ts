@@ -4,6 +4,7 @@ import {Config} from '../../../../config/Config'
 import * as AletheiaJson from '../../../../build/contracts/Aletheia.json'
 import * as ManuscriptIndexJson from '../../../../build/contracts/ManuscriptIndex.json'
 import * as MinimalManuscriptJson from '../../../../build/contracts/MinimalManuscript.json'
+import * as CommunityVotesJson from '../../../../build/contracts/CommunityVotes.json'
 import {Web3AccountService} from '../web3/web3-account/web3-account.service'
 import {Web3Provider} from '../web3/web3-provider/web3-provider.token'
 import {Web3NetworkIdPromise} from '../web3/web3-network-id/web3-network-id.token'
@@ -28,6 +29,10 @@ export class ContractLoaderService {
 
   public loadManuscriptIndex(): Promise<any> {
     return this.loadContract(ManuscriptIndexJson)
+  }
+
+  public loadCommunityVotes(): Promise<any> {
+    return this.loadContract(CommunityVotesJson)
   }
 
   public minimalManuscriptAt(manuscriptAddress): any {

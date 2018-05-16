@@ -11,7 +11,8 @@ export interface IpfsConfig {
 }
 
 export interface Web3Config {
-  defaultGas: 4712388
+  accountNumber: number
+  defaultGas: number
   url: string
   pollIntervalMs: number
   aletheiaContractAddress: string

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ViewChild} from '@angular/core'
 import {ElectronService} from '../../../providers/electron.service'
 import {ErrorHandlerService} from '../../../providers/error-handler/error-handler.service'
 import {Web3ClientService} from '../../../providers/web3/web3-client/web3-client.service'
@@ -14,9 +14,10 @@ import {NotificationsService} from 'angular2-notifications'
 export class SubmitPaperModalComponent implements OnInit {
   fileName = ''
   filePath = ''
-  title = ''
+  title = '';
   isAuthor = false
   uploadingPaper = false
+  @ViewChild('paperForm') paperForm
   constructor(
     private web3Client: Web3ClientService,
     private activeModal: NgbActiveModal,
@@ -57,6 +58,10 @@ export class SubmitPaperModalComponent implements OnInit {
   }
 
   onSubmitPaper() {
+    if (this.paperForm.invalid) {
+      return
+    }
+    //todo: It is quite common that this will fail because the paper has already been submitted, that case should be handled separately
     this.ipfsClient.addFileFromPath(this.fileName, this.filePath)
     .then((ipfsFileRef) => {
       if (typeof ipfsFileRef !== 'object' || !ipfsFileRef[0] || !ipfsFileRef[0].hash) {
@@ -66,6 +71,7 @@ export class SubmitPaperModalComponent implements OnInit {
       this.uploadingPaper = true
       return this.web3Client.submitManuscript(ipfsFileRef[0].hash, this.title, this.isAuthor)
     }).then((minimalManuscriptContract) => {
+
       if (!minimalManuscriptContract.address) {
         console.log('minimalManuscriptContract: ', minimalManuscriptContract)
         throw new Error('The manuscript contract returned had no address')

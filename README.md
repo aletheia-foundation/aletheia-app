@@ -123,8 +123,7 @@ npm run lint
 Tests run in a browser with karma.
 
 ```bash
-  # while `npm run ethereum-local` and `npm run ipfs-local` are running in two other tabs:
-  npm run test
+  npm run test:js
 ```
 
 Smart contract tests with truffle
@@ -133,6 +132,17 @@ Smart contract tests with truffle
   npm run ethereum-local
 
   # in tab 2
-  npm run test-truffle
+  npm run test:truffle
 ```
 
+# Testing notes
+force mine a block by calling this from debugger window:
+```javascript
+  web3.currentProvider.sendAsync({
+        jsonrpc: "2.0",
+        method: "evm_mine",
+        id: 12345
+    }, function(err, result) {
+      // this is your callback
+    });
+```

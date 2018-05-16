@@ -5,6 +5,8 @@ import {MockWeb3ClientService, Web3ClientService} from '../../providers/web3/web
 import {ErrorHandlerService, MockErrorHandlerService} from '../../providers/error-handler/error-handler.service'
 import {IpfsClientService, MockIpfsClientService} from '../../providers/ipfs/ipfs-client/ipfs-client.service'
 import {ElectronService, MockElectronService} from '../../providers/electron.service'
+import {MockWeb3MonitorService, Web3MonitorService} from '../../providers/web3/web3-monitor/web3-monitor.service'
+import {NotificationsService} from 'angular2-notifications'
 
 describe('ListPapersComponent', () => {
   let component: ListPapersComponent
@@ -21,7 +23,9 @@ describe('ListPapersComponent', () => {
         {provide: ElectronService, useValue: mockElectronService},
         {provide: IpfsClientService, useValue: mockIpfsClientService},
         {provide: Web3ClientService, useValue: mockWeb3Client},
-        {provide: ErrorHandlerService, useValue: mockErrorHandler}
+        {provide: ErrorHandlerService, useValue: mockErrorHandler},
+        {provide: Web3MonitorService, useValue: new MockWeb3MonitorService()},
+        {provide: NotificationsService, useValue: new NotificationsService({})}
       ]
     })
     .compileComponents()

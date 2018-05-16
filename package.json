@@ -10,8 +10,8 @@
     "ethereum-testnet:attach": "./scripts/attach-geth-testnet.sh",
     "ng": "ng",
     "lint": "ng lint",
-    "start": "webpack-dev-server --target web --content-base . --port 4200 --inline",
-    "start:web": "npm run truffle:migrate && npm run start",
+    "start": "npm run truffle:migrate && npm run electron:serve",
+    "start:web": "npm run truffle:migrate && webpack-dev-server --target web --content-base . --port 4200 --inline",
     "truffle:migrate": "./node_modules/.bin/truffle migrate",
     "build:electron:main": "tsc main.ts --outDir dist && copyfiles package.json dist && cd dist && npm install --prod && cd ..",
     "build": "webpack --display-error-details && npm run build:electron:main",
@@ -23,10 +23,12 @@
     "electron:linux": "npm run build:prod && node package.js --asar --platform=linux --arch=x64",
     "electron:windows": "npm run build:prod && node package.js --asar --platform=win32 --arch=ia32",
     "electron:mac": "npm run build:prod && node package.js --asar --platform=darwin --arch=x64",
-    "test": "karma start ./karma.conf.js",
-    "test:ci": "karma start ./karma.conf.js --singleRun true --browsers 'ChromeHeadless'",
-    "test-truffle": "./node_modules/.bin/truffle test",
-    "test-truffle:ci": "./scripts/test-truffle-ci.sh"
+    "test": "karma start ./karma.conf.js --singleRun true && npm run test:truffle",
+    "test:ci": "npm run test:js:ci && npm run test:truffle:ci",
+    "test:js": "karma start ./karma.conf.js",
+    "test:js:ci": "karma start ./karma.conf.js --singleRun true --browsers 'ChromeHeadless'",
+    "test:truffle": "./node_modules/.bin/truffle test",
+    "test:truffle:ci": "./scripts/test-truffle-ci.sh"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -112,7 +114,7 @@
     "@angular/router": "5.2.0",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.8",
     "@types/ipfs": "git+https://github.com/zabirauf/ipfs-types.git",
-    "angular2-notifications": "^0.9.7",
+    "angular2-notifications": "^1.0.2",
     "bootstrap": "4.0.0-beta.3",
     "core-js": "2.5.3",
     "enhanced-resolve": "^4.0.0-beta.4",
@@ -124,9 +126,9 @@
     "request-promise-native": "1.0.5",
     "rxjs": "5.5.6",
     "truffle-contract": "3.0.0",
-    "zeppelin-solidity": "^1.5.0",
     "truffle-expect": "0.0.3",
     "web3": "0.18.4",
+    "zeppelin-solidity": "^1.5.0",
     "zone.js": "0.8.20"
   }
 }

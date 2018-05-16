@@ -44,7 +44,7 @@ contract('CommunityVotes', function(accounts) {
     // check if votings were started
     for(var cnt=0; cnt<2; cnt++) {
       var voting1 = await instance.getVoting(bytesOfAddress[cnt]);
-      assert(voting1[0].toNumber() > 0, "voting start block not set");
+      assert(voting1[0].toNumber() > 1, "voting closed too soon");
 
       // check that list of voters is empty & no votes have been counted
       assert.equal(voting1[1].toNumber(), 0, "voting count not zero");

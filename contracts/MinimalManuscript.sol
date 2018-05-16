@@ -7,7 +7,7 @@ import "./Manuscript.sol";
 /** @title Minimal manuscript. */
 contract MinimalManuscript is Ownable, Manuscript {
     bytes32 public _dataAddress;
-    address[] public authors;
+    address[] public _authors;
     address[] public citations;
     string public _title;
 
@@ -37,12 +37,16 @@ contract MinimalManuscript is Ownable, Manuscript {
         return _title;
     }
 
+    function authors() public constant returns(address[] _authos) {
+        return _authors;
+    }
+
     function addAuthor(address newAuthor) public onlyOwner {
-        for (uint i = 0; i < authors.length; i++) {
+        for (uint i = 0; i < _authors.length; i++) {
             // ToDo: should function throw if author is already registered?
-            if (authors[i] == newAuthor) { return; }
+            if (_authors[i] == newAuthor) { return; }
         }
-        authors.push(newAuthor);
+        _authors.push(newAuthor);
     }
 
     function citePaper(address citee) public onlyOwner {
@@ -67,12 +71,12 @@ contract MinimalManuscript is Ownable, Manuscript {
     }
 
     function removeAuthor(address author) public onlyOwner {
-        uint i = findItem(authors, author);
-        removeItemByIndex(authors, i);
+        uint i = findItem(_authors, author);
+        removeItemByIndex(_authors, i);
     }
 
     function signAuthorship() public {
-        findItem(authors, msg.sender);
+        findItem(_authors, msg.sender);
         signedByAuthor[msg.sender] = true;
     }
 
@@ -81,11 +85,11 @@ contract MinimalManuscript is Ownable, Manuscript {
     }
 
     function authorCount() public constant returns (uint _authorCount) {
-        return authors.length;
+        return _authors.length;
     }
 
     function author(uint authorIdx) public constant returns (address authorList) {
-        return authors[authorIdx];
+        return _authors[authorIdx];
     }
 
     function citation(uint paperIdx) public constant returns (address citationList) {

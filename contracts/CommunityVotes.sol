@@ -8,6 +8,7 @@ contract CommunityVotes is Accessible {
     // voting votingDuration is set during contract creation
     // should votingDuration be changeable later on?
     uint public votingDuration;
+    event error(uint indexed StatusCode);
 
     struct voter {
         bool voted;
@@ -31,7 +32,7 @@ contract CommunityVotes is Accessible {
         votingList[ipfsHash].startingBlock = block.number;
     }
 
-    function votingActive(bytes32 ipfsHash) public constant returns(uint) {
+    function votingActive(bytes32 ipfsHash) public constant returns(uint blocksRemaining) {
         // check that voting has been started
         require(votingList[ipfsHash].startingBlock != 0);
         // return remaining blocks until voting is closed
@@ -61,7 +62,7 @@ contract CommunityVotes is Accessible {
     }
 
 
-    function getVoting(bytes32 ipfsHash) public constant returns(uint startingBlock, uint numVotesToAccept, address[] voterList){
+    function getVoting(bytes32 ipfsHash) public constant returns(uint blocksRemaining, uint numAcceptVotes, address[] voterList){
         uint numAccepted = 0;
         // check how many votes accepted the manuscript
         for (uint i; i < votingList[ipfsHash].voterList.length; i++) {
@@ -71,7 +72,7 @@ contract CommunityVotes is Accessible {
             }
         }
         return (
-            votingList[ipfsHash].startingBlock,
+            votingActive(ipfsHash),
             numAccepted,
             votingList[ipfsHash].voterList
             );

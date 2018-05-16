@@ -25,7 +25,7 @@ describe('InsufficientBalanceModalComponent', () => {
       providers: [
         NgbActiveModal,
         Config,
-        NotificationsService,
+        { provide: NotificationsService, useValue: new NotificationsService({})},
         { provide: ErrorHandlerService, useValue: mockErrorHandlerService },
         { provide: Web3AccountService, useValue: mockWeb3AccountService },
         { provide: Web3ClientService, useValue: mockWeb3ClientService }

@@ -46,6 +46,7 @@ describe('SubmitPaperModalComponent', () => {
     fixture = TestBed.createComponent(SubmitPaperModalComponent)
     component = fixture.componentInstance
     compiled = fixture.debugElement.nativeElement
+
     fixture.detectChanges()
   })
 
@@ -87,10 +88,13 @@ describe('SubmitPaperModalComponent', () => {
         }
       ))
       spyOn(mockWeb3Client, 'submitManuscript').and.returnValue(Promise.resolve({
-        tx: '0x90696942e1da6cf23d9c25bfe6d5d65237468fbbbb9beb0c1cf8940358ab031c'
+        address: '0x90696942e1da6cf23d9c25bfe6d5d65237468fbbbb9beb0c1cf8940358ab031c'
       }))
       spyOn(mockNotificationService, 'success')
       spyOn(mockErrorHandlerService, 'handleError')
+      component.paperForm = {
+        invalid: false
+      }
       component.onSubmitPaper()
       // tick allows promises returned by spys to resolve before running the `it` block
       tick()

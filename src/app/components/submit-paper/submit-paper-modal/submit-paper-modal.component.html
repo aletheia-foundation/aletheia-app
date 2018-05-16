@@ -1,4 +1,4 @@
-<form #form="ngForm" (ngSubmit)="onSubmitPaper(form.value)">
+<form #paperForm="ngForm" (ngSubmit)="onSubmitPaper(paperForm.value)" [ngClass]="{'was-validated': paperForm.submitted}">
 
   <div class="modal-header">
     <h4 class="modal-title">Submit a paper to aletheia</h4>
@@ -10,19 +10,32 @@
     <p>
       After submitting the paper it will be voted on by the community, If the paper is accepted, it will be freely downloadable for anyone running the Aletheia app.
     </p>
-    <span class="upload-paper-filename">{{fileName}}</span>
-    <button type="button" class="btn btn-secondary select-file-button" [disabled]="uploadingPaper" (click)="shareFileButtonClick()">Select a pdf to upload</button>
     <div class="form-group">
-      <label for="paper-title-input">Title</label>
-      <input type="text" class="form-control" id="paper-title-input" name="paper-title-input" [(ngModel)]="title">
+      <button type="button" class="btn btn-secondary select-file-button" [disabled]="uploadingPaper" (click)="shareFileButtonClick()">Select a pdf to upload</button>
+      <span class="upload-paper-filename">{{fileName}}</span>
     </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" [(ngModel)]="isAuthor" id="is-author-checkbox" name="is-author-checkbox">
+    <div class="form-group">
+      <label for="paper-title-input">Title *</label>
+      <input type="text"
+             class="form-control"
+             id="paper-title-input"
+             name="paper-title-input"
+             [(ngModel)]="title"
+             #titleInput="ngModel"
+             [ngClass]="{'is-invalid':titleInput.invalid && titleInput.touched}"
+             required
+      >
+      <div class="invalid-feedback">
+        Title is required.
+      </div>
+    </div>
+    <div class="custom-checkbox">
+      <input type="checkbox" [(ngModel)]="isAuthor" id="is-author-checkbox" name="is-author-checkbox">
       <label class="custom-control-label" for="is-author-checkbox">I am the author of this manuscript</label>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" [disabled]="!fileName || uploadingPaper"  class="btn btn-primary">Submit paper</button>
+    <button type="submit" [disabled]="!paperForm.valid || !fileName || uploadingPaper"  class="btn btn-primary">Submit paper</button>
 
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
   </div>
