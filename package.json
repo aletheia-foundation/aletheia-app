@@ -13,6 +13,7 @@
     "start": "npm run truffle:migrate && npm run electron:serve",
     "start:web": "npm run truffle:migrate && webpack-dev-server --target web --content-base . --port 4200 --inline",
     "truffle:migrate": "./node_modules/.bin/truffle migrate",
+    "seed-data": "node ./scripts/add-test-data.js",
     "build:electron:main": "tsc main.ts --outDir dist && copyfiles package.json dist && cd dist && npm install --prod && cd ..",
     "build": "webpack --display-error-details && npm run build:electron:main",
     "build:prod": "cross-env NODE_ENV=production npm run build",

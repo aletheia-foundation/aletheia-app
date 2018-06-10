@@ -136,7 +136,22 @@ Smart contract tests with truffle
 ```
 
 # Testing notes
-force mine a block by calling this from debugger window:
+
+### Test data
+
+```
+npm run test-data
+```
+
+
+### Start the app with another user
+
+ACCOUNT_NUMBER=1 npm run start
+
+
+### Force mine a block
+
+Call this from debugger window:
 ```javascript
   web3.currentProvider.sendAsync({
         jsonrpc: "2.0",
