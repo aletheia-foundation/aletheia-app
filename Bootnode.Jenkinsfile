@@ -4,6 +4,7 @@ pipeline {
         stage('Deploy bootnode') {
             steps {
                 echo 'deploying testnet bootnode'
+                sh 'ls -al scripts'
                 sshPublisher(
                         publishers: [sshPublisherDesc(
                                 configName: 'aletheia-infrastructure',
@@ -14,7 +15,6 @@ pipeline {
                                         execCommand: 'sudo /var/aletheia-bootnode/restart-bootnode.sh'
                                 )]
                         )]
-
                 )
             }
         }

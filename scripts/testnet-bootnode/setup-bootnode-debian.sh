@@ -38,4 +38,5 @@ EOF
 
 sudo chown -R aletheia-bootnode:bootnode-users /var/aletheia-bootnode
 sudo chmod +x,g+x /var/aletheia-bootnode/restart-bootnode.sh
-sudo chmod g+rwx /var/aletheia-bootnode
+
+sudo chmod g+rwxs /var/aletheia-bootnode
