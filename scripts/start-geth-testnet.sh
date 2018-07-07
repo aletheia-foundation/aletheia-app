@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source ./scripts/env-testnet.sh
 
-BOOTNODE_1_IP=`dig +short theserverbythe.stream | awk '{print $1}'`
+BOOTNODE_1_IP=`dig +short aletheia-infrastructure.org | awk '{print $1}'`
 
 
 # Even if we are not the admin(rich) node,
@@ -26,5 +26,5 @@ TESTNET_ACCOUNTS=`./scripts/get-testnet-addresses.sh`
 geth --datadir $TEST_DATA_DIR --rpc --rpcapi eth,net,web3,personal \
   --networkid 123039281 --password $TEST_NET_PASSWORD \
   --unlock "$TESTNET_ACCOUNTS" \
-  --bootnodes enode://68df974606fb67032ff513e7d54733d14f49783bd63c9469eb21c1c5422e898d581e880cbf0944a22ffea740f1d0ef70a3449a898bd6a81a8466de6b61146947@$BOOTNODE_1_IP:30303 \
+  --bootnodes enode://682e65fffd55107fcc4ace95aca52ee9a06fe28507610a47a2c9c9c2e28175ca06b462085f6e845d209619ee5a26b597c4c9504da243c4a6503f8d5fa07b8175@$BOOTNODE_1_IP:30303 \
   js ./scripts/mine.js

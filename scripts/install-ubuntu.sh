@@ -13,9 +13,9 @@ sudo apt-get install -y software-properties-common # required by geth
 
 sudo apt-get update
 
+sudo apt-get install ethereum -y
+
 sudo apt-get install -y nodejs
 # and create an alias in your .bash_profile: alias node=nodejs
-
-sudo apt-get install ethereum -y
 
 npm install -g electron
