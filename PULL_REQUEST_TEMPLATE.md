@@ -15,3 +15,6 @@
 - [ ] I've **Checked** the [outstanding issues](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+user%3Aaletheia-foundation+). 
 - [ ] I've **Read** the latest version of the [whitepaper](https://github.com/aletheia-foundation/whitepaper).
 - [ ] I've **Emailed** contact@aletheia-foundation.io to discuss the enhancement. 
+
+> Contact update (11 October 2026): The Aletheia email address is no longer monitored. Please send all enquiries, feedback, and contribution offers to [kademorton@protonmail.com](mailto:kademorton@protonmail.com).
+
